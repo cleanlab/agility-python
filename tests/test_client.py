@@ -31,9 +31,7 @@ from agility._base_client import (
 from .utils import update_env
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
-bearer_token = "My Bearer Token"
 api_key = "My API Key"
-access_key = "My Access Key"
 
 
 def _get_params(client: BaseClient[Any, Any]) -> dict[str, str]:
@@ -55,13 +53,7 @@ def _get_open_connections(client: Agility | AsyncAgility) -> int:
 
 
 class TestAgility:
-    client = Agility(
-        base_url=base_url,
-        bearer_token=bearer_token,
-        api_key=api_key,
-        access_key=access_key,
-        _strict_response_validation=True,
-    )
+    client = Agility(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
     @pytest.mark.respx(base_url=base_url)
     def test_raw_response(self, respx_mock: MockRouter) -> None:
@@ -87,17 +79,9 @@ class TestAgility:
         copied = self.client.copy()
         assert id(copied) != id(self.client)
 
-        copied = self.client.copy(bearer_token="another My Bearer Token")
-        assert copied.bearer_token == "another My Bearer Token"
-        assert self.client.bearer_token == "My Bearer Token"
-
         copied = self.client.copy(api_key="another My API Key")
         assert copied.api_key == "another My API Key"
         assert self.client.api_key == "My API Key"
-
-        copied = self.client.copy(access_key="another My Access Key")
-        assert copied.access_key == "another My Access Key"
-        assert self.client.access_key == "My Access Key"
 
     def test_copy_default_options(self) -> None:
         # options that have a default are overridden correctly
@@ -117,12 +101,7 @@ class TestAgility:
 
     def test_copy_default_headers(self) -> None:
         client = Agility(
-            base_url=base_url,
-            bearer_token=bearer_token,
-            api_key=api_key,
-            access_key=access_key,
-            _strict_response_validation=True,
-            default_headers={"X-Foo": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         assert client.default_headers["X-Foo"] == "bar"
 
@@ -156,12 +135,7 @@ class TestAgility:
 
     def test_copy_default_query(self) -> None:
         client = Agility(
-            base_url=base_url,
-            bearer_token=bearer_token,
-            api_key=api_key,
-            access_key=access_key,
-            _strict_response_validation=True,
-            default_query={"foo": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"foo": "bar"}
         )
         assert _get_params(client)["foo"] == "bar"
 
@@ -285,14 +259,7 @@ class TestAgility:
         assert timeout == httpx.Timeout(100.0)
 
     def test_client_timeout_option(self) -> None:
-        client = Agility(
-            base_url=base_url,
-            bearer_token=bearer_token,
-            api_key=api_key,
-            access_key=access_key,
-            _strict_response_validation=True,
-            timeout=httpx.Timeout(0),
-        )
+        client = Agility(base_url=base_url, api_key=api_key, _strict_response_validation=True, timeout=httpx.Timeout(0))
 
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         timeout = httpx.Timeout(**request.extensions["timeout"])  # type: ignore
@@ -302,12 +269,7 @@ class TestAgility:
         # custom timeout given to the httpx client should be used
         with httpx.Client(timeout=None) as http_client:
             client = Agility(
-                base_url=base_url,
-                bearer_token=bearer_token,
-                api_key=api_key,
-                access_key=access_key,
-                _strict_response_validation=True,
-                http_client=http_client,
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -317,12 +279,7 @@ class TestAgility:
         # no timeout given to the httpx client should not use the httpx default
         with httpx.Client() as http_client:
             client = Agility(
-                base_url=base_url,
-                bearer_token=bearer_token,
-                api_key=api_key,
-                access_key=access_key,
-                _strict_response_validation=True,
-                http_client=http_client,
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -332,12 +289,7 @@ class TestAgility:
         # explicitly passing the default timeout currently results in it being ignored
         with httpx.Client(timeout=HTTPX_DEFAULT_TIMEOUT) as http_client:
             client = Agility(
-                base_url=base_url,
-                bearer_token=bearer_token,
-                api_key=api_key,
-                access_key=access_key,
-                _strict_response_validation=True,
-                http_client=http_client,
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -349,21 +301,14 @@ class TestAgility:
             async with httpx.AsyncClient() as http_client:
                 Agility(
                     base_url=base_url,
-                    bearer_token=bearer_token,
                     api_key=api_key,
-                    access_key=access_key,
                     _strict_response_validation=True,
                     http_client=cast(Any, http_client),
                 )
 
     def test_default_headers_option(self) -> None:
         client = Agility(
-            base_url=base_url,
-            bearer_token=bearer_token,
-            api_key=api_key,
-            access_key=access_key,
-            _strict_response_validation=True,
-            default_headers={"X-Foo": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "bar"
@@ -371,9 +316,7 @@ class TestAgility:
 
         client2 = Agility(
             base_url=base_url,
-            bearer_token=bearer_token,
             api_key=api_key,
-            access_key=access_key,
             _strict_response_validation=True,
             default_headers={
                 "X-Foo": "stainless",
@@ -386,12 +329,7 @@ class TestAgility:
 
     def test_default_query_option(self) -> None:
         client = Agility(
-            base_url=base_url,
-            bearer_token=bearer_token,
-            api_key=api_key,
-            access_key=access_key,
-            _strict_response_validation=True,
-            default_query={"query_param": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"query_param": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         url = httpx.URL(request.url)
@@ -591,13 +529,7 @@ class TestAgility:
         assert response.foo == 2
 
     def test_base_url_setter(self) -> None:
-        client = Agility(
-            base_url="https://example.com/from_init",
-            bearer_token=bearer_token,
-            api_key=api_key,
-            access_key=access_key,
-            _strict_response_validation=True,
-        )
+        client = Agility(base_url="https://example.com/from_init", api_key=api_key, _strict_response_validation=True)
         assert client.base_url == "https://example.com/from_init/"
 
         client.base_url = "https://example.com/from_setter"  # type: ignore[assignment]
@@ -606,26 +538,16 @@ class TestAgility:
 
     def test_base_url_env(self) -> None:
         with update_env(AGILITY_BASE_URL="http://localhost:5000/from/env"):
-            client = Agility(
-                bearer_token=bearer_token, api_key=api_key, access_key=access_key, _strict_response_validation=True
-            )
+            client = Agility(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
     @pytest.mark.parametrize(
         "client",
         [
+            Agility(base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True),
             Agility(
                 base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
                 api_key=api_key,
-                access_key=access_key,
-                _strict_response_validation=True,
-            ),
-            Agility(
-                base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
-                api_key=api_key,
-                access_key=access_key,
                 _strict_response_validation=True,
                 http_client=httpx.Client(),
             ),
@@ -645,18 +567,10 @@ class TestAgility:
     @pytest.mark.parametrize(
         "client",
         [
+            Agility(base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True),
             Agility(
                 base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
                 api_key=api_key,
-                access_key=access_key,
-                _strict_response_validation=True,
-            ),
-            Agility(
-                base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
-                api_key=api_key,
-                access_key=access_key,
                 _strict_response_validation=True,
                 http_client=httpx.Client(),
             ),
@@ -676,18 +590,10 @@ class TestAgility:
     @pytest.mark.parametrize(
         "client",
         [
+            Agility(base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True),
             Agility(
                 base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
                 api_key=api_key,
-                access_key=access_key,
-                _strict_response_validation=True,
-            ),
-            Agility(
-                base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
-                api_key=api_key,
-                access_key=access_key,
                 _strict_response_validation=True,
                 http_client=httpx.Client(),
             ),
@@ -705,13 +611,7 @@ class TestAgility:
         assert request.url == "https://myapi.com/foo"
 
     def test_copied_client_does_not_close_http(self) -> None:
-        client = Agility(
-            base_url=base_url,
-            bearer_token=bearer_token,
-            api_key=api_key,
-            access_key=access_key,
-            _strict_response_validation=True,
-        )
+        client = Agility(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         assert not client.is_closed()
 
         copied = client.copy()
@@ -722,13 +622,7 @@ class TestAgility:
         assert not client.is_closed()
 
     def test_client_context_manager(self) -> None:
-        client = Agility(
-            base_url=base_url,
-            bearer_token=bearer_token,
-            api_key=api_key,
-            access_key=access_key,
-            _strict_response_validation=True,
-        )
+        client = Agility(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         with client as c2:
             assert c2 is client
             assert not c2.is_closed()
@@ -749,14 +643,7 @@ class TestAgility:
 
     def test_client_max_retries_validation(self) -> None:
         with pytest.raises(TypeError, match=r"max_retries cannot be None"):
-            Agility(
-                base_url=base_url,
-                bearer_token=bearer_token,
-                api_key=api_key,
-                access_key=access_key,
-                _strict_response_validation=True,
-                max_retries=cast(Any, None),
-            )
+            Agility(base_url=base_url, api_key=api_key, _strict_response_validation=True, max_retries=cast(Any, None))
 
     @pytest.mark.respx(base_url=base_url)
     def test_received_text_for_expected_json(self, respx_mock: MockRouter) -> None:
@@ -765,24 +652,12 @@ class TestAgility:
 
         respx_mock.get("/foo").mock(return_value=httpx.Response(200, text="my-custom-format"))
 
-        strict_client = Agility(
-            base_url=base_url,
-            bearer_token=bearer_token,
-            api_key=api_key,
-            access_key=access_key,
-            _strict_response_validation=True,
-        )
+        strict_client = Agility(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         with pytest.raises(APIResponseValidationError):
             strict_client.get("/foo", cast_to=Model)
 
-        client = Agility(
-            base_url=base_url,
-            bearer_token=bearer_token,
-            api_key=api_key,
-            access_key=access_key,
-            _strict_response_validation=False,
-        )
+        client = Agility(base_url=base_url, api_key=api_key, _strict_response_validation=False)
 
         response = client.get("/foo", cast_to=Model)
         assert isinstance(response, str)  # type: ignore[unreachable]
@@ -810,13 +685,7 @@ class TestAgility:
     )
     @mock.patch("time.time", mock.MagicMock(return_value=1696004797))
     def test_parse_retry_after_header(self, remaining_retries: int, retry_after: str, timeout: float) -> None:
-        client = Agility(
-            base_url=base_url,
-            bearer_token=bearer_token,
-            api_key=api_key,
-            access_key=access_key,
-            _strict_response_validation=True,
-        )
+        client = Agility(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         headers = httpx.Headers({"retry-after": retry_after})
         options = FinalRequestOptions(method="get", url="/foo", max_retries=3)
@@ -945,13 +814,7 @@ class TestAgility:
 
 
 class TestAsyncAgility:
-    client = AsyncAgility(
-        base_url=base_url,
-        bearer_token=bearer_token,
-        api_key=api_key,
-        access_key=access_key,
-        _strict_response_validation=True,
-    )
+    client = AsyncAgility(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
@@ -979,17 +842,9 @@ class TestAsyncAgility:
         copied = self.client.copy()
         assert id(copied) != id(self.client)
 
-        copied = self.client.copy(bearer_token="another My Bearer Token")
-        assert copied.bearer_token == "another My Bearer Token"
-        assert self.client.bearer_token == "My Bearer Token"
-
         copied = self.client.copy(api_key="another My API Key")
         assert copied.api_key == "another My API Key"
         assert self.client.api_key == "My API Key"
-
-        copied = self.client.copy(access_key="another My Access Key")
-        assert copied.access_key == "another My Access Key"
-        assert self.client.access_key == "My Access Key"
 
     def test_copy_default_options(self) -> None:
         # options that have a default are overridden correctly
@@ -1009,12 +864,7 @@ class TestAsyncAgility:
 
     def test_copy_default_headers(self) -> None:
         client = AsyncAgility(
-            base_url=base_url,
-            bearer_token=bearer_token,
-            api_key=api_key,
-            access_key=access_key,
-            _strict_response_validation=True,
-            default_headers={"X-Foo": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         assert client.default_headers["X-Foo"] == "bar"
 
@@ -1048,12 +898,7 @@ class TestAsyncAgility:
 
     def test_copy_default_query(self) -> None:
         client = AsyncAgility(
-            base_url=base_url,
-            bearer_token=bearer_token,
-            api_key=api_key,
-            access_key=access_key,
-            _strict_response_validation=True,
-            default_query={"foo": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"foo": "bar"}
         )
         assert _get_params(client)["foo"] == "bar"
 
@@ -1178,12 +1023,7 @@ class TestAsyncAgility:
 
     async def test_client_timeout_option(self) -> None:
         client = AsyncAgility(
-            base_url=base_url,
-            bearer_token=bearer_token,
-            api_key=api_key,
-            access_key=access_key,
-            _strict_response_validation=True,
-            timeout=httpx.Timeout(0),
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, timeout=httpx.Timeout(0)
         )
 
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1194,12 +1034,7 @@ class TestAsyncAgility:
         # custom timeout given to the httpx client should be used
         async with httpx.AsyncClient(timeout=None) as http_client:
             client = AsyncAgility(
-                base_url=base_url,
-                bearer_token=bearer_token,
-                api_key=api_key,
-                access_key=access_key,
-                _strict_response_validation=True,
-                http_client=http_client,
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1209,12 +1044,7 @@ class TestAsyncAgility:
         # no timeout given to the httpx client should not use the httpx default
         async with httpx.AsyncClient() as http_client:
             client = AsyncAgility(
-                base_url=base_url,
-                bearer_token=bearer_token,
-                api_key=api_key,
-                access_key=access_key,
-                _strict_response_validation=True,
-                http_client=http_client,
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1224,12 +1054,7 @@ class TestAsyncAgility:
         # explicitly passing the default timeout currently results in it being ignored
         async with httpx.AsyncClient(timeout=HTTPX_DEFAULT_TIMEOUT) as http_client:
             client = AsyncAgility(
-                base_url=base_url,
-                bearer_token=bearer_token,
-                api_key=api_key,
-                access_key=access_key,
-                _strict_response_validation=True,
-                http_client=http_client,
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1241,21 +1066,14 @@ class TestAsyncAgility:
             with httpx.Client() as http_client:
                 AsyncAgility(
                     base_url=base_url,
-                    bearer_token=bearer_token,
                     api_key=api_key,
-                    access_key=access_key,
                     _strict_response_validation=True,
                     http_client=cast(Any, http_client),
                 )
 
     def test_default_headers_option(self) -> None:
         client = AsyncAgility(
-            base_url=base_url,
-            bearer_token=bearer_token,
-            api_key=api_key,
-            access_key=access_key,
-            _strict_response_validation=True,
-            default_headers={"X-Foo": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "bar"
@@ -1263,9 +1081,7 @@ class TestAsyncAgility:
 
         client2 = AsyncAgility(
             base_url=base_url,
-            bearer_token=bearer_token,
             api_key=api_key,
-            access_key=access_key,
             _strict_response_validation=True,
             default_headers={
                 "X-Foo": "stainless",
@@ -1278,12 +1094,7 @@ class TestAsyncAgility:
 
     def test_default_query_option(self) -> None:
         client = AsyncAgility(
-            base_url=base_url,
-            bearer_token=bearer_token,
-            api_key=api_key,
-            access_key=access_key,
-            _strict_response_validation=True,
-            default_query={"query_param": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"query_param": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         url = httpx.URL(request.url)
@@ -1484,11 +1295,7 @@ class TestAsyncAgility:
 
     def test_base_url_setter(self) -> None:
         client = AsyncAgility(
-            base_url="https://example.com/from_init",
-            bearer_token=bearer_token,
-            api_key=api_key,
-            access_key=access_key,
-            _strict_response_validation=True,
+            base_url="https://example.com/from_init", api_key=api_key, _strict_response_validation=True
         )
         assert client.base_url == "https://example.com/from_init/"
 
@@ -1498,26 +1305,18 @@ class TestAsyncAgility:
 
     def test_base_url_env(self) -> None:
         with update_env(AGILITY_BASE_URL="http://localhost:5000/from/env"):
-            client = AsyncAgility(
-                bearer_token=bearer_token, api_key=api_key, access_key=access_key, _strict_response_validation=True
-            )
+            client = AsyncAgility(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
     @pytest.mark.parametrize(
         "client",
         [
             AsyncAgility(
-                base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
-                api_key=api_key,
-                access_key=access_key,
-                _strict_response_validation=True,
+                base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
             AsyncAgility(
                 base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
                 api_key=api_key,
-                access_key=access_key,
                 _strict_response_validation=True,
                 http_client=httpx.AsyncClient(),
             ),
@@ -1538,17 +1337,11 @@ class TestAsyncAgility:
         "client",
         [
             AsyncAgility(
-                base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
-                api_key=api_key,
-                access_key=access_key,
-                _strict_response_validation=True,
+                base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
             AsyncAgility(
                 base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
                 api_key=api_key,
-                access_key=access_key,
                 _strict_response_validation=True,
                 http_client=httpx.AsyncClient(),
             ),
@@ -1569,17 +1362,11 @@ class TestAsyncAgility:
         "client",
         [
             AsyncAgility(
-                base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
-                api_key=api_key,
-                access_key=access_key,
-                _strict_response_validation=True,
+                base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
             AsyncAgility(
                 base_url="http://localhost:5000/custom/path/",
-                bearer_token=bearer_token,
                 api_key=api_key,
-                access_key=access_key,
                 _strict_response_validation=True,
                 http_client=httpx.AsyncClient(),
             ),
@@ -1597,13 +1384,7 @@ class TestAsyncAgility:
         assert request.url == "https://myapi.com/foo"
 
     async def test_copied_client_does_not_close_http(self) -> None:
-        client = AsyncAgility(
-            base_url=base_url,
-            bearer_token=bearer_token,
-            api_key=api_key,
-            access_key=access_key,
-            _strict_response_validation=True,
-        )
+        client = AsyncAgility(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         assert not client.is_closed()
 
         copied = client.copy()
@@ -1615,13 +1396,7 @@ class TestAsyncAgility:
         assert not client.is_closed()
 
     async def test_client_context_manager(self) -> None:
-        client = AsyncAgility(
-            base_url=base_url,
-            bearer_token=bearer_token,
-            api_key=api_key,
-            access_key=access_key,
-            _strict_response_validation=True,
-        )
+        client = AsyncAgility(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         async with client as c2:
             assert c2 is client
             assert not c2.is_closed()
@@ -1644,12 +1419,7 @@ class TestAsyncAgility:
     async def test_client_max_retries_validation(self) -> None:
         with pytest.raises(TypeError, match=r"max_retries cannot be None"):
             AsyncAgility(
-                base_url=base_url,
-                bearer_token=bearer_token,
-                api_key=api_key,
-                access_key=access_key,
-                _strict_response_validation=True,
-                max_retries=cast(Any, None),
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, max_retries=cast(Any, None)
             )
 
     @pytest.mark.respx(base_url=base_url)
@@ -1660,24 +1430,12 @@ class TestAsyncAgility:
 
         respx_mock.get("/foo").mock(return_value=httpx.Response(200, text="my-custom-format"))
 
-        strict_client = AsyncAgility(
-            base_url=base_url,
-            bearer_token=bearer_token,
-            api_key=api_key,
-            access_key=access_key,
-            _strict_response_validation=True,
-        )
+        strict_client = AsyncAgility(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         with pytest.raises(APIResponseValidationError):
             await strict_client.get("/foo", cast_to=Model)
 
-        client = AsyncAgility(
-            base_url=base_url,
-            bearer_token=bearer_token,
-            api_key=api_key,
-            access_key=access_key,
-            _strict_response_validation=False,
-        )
+        client = AsyncAgility(base_url=base_url, api_key=api_key, _strict_response_validation=False)
 
         response = await client.get("/foo", cast_to=Model)
         assert isinstance(response, str)  # type: ignore[unreachable]
@@ -1706,13 +1464,7 @@ class TestAsyncAgility:
     @mock.patch("time.time", mock.MagicMock(return_value=1696004797))
     @pytest.mark.asyncio
     async def test_parse_retry_after_header(self, remaining_retries: int, retry_after: str, timeout: float) -> None:
-        client = AsyncAgility(
-            base_url=base_url,
-            bearer_token=bearer_token,
-            api_key=api_key,
-            access_key=access_key,
-            _strict_response_validation=True,
-        )
+        client = AsyncAgility(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         headers = httpx.Headers({"retry-after": retry_after})
         options = FinalRequestOptions(method="get", url="/foo", max_retries=3)

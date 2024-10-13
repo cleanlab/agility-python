@@ -55,16 +55,12 @@ class Agility(SyncAPIClient):
     with_streaming_response: AgilityWithStreamedResponse
 
     # client options
-    bearer_token: str
     api_key: str
-    access_key: str
 
     def __init__(
         self,
         *,
-        bearer_token: str | None = None,
         api_key: str | None = None,
-        access_key: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -86,19 +82,8 @@ class Agility(SyncAPIClient):
     ) -> None:
         """Construct a new synchronous agility client instance.
 
-        This automatically infers the following arguments from their corresponding environment variables if they are not provided:
-        - `bearer_token` from `BEARER_TOKEN`
-        - `api_key` from `AUTHENTICATED_API_KEY`
-        - `access_key` from `PUBLIC_ACCESS_KEY`
+        This automatically infers the `api_key` argument from the `AUTHENTICATED_API_KEY` environment variable if it is not provided.
         """
-        if bearer_token is None:
-            bearer_token = os.environ.get("BEARER_TOKEN")
-        if bearer_token is None:
-            raise AgilityError(
-                "The bearer_token client option must be set either by passing bearer_token to the client or by setting the BEARER_TOKEN environment variable"
-            )
-        self.bearer_token = bearer_token
-
         if api_key is None:
             api_key = os.environ.get("AUTHENTICATED_API_KEY")
         if api_key is None:
@@ -107,18 +92,10 @@ class Agility(SyncAPIClient):
             )
         self.api_key = api_key
 
-        if access_key is None:
-            access_key = os.environ.get("PUBLIC_ACCESS_KEY")
-        if access_key is None:
-            raise AgilityError(
-                "The access_key client option must be set either by passing access_key to the client or by setting the PUBLIC_ACCESS_KEY environment variable"
-            )
-        self.access_key = access_key
-
         if base_url is None:
             base_url = os.environ.get("AGILITY_BASE_URL")
         if base_url is None:
-            base_url = f"https://localhost:8080/test-api"
+            base_url = f"https://localhost:8080"
 
         super().__init__(
             version=__version__,
@@ -147,28 +124,8 @@ class Agility(SyncAPIClient):
     @property
     @override
     def auth_headers(self) -> dict[str, str]:
-        if self._http_bearer:
-            return self._http_bearer
-        if self._authenticated_api_key:
-            return self._authenticated_api_key
-        if self._public_access_key:
-            return self._public_access_key
-        return {}
-
-    @property
-    def _http_bearer(self) -> dict[str, str]:
-        bearer_token = self.bearer_token
-        return {"Authorization": f"Bearer {bearer_token}"}
-
-    @property
-    def _authenticated_api_key(self) -> dict[str, str]:
         api_key = self.api_key
         return {"X-API-Key": api_key}
-
-    @property
-    def _public_access_key(self) -> dict[str, str]:
-        access_key = self.access_key
-        return {"X-Access-Key": access_key}
 
     @property
     @override
@@ -182,9 +139,7 @@ class Agility(SyncAPIClient):
     def copy(
         self,
         *,
-        bearer_token: str | None = None,
         api_key: str | None = None,
-        access_key: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.Client | None = None,
@@ -218,9 +173,7 @@ class Agility(SyncAPIClient):
 
         http_client = http_client or self._client
         return self.__class__(
-            bearer_token=bearer_token or self.bearer_token,
             api_key=api_key or self.api_key,
-            access_key=access_key or self.access_key,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
@@ -278,16 +231,12 @@ class AsyncAgility(AsyncAPIClient):
     with_streaming_response: AsyncAgilityWithStreamedResponse
 
     # client options
-    bearer_token: str
     api_key: str
-    access_key: str
 
     def __init__(
         self,
         *,
-        bearer_token: str | None = None,
         api_key: str | None = None,
-        access_key: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -309,19 +258,8 @@ class AsyncAgility(AsyncAPIClient):
     ) -> None:
         """Construct a new async agility client instance.
 
-        This automatically infers the following arguments from their corresponding environment variables if they are not provided:
-        - `bearer_token` from `BEARER_TOKEN`
-        - `api_key` from `AUTHENTICATED_API_KEY`
-        - `access_key` from `PUBLIC_ACCESS_KEY`
+        This automatically infers the `api_key` argument from the `AUTHENTICATED_API_KEY` environment variable if it is not provided.
         """
-        if bearer_token is None:
-            bearer_token = os.environ.get("BEARER_TOKEN")
-        if bearer_token is None:
-            raise AgilityError(
-                "The bearer_token client option must be set either by passing bearer_token to the client or by setting the BEARER_TOKEN environment variable"
-            )
-        self.bearer_token = bearer_token
-
         if api_key is None:
             api_key = os.environ.get("AUTHENTICATED_API_KEY")
         if api_key is None:
@@ -330,18 +268,10 @@ class AsyncAgility(AsyncAPIClient):
             )
         self.api_key = api_key
 
-        if access_key is None:
-            access_key = os.environ.get("PUBLIC_ACCESS_KEY")
-        if access_key is None:
-            raise AgilityError(
-                "The access_key client option must be set either by passing access_key to the client or by setting the PUBLIC_ACCESS_KEY environment variable"
-            )
-        self.access_key = access_key
-
         if base_url is None:
             base_url = os.environ.get("AGILITY_BASE_URL")
         if base_url is None:
-            base_url = f"https://localhost:8080/test-api"
+            base_url = f"https://localhost:8080"
 
         super().__init__(
             version=__version__,
@@ -370,28 +300,8 @@ class AsyncAgility(AsyncAPIClient):
     @property
     @override
     def auth_headers(self) -> dict[str, str]:
-        if self._http_bearer:
-            return self._http_bearer
-        if self._authenticated_api_key:
-            return self._authenticated_api_key
-        if self._public_access_key:
-            return self._public_access_key
-        return {}
-
-    @property
-    def _http_bearer(self) -> dict[str, str]:
-        bearer_token = self.bearer_token
-        return {"Authorization": f"Bearer {bearer_token}"}
-
-    @property
-    def _authenticated_api_key(self) -> dict[str, str]:
         api_key = self.api_key
         return {"X-API-Key": api_key}
-
-    @property
-    def _public_access_key(self) -> dict[str, str]:
-        access_key = self.access_key
-        return {"X-Access-Key": access_key}
 
     @property
     @override
@@ -405,9 +315,7 @@ class AsyncAgility(AsyncAPIClient):
     def copy(
         self,
         *,
-        bearer_token: str | None = None,
         api_key: str | None = None,
-        access_key: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.AsyncClient | None = None,
@@ -441,9 +349,7 @@ class AsyncAgility(AsyncAPIClient):
 
         http_client = http_client or self._client
         return self.__class__(
-            bearer_token=bearer_token or self.bearer_token,
             api_key=api_key or self.api_key,
-            access_key=access_key or self.access_key,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
