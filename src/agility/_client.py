@@ -95,7 +95,7 @@ class Agility(SyncAPIClient):
         if base_url is None:
             base_url = os.environ.get("AGILITY_BASE_URL")
         if base_url is None:
-            base_url = f"https://localhost:8080"
+            base_url = f"http://localhost:8080"
 
         super().__init__(
             version=__version__,
@@ -271,7 +271,7 @@ class AsyncAgility(AsyncAPIClient):
         if base_url is None:
             base_url = os.environ.get("AGILITY_BASE_URL")
         if base_url is None:
-            base_url = f"https://localhost:8080"
+            base_url = f"http://localhost:8080"
 
         super().__init__(
             version=__version__,
