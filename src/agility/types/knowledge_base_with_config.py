@@ -1,0 +1,127 @@
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+from typing import Dict, Union, Optional
+from datetime import datetime
+from typing_extensions import Literal, Annotated, TypeAlias
+
+from .._utils import PropertyInfo
+from .._models import BaseModel
+
+__all__ = [
+    "KnowledgeBaseWithConfig",
+    "IngestionPipelineParams",
+    "IngestionPipelineParamsCurate",
+    "IngestionPipelineParamsCurateSteps",
+    "IngestionPipelineParamsCurateStepsRemoveExactDuplicatesParams",
+    "IngestionPipelineParamsCurateStepsTagExactDuplicatesParams",
+    "IngestionPipelineParamsCurateStepsPostpendContentParams",
+    "IngestionPipelineParamsCurateDocumentStore",
+    "IngestionPipelineParamsTransform",
+    "IngestionPipelineParamsTransformSteps",
+    "IngestionPipelineParamsTransformStepsRecursiveCharacterSplitterV0Params",
+    "IngestionPipelineParamsTransformStepsNoopParams",
+    "IngestionPipelineParamsVectorStore",
+]
+
+
+class IngestionPipelineParamsCurateStepsRemoveExactDuplicatesParams(BaseModel):
+    name: Optional[Literal["remove_exact_duplicates.v0"]] = None
+
+
+class IngestionPipelineParamsCurateStepsTagExactDuplicatesParams(BaseModel):
+    name: Optional[Literal["tag_exact_duplicates.v0"]] = None
+
+
+class IngestionPipelineParamsCurateStepsPostpendContentParams(BaseModel):
+    postpend_value: str
+    """The value to postpend to the content."""
+
+    name: Optional[Literal["postpend_content.v0"]] = None
+
+
+IngestionPipelineParamsCurateSteps: TypeAlias = Annotated[
+    Union[
+        IngestionPipelineParamsCurateStepsRemoveExactDuplicatesParams,
+        IngestionPipelineParamsCurateStepsTagExactDuplicatesParams,
+        IngestionPipelineParamsCurateStepsPostpendContentParams,
+    ],
+    PropertyInfo(discriminator="name"),
+]
+
+
+class IngestionPipelineParamsCurate(BaseModel):
+    steps: Optional[Dict[str, IngestionPipelineParamsCurateSteps]] = None
+
+
+class IngestionPipelineParamsCurateDocumentStore(BaseModel):
+    document_tags: Optional[Dict[str, str]] = None
+
+
+class IngestionPipelineParamsTransformStepsRecursiveCharacterSplitterV0Params(BaseModel):
+    chunk_overlap: Optional[int] = None
+
+    chunk_size: Optional[int] = None
+
+    name: Optional[Literal["splitters.recursive_character.v0"]] = None
+
+
+class IngestionPipelineParamsTransformStepsNoopParams(BaseModel):
+    name: Optional[Literal["noop"]] = None
+
+
+IngestionPipelineParamsTransformSteps: TypeAlias = Union[
+    IngestionPipelineParamsTransformStepsRecursiveCharacterSplitterV0Params,
+    IngestionPipelineParamsTransformStepsNoopParams,
+]
+
+
+class IngestionPipelineParamsTransform(BaseModel):
+    steps: Optional[Dict[str, IngestionPipelineParamsTransformSteps]] = None
+
+
+class IngestionPipelineParamsVectorStore(BaseModel):
+    weaviate_collection_name: str
+
+    node_tags: Optional[Dict[str, str]] = None
+
+
+class IngestionPipelineParams(BaseModel):
+    curate: IngestionPipelineParamsCurate
+    """Curate params.
+
+    Defines full curation pipeline, as an ordered dict of named curation steps.
+    Order of steps _does_ matter -- they are executed in the order defined.
+    """
+
+    curate_document_store: IngestionPipelineParamsCurateDocumentStore
+    """Document store params."""
+
+    transform: IngestionPipelineParamsTransform
+    """Transform params.
+
+    Defines full transform pipeline, as an ordered dict of named transform steps.
+    Order of steps _does_ matter -- they are executed in the order defined.
+    """
+
+    vector_store: IngestionPipelineParamsVectorStore
+    """Vector store params."""
+
+
+class KnowledgeBaseWithConfig(BaseModel):
+    id: str
+
+    created_at: datetime
+
+    deleted_at: Optional[datetime] = None
+
+    description: str
+
+    ingestion_pipeline_params: IngestionPipelineParams
+    """Knowledge base pipeline params.
+
+    Parameters defined on the knowledge-base level for a pipeline.
+    """
+
+    name: str
+
+    updated_at: datetime
