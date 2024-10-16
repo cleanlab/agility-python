@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from .user import User as User
 from .thread import Thread as Thread
-from .assistant import Assistant as Assistant
 from .thread_list_params import ThreadListParams as ThreadListParams
 from .thread_list_response import ThreadListResponse as ThreadListResponse
 from .assistant_list_params import AssistantListParams as AssistantListParams

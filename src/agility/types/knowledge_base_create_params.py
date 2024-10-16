@@ -88,6 +88,10 @@ class IngestionPipelineParamsTransform(TypedDict, total=False):
 
 class IngestionPipelineParamsVectorStore(TypedDict, total=False):
     weaviate_collection_name: Required[str]
+    """The name of the Weaviate collection to use for storing documents.
+
+    Must start with AgilityKB and be valid.
+    """
 
     node_tags: Dict[str, str]
 

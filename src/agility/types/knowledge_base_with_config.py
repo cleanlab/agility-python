@@ -81,6 +81,10 @@ class IngestionPipelineParamsTransform(BaseModel):
 
 class IngestionPipelineParamsVectorStore(BaseModel):
     weaviate_collection_name: str
+    """The name of the Weaviate collection to use for storing documents.
+
+    Must start with AgilityKB and be valid.
+    """
 
     node_tags: Optional[Dict[str, str]] = None
 

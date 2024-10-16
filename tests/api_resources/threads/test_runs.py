@@ -54,6 +54,47 @@ class TestRuns:
             instructions="instructions",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             model="gpt-4o",
+            tools=[
+                {
+                    "function": {
+                        "description": "description",
+                        "name": "name",
+                        "parameters": {
+                            "type": "type",
+                            "properties": {"foo": "bar"},
+                            "required": ["string", "string", "string"],
+                        },
+                        "strict": True,
+                    },
+                    "type": "function",
+                },
+                {
+                    "function": {
+                        "description": "description",
+                        "name": "name",
+                        "parameters": {
+                            "type": "type",
+                            "properties": {"foo": "bar"},
+                            "required": ["string", "string", "string"],
+                        },
+                        "strict": True,
+                    },
+                    "type": "function",
+                },
+                {
+                    "function": {
+                        "description": "description",
+                        "name": "name",
+                        "parameters": {
+                            "type": "type",
+                            "properties": {"foo": "bar"},
+                            "required": ["string", "string", "string"],
+                        },
+                        "strict": True,
+                    },
+                    "type": "function",
+                },
+            ],
         )
         assert_matches_type(Run, run, path=["response"])
 
@@ -224,6 +265,47 @@ class TestRuns:
             instructions="instructions",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             model="gpt-4o",
+            tools=[
+                {
+                    "function": {
+                        "description": "description",
+                        "name": "name",
+                        "parameters": {
+                            "type": "type",
+                            "properties": {"foo": "bar"},
+                            "required": ["string", "string", "string"],
+                        },
+                        "strict": True,
+                    },
+                    "type": "function",
+                },
+                {
+                    "function": {
+                        "description": "description",
+                        "name": "name",
+                        "parameters": {
+                            "type": "type",
+                            "properties": {"foo": "bar"},
+                            "required": ["string", "string", "string"],
+                        },
+                        "strict": True,
+                    },
+                    "type": "function",
+                },
+                {
+                    "function": {
+                        "description": "description",
+                        "name": "name",
+                        "parameters": {
+                            "type": "type",
+                            "properties": {"foo": "bar"},
+                            "required": ["string", "string", "string"],
+                        },
+                        "strict": True,
+                    },
+                    "type": "function",
+                },
+            ],
         )
         assert_matches_type(object, run, path=["response"])
 
@@ -302,6 +384,47 @@ class TestAsyncRuns:
             instructions="instructions",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             model="gpt-4o",
+            tools=[
+                {
+                    "function": {
+                        "description": "description",
+                        "name": "name",
+                        "parameters": {
+                            "type": "type",
+                            "properties": {"foo": "bar"},
+                            "required": ["string", "string", "string"],
+                        },
+                        "strict": True,
+                    },
+                    "type": "function",
+                },
+                {
+                    "function": {
+                        "description": "description",
+                        "name": "name",
+                        "parameters": {
+                            "type": "type",
+                            "properties": {"foo": "bar"},
+                            "required": ["string", "string", "string"],
+                        },
+                        "strict": True,
+                    },
+                    "type": "function",
+                },
+                {
+                    "function": {
+                        "description": "description",
+                        "name": "name",
+                        "parameters": {
+                            "type": "type",
+                            "properties": {"foo": "bar"},
+                            "required": ["string", "string", "string"],
+                        },
+                        "strict": True,
+                    },
+                    "type": "function",
+                },
+            ],
         )
         assert_matches_type(Run, run, path=["response"])
 
@@ -472,6 +595,47 @@ class TestAsyncRuns:
             instructions="instructions",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             model="gpt-4o",
+            tools=[
+                {
+                    "function": {
+                        "description": "description",
+                        "name": "name",
+                        "parameters": {
+                            "type": "type",
+                            "properties": {"foo": "bar"},
+                            "required": ["string", "string", "string"],
+                        },
+                        "strict": True,
+                    },
+                    "type": "function",
+                },
+                {
+                    "function": {
+                        "description": "description",
+                        "name": "name",
+                        "parameters": {
+                            "type": "type",
+                            "properties": {"foo": "bar"},
+                            "required": ["string", "string", "string"],
+                        },
+                        "strict": True,
+                    },
+                    "type": "function",
+                },
+                {
+                    "function": {
+                        "description": "description",
+                        "name": "name",
+                        "parameters": {
+                            "type": "type",
+                            "properties": {"foo": "bar"},
+                            "required": ["string", "string", "string"],
+                        },
+                        "strict": True,
+                    },
+                    "type": "function",
+                },
+            ],
         )
         assert_matches_type(object, run, path=["response"])
 

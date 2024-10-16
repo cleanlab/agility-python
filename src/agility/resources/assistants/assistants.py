@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import Iterable, Optional
 from typing_extensions import Literal
 
 import httpx
@@ -30,7 +30,6 @@ from .access_keys import (
     AsyncAccessKeysResourceWithStreamingResponse,
 )
 from ..._base_client import make_request_options
-from ...types.assistant import Assistant
 from ...types.assistant_with_config import AssistantWithConfig
 from ...types.assistant_list_response import AssistantListResponse
 
@@ -69,13 +68,14 @@ class AssistantsResource(SyncAPIResource):
         name: str,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
+        tools: Iterable[assistant_create_params.Tool] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Assistant:
+    ) -> AssistantWithConfig:
         """
         Create a new assistant.
 
@@ -97,13 +97,14 @@ class AssistantsResource(SyncAPIResource):
                     "name": name,
                     "instructions": instructions,
                     "model": model,
+                    "tools": tools,
                 },
                 assistant_create_params.AssistantCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Assistant,
+            cast_to=AssistantWithConfig,
         )
 
     def retrieve(
@@ -149,6 +150,7 @@ class AssistantsResource(SyncAPIResource):
         name: str,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
+        tools: Iterable[assistant_update_params.Tool] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -180,6 +182,7 @@ class AssistantsResource(SyncAPIResource):
                     "name": name,
                     "instructions": instructions,
                     "model": model,
+                    "tools": tools,
                 },
                 assistant_update_params.AssistantUpdateParams,
             ),
@@ -298,13 +301,14 @@ class AsyncAssistantsResource(AsyncAPIResource):
         name: str,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
+        tools: Iterable[assistant_create_params.Tool] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Assistant:
+    ) -> AssistantWithConfig:
         """
         Create a new assistant.
 
@@ -326,13 +330,14 @@ class AsyncAssistantsResource(AsyncAPIResource):
                     "name": name,
                     "instructions": instructions,
                     "model": model,
+                    "tools": tools,
                 },
                 assistant_create_params.AssistantCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Assistant,
+            cast_to=AssistantWithConfig,
         )
 
     async def retrieve(
@@ -378,6 +383,7 @@ class AsyncAssistantsResource(AsyncAPIResource):
         name: str,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
+        tools: Iterable[assistant_update_params.Tool] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -409,6 +415,7 @@ class AsyncAssistantsResource(AsyncAPIResource):
                     "name": name,
                     "instructions": instructions,
                     "model": model,
+                    "tools": tools,
                 },
                 assistant_update_params.AssistantUpdateParams,
             ),

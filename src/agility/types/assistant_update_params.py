@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import Dict, List, Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["AssistantUpdateParams"]
+__all__ = ["AssistantUpdateParams", "Tool", "ToolFunction", "ToolFunctionParameters"]
 
 
 class AssistantUpdateParams(TypedDict, total=False):
@@ -20,3 +20,34 @@ class AssistantUpdateParams(TypedDict, total=False):
     instructions: Optional[str]
 
     model: Optional[Literal["gpt-4o"]]
+
+    tools: Iterable[Tool]
+
+
+class ToolFunctionParameters(TypedDict, total=False):
+    type: Required[str]
+
+    properties: Dict[str, object]
+
+    required: Optional[List[str]]
+
+
+class ToolFunction(TypedDict, total=False):
+    description: Required[str]
+    """
+    A description of what the function does, used by the model to choose when and
+    how to call the function.
+    """
+
+    name: Required[str]
+    """The name of the function to be called."""
+
+    parameters: Optional[ToolFunctionParameters]
+
+    strict: bool
+
+
+class Tool(TypedDict, total=False):
+    function: Required[ToolFunction]
+
+    type: Required[Literal["function"]]

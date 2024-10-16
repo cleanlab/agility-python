@@ -10,7 +10,6 @@ import pytest
 from agility import Agility, AsyncAgility
 from tests.utils import assert_matches_type
 from agility.types import (
-    Assistant,
     AssistantWithConfig,
     AssistantListResponse,
 )
@@ -28,7 +27,7 @@ class TestAssistants:
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             name="name",
         )
-        assert_matches_type(Assistant, assistant, path=["response"])
+        assert_matches_type(AssistantWithConfig, assistant, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params(self, client: Agility) -> None:
@@ -38,8 +37,49 @@ class TestAssistants:
             name="name",
             instructions="instructions",
             model="gpt-4o",
+            tools=[
+                {
+                    "function": {
+                        "description": "description",
+                        "name": "name",
+                        "parameters": {
+                            "type": "type",
+                            "properties": {"foo": "bar"},
+                            "required": ["string", "string", "string"],
+                        },
+                        "strict": True,
+                    },
+                    "type": "function",
+                },
+                {
+                    "function": {
+                        "description": "description",
+                        "name": "name",
+                        "parameters": {
+                            "type": "type",
+                            "properties": {"foo": "bar"},
+                            "required": ["string", "string", "string"],
+                        },
+                        "strict": True,
+                    },
+                    "type": "function",
+                },
+                {
+                    "function": {
+                        "description": "description",
+                        "name": "name",
+                        "parameters": {
+                            "type": "type",
+                            "properties": {"foo": "bar"},
+                            "required": ["string", "string", "string"],
+                        },
+                        "strict": True,
+                    },
+                    "type": "function",
+                },
+            ],
         )
-        assert_matches_type(Assistant, assistant, path=["response"])
+        assert_matches_type(AssistantWithConfig, assistant, path=["response"])
 
     @parametrize
     def test_raw_response_create(self, client: Agility) -> None:
@@ -52,7 +92,7 @@ class TestAssistants:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         assistant = response.parse()
-        assert_matches_type(Assistant, assistant, path=["response"])
+        assert_matches_type(AssistantWithConfig, assistant, path=["response"])
 
     @parametrize
     def test_streaming_response_create(self, client: Agility) -> None:
@@ -65,7 +105,7 @@ class TestAssistants:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             assistant = response.parse()
-            assert_matches_type(Assistant, assistant, path=["response"])
+            assert_matches_type(AssistantWithConfig, assistant, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -128,6 +168,47 @@ class TestAssistants:
             name="name",
             instructions="instructions",
             model="gpt-4o",
+            tools=[
+                {
+                    "function": {
+                        "description": "description",
+                        "name": "name",
+                        "parameters": {
+                            "type": "type",
+                            "properties": {"foo": "bar"},
+                            "required": ["string", "string", "string"],
+                        },
+                        "strict": True,
+                    },
+                    "type": "function",
+                },
+                {
+                    "function": {
+                        "description": "description",
+                        "name": "name",
+                        "parameters": {
+                            "type": "type",
+                            "properties": {"foo": "bar"},
+                            "required": ["string", "string", "string"],
+                        },
+                        "strict": True,
+                    },
+                    "type": "function",
+                },
+                {
+                    "function": {
+                        "description": "description",
+                        "name": "name",
+                        "parameters": {
+                            "type": "type",
+                            "properties": {"foo": "bar"},
+                            "required": ["string", "string", "string"],
+                        },
+                        "strict": True,
+                    },
+                    "type": "function",
+                },
+            ],
         )
         assert_matches_type(AssistantWithConfig, assistant, path=["response"])
 
@@ -256,7 +337,7 @@ class TestAsyncAssistants:
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             name="name",
         )
-        assert_matches_type(Assistant, assistant, path=["response"])
+        assert_matches_type(AssistantWithConfig, assistant, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncAgility) -> None:
@@ -266,8 +347,49 @@ class TestAsyncAssistants:
             name="name",
             instructions="instructions",
             model="gpt-4o",
+            tools=[
+                {
+                    "function": {
+                        "description": "description",
+                        "name": "name",
+                        "parameters": {
+                            "type": "type",
+                            "properties": {"foo": "bar"},
+                            "required": ["string", "string", "string"],
+                        },
+                        "strict": True,
+                    },
+                    "type": "function",
+                },
+                {
+                    "function": {
+                        "description": "description",
+                        "name": "name",
+                        "parameters": {
+                            "type": "type",
+                            "properties": {"foo": "bar"},
+                            "required": ["string", "string", "string"],
+                        },
+                        "strict": True,
+                    },
+                    "type": "function",
+                },
+                {
+                    "function": {
+                        "description": "description",
+                        "name": "name",
+                        "parameters": {
+                            "type": "type",
+                            "properties": {"foo": "bar"},
+                            "required": ["string", "string", "string"],
+                        },
+                        "strict": True,
+                    },
+                    "type": "function",
+                },
+            ],
         )
-        assert_matches_type(Assistant, assistant, path=["response"])
+        assert_matches_type(AssistantWithConfig, assistant, path=["response"])
 
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncAgility) -> None:
@@ -280,7 +402,7 @@ class TestAsyncAssistants:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         assistant = await response.parse()
-        assert_matches_type(Assistant, assistant, path=["response"])
+        assert_matches_type(AssistantWithConfig, assistant, path=["response"])
 
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncAgility) -> None:
@@ -293,7 +415,7 @@ class TestAsyncAssistants:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             assistant = await response.parse()
-            assert_matches_type(Assistant, assistant, path=["response"])
+            assert_matches_type(AssistantWithConfig, assistant, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -356,6 +478,47 @@ class TestAsyncAssistants:
             name="name",
             instructions="instructions",
             model="gpt-4o",
+            tools=[
+                {
+                    "function": {
+                        "description": "description",
+                        "name": "name",
+                        "parameters": {
+                            "type": "type",
+                            "properties": {"foo": "bar"},
+                            "required": ["string", "string", "string"],
+                        },
+                        "strict": True,
+                    },
+                    "type": "function",
+                },
+                {
+                    "function": {
+                        "description": "description",
+                        "name": "name",
+                        "parameters": {
+                            "type": "type",
+                            "properties": {"foo": "bar"},
+                            "required": ["string", "string", "string"],
+                        },
+                        "strict": True,
+                    },
+                    "type": "function",
+                },
+                {
+                    "function": {
+                        "description": "description",
+                        "name": "name",
+                        "parameters": {
+                            "type": "type",
+                            "properties": {"foo": "bar"},
+                            "required": ["string", "string", "string"],
+                        },
+                        "strict": True,
+                    },
+                    "type": "function",
+                },
+            ],
         )
         assert_matches_type(AssistantWithConfig, assistant, path=["response"])
 
