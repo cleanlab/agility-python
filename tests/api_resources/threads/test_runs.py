@@ -349,6 +349,59 @@ class TestRuns:
                 assistant_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
+    @parametrize
+    def test_method_submit_tool_outputs(self, client: Agility) -> None:
+        run = client.threads.runs.submit_tool_outputs(
+            run_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            body=[{}, {}, {}],
+        )
+        assert_matches_type(Run, run, path=["response"])
+
+    @parametrize
+    def test_raw_response_submit_tool_outputs(self, client: Agility) -> None:
+        response = client.threads.runs.with_raw_response.submit_tool_outputs(
+            run_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            body=[{}, {}, {}],
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        run = response.parse()
+        assert_matches_type(Run, run, path=["response"])
+
+    @parametrize
+    def test_streaming_response_submit_tool_outputs(self, client: Agility) -> None:
+        with client.threads.runs.with_streaming_response.submit_tool_outputs(
+            run_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            body=[{}, {}, {}],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            run = response.parse()
+            assert_matches_type(Run, run, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_submit_tool_outputs(self, client: Agility) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `thread_id` but received ''"):
+            client.threads.runs.with_raw_response.submit_tool_outputs(
+                run_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                thread_id="",
+                body=[{}, {}, {}],
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `run_id` but received ''"):
+            client.threads.runs.with_raw_response.submit_tool_outputs(
+                run_id="",
+                thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                body=[{}, {}, {}],
+            )
+
 
 class TestAsyncRuns:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
@@ -683,4 +736,57 @@ class TestAsyncRuns:
             await async_client.threads.runs.with_raw_response.stream(
                 thread_id="",
                 assistant_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            )
+
+    @parametrize
+    async def test_method_submit_tool_outputs(self, async_client: AsyncAgility) -> None:
+        run = await async_client.threads.runs.submit_tool_outputs(
+            run_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            body=[{}, {}, {}],
+        )
+        assert_matches_type(Run, run, path=["response"])
+
+    @parametrize
+    async def test_raw_response_submit_tool_outputs(self, async_client: AsyncAgility) -> None:
+        response = await async_client.threads.runs.with_raw_response.submit_tool_outputs(
+            run_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            body=[{}, {}, {}],
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        run = await response.parse()
+        assert_matches_type(Run, run, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_submit_tool_outputs(self, async_client: AsyncAgility) -> None:
+        async with async_client.threads.runs.with_streaming_response.submit_tool_outputs(
+            run_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            body=[{}, {}, {}],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            run = await response.parse()
+            assert_matches_type(Run, run, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_submit_tool_outputs(self, async_client: AsyncAgility) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `thread_id` but received ''"):
+            await async_client.threads.runs.with_raw_response.submit_tool_outputs(
+                run_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                thread_id="",
+                body=[{}, {}, {}],
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `run_id` but received ''"):
+            await async_client.threads.runs.with_raw_response.submit_tool_outputs(
+                run_id="",
+                thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                body=[{}, {}, {}],
             )
