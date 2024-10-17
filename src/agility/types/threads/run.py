@@ -4,13 +4,55 @@ from typing import Dict, List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
+from pydantic import Field as FieldInfo
+
 from ..._models import BaseModel
 
-__all__ = ["Run", "Tool", "ToolFunction", "ToolFunctionParameters", "Usage"]
+__all__ = [
+    "Run",
+    "RequiredAction",
+    "RequiredActionSubmitToolOutputs",
+    "RequiredActionSubmitToolOutputsToolCall",
+    "RequiredActionSubmitToolOutputsToolCallFunction",
+    "Tool",
+    "ToolFunction",
+    "ToolFunctionParameters",
+    "Usage",
+]
+
+
+class RequiredActionSubmitToolOutputsToolCallFunction(BaseModel):
+    arguments: str
+
+    name: str
+
+    output: Optional[str] = None
+
+
+class RequiredActionSubmitToolOutputsToolCall(BaseModel):
+    id: str
+
+    function: RequiredActionSubmitToolOutputsToolCallFunction
+
+    index: int
+
+    type: Optional[Literal["function"]] = None
+
+
+class RequiredActionSubmitToolOutputs(BaseModel):
+    tool_calls: List[RequiredActionSubmitToolOutputsToolCall]
+
+
+class RequiredAction(BaseModel):
+    submit_tool_outputs: RequiredActionSubmitToolOutputs
+
+    type: Optional[Literal["submit_tool_outputs"]] = None
 
 
 class ToolFunctionParameters(BaseModel):
     type: str
+
+    additional_properties: Optional[bool] = FieldInfo(alias="additionalProperties", default=None)
 
     properties: Optional[Dict[str, object]] = None
 
@@ -68,6 +110,8 @@ class Run(BaseModel):
     knowledge_base_id: Optional[str] = None
 
     model: Optional[Literal["gpt-4o"]] = None
+
+    required_action: Optional[RequiredAction] = None
 
     tools: Optional[List[Tool]] = None
 

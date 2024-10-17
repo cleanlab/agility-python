@@ -61,6 +61,7 @@ class TestRuns:
                         "name": "name",
                         "parameters": {
                             "type": "type",
+                            "additional_properties": True,
                             "properties": {"foo": "bar"},
                             "required": ["string", "string", "string"],
                         },
@@ -74,6 +75,7 @@ class TestRuns:
                         "name": "name",
                         "parameters": {
                             "type": "type",
+                            "additional_properties": True,
                             "properties": {"foo": "bar"},
                             "required": ["string", "string", "string"],
                         },
@@ -87,6 +89,7 @@ class TestRuns:
                         "name": "name",
                         "parameters": {
                             "type": "type",
+                            "additional_properties": True,
                             "properties": {"foo": "bar"},
                             "required": ["string", "string", "string"],
                         },
@@ -272,6 +275,7 @@ class TestRuns:
                         "name": "name",
                         "parameters": {
                             "type": "type",
+                            "additional_properties": True,
                             "properties": {"foo": "bar"},
                             "required": ["string", "string", "string"],
                         },
@@ -285,6 +289,7 @@ class TestRuns:
                         "name": "name",
                         "parameters": {
                             "type": "type",
+                            "additional_properties": True,
                             "properties": {"foo": "bar"},
                             "required": ["string", "string", "string"],
                         },
@@ -298,6 +303,7 @@ class TestRuns:
                         "name": "name",
                         "parameters": {
                             "type": "type",
+                            "additional_properties": True,
                             "properties": {"foo": "bar"},
                             "required": ["string", "string", "string"],
                         },
@@ -391,6 +397,7 @@ class TestAsyncRuns:
                         "name": "name",
                         "parameters": {
                             "type": "type",
+                            "additional_properties": True,
                             "properties": {"foo": "bar"},
                             "required": ["string", "string", "string"],
                         },
@@ -404,6 +411,7 @@ class TestAsyncRuns:
                         "name": "name",
                         "parameters": {
                             "type": "type",
+                            "additional_properties": True,
                             "properties": {"foo": "bar"},
                             "required": ["string", "string", "string"],
                         },
@@ -417,6 +425,7 @@ class TestAsyncRuns:
                         "name": "name",
                         "parameters": {
                             "type": "type",
+                            "additional_properties": True,
                             "properties": {"foo": "bar"},
                             "required": ["string", "string", "string"],
                         },
@@ -602,6 +611,7 @@ class TestAsyncRuns:
                         "name": "name",
                         "parameters": {
                             "type": "type",
+                            "additional_properties": True,
                             "properties": {"foo": "bar"},
                             "required": ["string", "string", "string"],
                         },
@@ -615,6 +625,7 @@ class TestAsyncRuns:
                         "name": "name",
                         "parameters": {
                             "type": "type",
+                            "additional_properties": True,
                             "properties": {"foo": "bar"},
                             "required": ["string", "string", "string"],
                         },
@@ -628,6 +639,7 @@ class TestAsyncRuns:
                         "name": "name",
                         "parameters": {
                             "type": "type",
+                            "additional_properties": True,
                             "properties": {"foo": "bar"},
                             "required": ["string", "string", "string"],
                         },

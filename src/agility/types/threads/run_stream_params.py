@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 from typing import Dict, List, Iterable, Optional
-from typing_extensions import Literal, Required, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypedDict
+
+from ..._utils import PropertyInfo
 
 __all__ = [
     "RunStreamParams",
@@ -47,6 +49,8 @@ class AdditionalMessage(TypedDict, total=False):
 
 class ToolFunctionParameters(TypedDict, total=False):
     type: Required[str]
+
+    additional_properties: Annotated[bool, PropertyInfo(alias="additionalProperties")]
 
     properties: Dict[str, object]
 

@@ -4,6 +4,8 @@ from typing import Dict, List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
+from pydantic import Field as FieldInfo
+
 from .._models import BaseModel
 
 __all__ = ["AssistantWithConfig", "Tool", "ToolFunction", "ToolFunctionParameters"]
@@ -11,6 +13,8 @@ __all__ = ["AssistantWithConfig", "Tool", "ToolFunction", "ToolFunctionParameter
 
 class ToolFunctionParameters(BaseModel):
     type: str
+
+    additional_properties: Optional[bool] = FieldInfo(alias="additionalProperties", default=None)
 
     properties: Optional[Dict[str, object]] = None
 

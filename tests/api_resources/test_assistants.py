@@ -44,6 +44,7 @@ class TestAssistants:
                         "name": "name",
                         "parameters": {
                             "type": "type",
+                            "additional_properties": True,
                             "properties": {"foo": "bar"},
                             "required": ["string", "string", "string"],
                         },
@@ -57,6 +58,7 @@ class TestAssistants:
                         "name": "name",
                         "parameters": {
                             "type": "type",
+                            "additional_properties": True,
                             "properties": {"foo": "bar"},
                             "required": ["string", "string", "string"],
                         },
@@ -70,6 +72,7 @@ class TestAssistants:
                         "name": "name",
                         "parameters": {
                             "type": "type",
+                            "additional_properties": True,
                             "properties": {"foo": "bar"},
                             "required": ["string", "string", "string"],
                         },
@@ -175,6 +178,7 @@ class TestAssistants:
                         "name": "name",
                         "parameters": {
                             "type": "type",
+                            "additional_properties": True,
                             "properties": {"foo": "bar"},
                             "required": ["string", "string", "string"],
                         },
@@ -188,6 +192,7 @@ class TestAssistants:
                         "name": "name",
                         "parameters": {
                             "type": "type",
+                            "additional_properties": True,
                             "properties": {"foo": "bar"},
                             "required": ["string", "string", "string"],
                         },
@@ -201,6 +206,7 @@ class TestAssistants:
                         "name": "name",
                         "parameters": {
                             "type": "type",
+                            "additional_properties": True,
                             "properties": {"foo": "bar"},
                             "required": ["string", "string", "string"],
                         },
@@ -354,6 +360,7 @@ class TestAsyncAssistants:
                         "name": "name",
                         "parameters": {
                             "type": "type",
+                            "additional_properties": True,
                             "properties": {"foo": "bar"},
                             "required": ["string", "string", "string"],
                         },
@@ -367,6 +374,7 @@ class TestAsyncAssistants:
                         "name": "name",
                         "parameters": {
                             "type": "type",
+                            "additional_properties": True,
                             "properties": {"foo": "bar"},
                             "required": ["string", "string", "string"],
                         },
@@ -380,6 +388,7 @@ class TestAsyncAssistants:
                         "name": "name",
                         "parameters": {
                             "type": "type",
+                            "additional_properties": True,
                             "properties": {"foo": "bar"},
                             "required": ["string", "string", "string"],
                         },
@@ -485,6 +494,7 @@ class TestAsyncAssistants:
                         "name": "name",
                         "parameters": {
                             "type": "type",
+                            "additional_properties": True,
                             "properties": {"foo": "bar"},
                             "required": ["string", "string", "string"],
                         },
@@ -498,6 +508,7 @@ class TestAsyncAssistants:
                         "name": "name",
                         "parameters": {
                             "type": "type",
+                            "additional_properties": True,
                             "properties": {"foo": "bar"},
                             "required": ["string", "string", "string"],
                         },
@@ -511,6 +522,7 @@ class TestAsyncAssistants:
                         "name": "name",
                         "parameters": {
                             "type": "type",
+                            "additional_properties": True,
                             "properties": {"foo": "bar"},
                             "required": ["string", "string", "string"],
                         },
