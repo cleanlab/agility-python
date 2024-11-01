@@ -29,7 +29,10 @@ The full API of this library can be found in [api.md](api.md).
 ```python
 from agility import Agility
 
-client = Agility()
+client = Agility(
+    # or 'production' | 'dev' | 'local'; defaults to "production".
+    environment="staging",
+)
 
 assistant = client.assistants.create(
     description="description",
@@ -39,10 +42,10 @@ assistant = client.assistants.create(
 print(assistant.id)
 ```
 
-While you can provide an `api_key` keyword argument,
+While you can provide a `bearer_token` keyword argument,
 we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `AUTHENTICATED_API_KEY="My API Key"` to your `.env` file
-so that your API Key is not stored in source control.
+to add `BEARER_TOKEN="My Bearer Token"` to your `.env` file
+so that your Bearer Token is not stored in source control.
 
 ## Async usage
 
@@ -52,7 +55,10 @@ Simply import `AsyncAgility` instead of `Agility` and use `await` with each API 
 import asyncio
 from agility import AsyncAgility
 
-client = AsyncAgility()
+client = AsyncAgility(
+    # or 'production' | 'dev' | 'local'; defaults to "production".
+    environment="staging",
+)
 
 
 async def main() -> None:
@@ -77,6 +83,67 @@ Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typ
 - Converting to a dictionary, `model.to_dict()`
 
 Typed requests and responses provide autocomplete and documentation within your editor. If you would like to see type errors in VS Code to help catch bugs earlier, set `python.analysis.typeCheckingMode` to `basic`.
+
+## Pagination
+
+List methods in the Agility API are paginated.
+
+This library provides auto-paginating iterators with each list response, so you do not have to request successive pages manually:
+
+```python
+from agility import Agility
+
+client = Agility()
+
+all_assistants = []
+# Automatically fetches more pages as needed.
+for assistant in client.assistants.list():
+    # Do something with assistant here
+    all_assistants.append(assistant)
+print(all_assistants)
+```
+
+Or, asynchronously:
+
+```python
+import asyncio
+from agility import AsyncAgility
+
+client = AsyncAgility()
+
+
+async def main() -> None:
+    all_assistants = []
+    # Iterate through items across all pages, issuing requests as needed.
+    async for assistant in client.assistants.list():
+        all_assistants.append(assistant)
+    print(all_assistants)
+
+
+asyncio.run(main())
+```
+
+Alternatively, you can use the `.has_next_page()`, `.next_page_info()`, or `.get_next_page()` methods for more granular control working with pages:
+
+```python
+first_page = await client.assistants.list()
+if first_page.has_next_page():
+    print(f"will fetch next page using these details: {first_page.next_page_info()}")
+    next_page = await first_page.get_next_page()
+    print(f"number of items we just fetched: {len(next_page.items)}")
+
+# Remove `await` for non-async usage.
+```
+
+Or just work directly with the returned data:
+
+```python
+first_page = await client.assistants.list()
+for assistant in first_page.items:
+    print(assistant.id)
+
+# Remove `await` for non-async usage.
+```
 
 ## Handling errors
 

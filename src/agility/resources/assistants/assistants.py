@@ -29,10 +29,10 @@ from .access_keys import (
     AccessKeysResourceWithStreamingResponse,
     AsyncAccessKeysResourceWithStreamingResponse,
 )
-from ..._base_client import make_request_options
+from ...pagination import SyncMyOffsetPage, AsyncMyOffsetPage
+from ..._base_client import AsyncPaginator, make_request_options
 from ...types.assistant import Assistant
 from ...types.assistant_with_config import AssistantWithConfig
-from ...types.assistant_list_response import AssistantListResponse
 
 __all__ = ["AssistantsResource", "AsyncAssistantsResource"]
 
@@ -224,7 +224,7 @@ class AssistantsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AssistantListResponse:
+    ) -> SyncMyOffsetPage[AssistantWithConfig]:
         """
         Get all assistants for the current user.
 
@@ -237,8 +237,9 @@ class AssistantsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._get(
+        return self._get_api_list(
             "/api/assistants/",
+            page=SyncMyOffsetPage[AssistantWithConfig],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -252,7 +253,7 @@ class AssistantsResource(SyncAPIResource):
                     assistant_list_params.AssistantListParams,
                 ),
             ),
-            cast_to=AssistantListResponse,
+            model=AssistantWithConfig,
         )
 
     def delete(
@@ -466,7 +467,7 @@ class AsyncAssistantsResource(AsyncAPIResource):
             cast_to=AssistantWithConfig,
         )
 
-    async def list(
+    def list(
         self,
         *,
         limit: int | NotGiven = NOT_GIVEN,
@@ -477,7 +478,7 @@ class AsyncAssistantsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AssistantListResponse:
+    ) -> AsyncPaginator[AssistantWithConfig, AsyncMyOffsetPage[AssistantWithConfig]]:
         """
         Get all assistants for the current user.
 
@@ -490,14 +491,15 @@ class AsyncAssistantsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return await self._get(
+        return self._get_api_list(
             "/api/assistants/",
+            page=AsyncMyOffsetPage[AssistantWithConfig],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
+                query=maybe_transform(
                     {
                         "limit": limit,
                         "offset": offset,
@@ -505,7 +507,7 @@ class AsyncAssistantsResource(AsyncAPIResource):
                     assistant_list_params.AssistantListParams,
                 ),
             ),
-            cast_to=AssistantListResponse,
+            model=AssistantWithConfig,
         )
 
     async def delete(

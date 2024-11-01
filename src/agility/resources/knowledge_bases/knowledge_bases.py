@@ -30,10 +30,10 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..._base_client import make_request_options
+from ...pagination import SyncMyOffsetPage, AsyncMyOffsetPage
+from ..._base_client import AsyncPaginator, make_request_options
 from .sources.sources import SourcesResource, AsyncSourcesResource
 from ...types.knowledge_base_with_config import KnowledgeBaseWithConfig
-from ...types.knowledge_base_list_response import KnowledgeBaseListResponse
 
 __all__ = ["KnowledgeBasesResource", "AsyncKnowledgeBasesResource"]
 
@@ -199,7 +199,7 @@ class KnowledgeBasesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> KnowledgeBaseListResponse:
+    ) -> SyncMyOffsetPage[KnowledgeBaseWithConfig]:
         """
         List all knowledge bases.
 
@@ -212,8 +212,9 @@ class KnowledgeBasesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._get(
+        return self._get_api_list(
             "/api/knowledge_bases/",
+            page=SyncMyOffsetPage[KnowledgeBaseWithConfig],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -227,7 +228,7 @@ class KnowledgeBasesResource(SyncAPIResource):
                     knowledge_base_list_params.KnowledgeBaseListParams,
                 ),
             ),
-            cast_to=KnowledgeBaseListResponse,
+            model=KnowledgeBaseWithConfig,
         )
 
     def delete(
@@ -415,7 +416,7 @@ class AsyncKnowledgeBasesResource(AsyncAPIResource):
             cast_to=KnowledgeBaseWithConfig,
         )
 
-    async def list(
+    def list(
         self,
         *,
         limit: int | NotGiven = NOT_GIVEN,
@@ -426,7 +427,7 @@ class AsyncKnowledgeBasesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> KnowledgeBaseListResponse:
+    ) -> AsyncPaginator[KnowledgeBaseWithConfig, AsyncMyOffsetPage[KnowledgeBaseWithConfig]]:
         """
         List all knowledge bases.
 
@@ -439,14 +440,15 @@ class AsyncKnowledgeBasesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return await self._get(
+        return self._get_api_list(
             "/api/knowledge_bases/",
+            page=AsyncMyOffsetPage[KnowledgeBaseWithConfig],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
+                query=maybe_transform(
                     {
                         "limit": limit,
                         "offset": offset,
@@ -454,7 +456,7 @@ class AsyncKnowledgeBasesResource(AsyncAPIResource):
                     knowledge_base_list_params.KnowledgeBaseListParams,
                 ),
             ),
-            cast_to=KnowledgeBaseListResponse,
+            model=KnowledgeBaseWithConfig,
         )
 
     async def delete(

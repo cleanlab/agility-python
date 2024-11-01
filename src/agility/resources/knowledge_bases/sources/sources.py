@@ -25,10 +25,10 @@ from ...._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...._base_client import make_request_options
+from ....pagination import SyncMyOffsetPage, AsyncMyOffsetPage
+from ...._base_client import AsyncPaginator, make_request_options
 from ....types.knowledge_bases import source_list_params, source_create_params, source_update_params
 from ....types.knowledge_bases.source import Source
-from ....types.knowledge_bases.source_list_response import SourceListResponse
 from ....types.knowledge_bases.source_status_response import SourceStatusResponse
 
 __all__ = ["SourcesResource", "AsyncSourcesResource"]
@@ -219,7 +219,7 @@ class SourcesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SourceListResponse:
+    ) -> SyncMyOffsetPage[Source]:
         """
         Get all sources for a knowledge base.
 
@@ -234,8 +234,9 @@ class SourcesResource(SyncAPIResource):
         """
         if not knowledge_base_id:
             raise ValueError(f"Expected a non-empty value for `knowledge_base_id` but received {knowledge_base_id!r}")
-        return self._get(
+        return self._get_api_list(
             f"/api/knowledge_bases/{knowledge_base_id}/sources/",
+            page=SyncMyOffsetPage[Source],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -249,7 +250,7 @@ class SourcesResource(SyncAPIResource):
                     source_list_params.SourceListParams,
                 ),
             ),
-            cast_to=SourceListResponse,
+            model=Source,
         )
 
     def delete(
@@ -535,7 +536,7 @@ class AsyncSourcesResource(AsyncAPIResource):
             cast_to=Source,
         )
 
-    async def list(
+    def list(
         self,
         knowledge_base_id: str,
         *,
@@ -547,7 +548,7 @@ class AsyncSourcesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SourceListResponse:
+    ) -> AsyncPaginator[Source, AsyncMyOffsetPage[Source]]:
         """
         Get all sources for a knowledge base.
 
@@ -562,14 +563,15 @@ class AsyncSourcesResource(AsyncAPIResource):
         """
         if not knowledge_base_id:
             raise ValueError(f"Expected a non-empty value for `knowledge_base_id` but received {knowledge_base_id!r}")
-        return await self._get(
+        return self._get_api_list(
             f"/api/knowledge_bases/{knowledge_base_id}/sources/",
+            page=AsyncMyOffsetPage[Source],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
+                query=maybe_transform(
                     {
                         "limit": limit,
                         "offset": offset,
@@ -577,7 +579,7 @@ class AsyncSourcesResource(AsyncAPIResource):
                     source_list_params.SourceListParams,
                 ),
             ),
-            cast_to=SourceListResponse,
+            model=Source,
         )
 
     async def delete(

@@ -5,10 +5,7 @@ from __future__ import annotations
 import httpx
 
 from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ...._utils import (
-    maybe_transform,
-    async_maybe_transform,
-)
+from ...._utils import maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
 from ...._response import (
@@ -17,10 +14,10 @@ from ...._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...._base_client import make_request_options
+from ....pagination import SyncMyOffsetPage, AsyncMyOffsetPage
+from ...._base_client import AsyncPaginator, make_request_options
 from ....types.knowledge_bases.sources import document_list_params
 from ....types.knowledge_bases.sources.document import Document
-from ....types.knowledge_bases.sources.document_list_response import DocumentListResponse
 
 __all__ = ["DocumentsResource", "AsyncDocumentsResource"]
 
@@ -97,7 +94,7 @@ class DocumentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DocumentListResponse:
+    ) -> SyncMyOffsetPage[Document]:
         """
         List all documents for a knowledge base.
 
@@ -114,8 +111,9 @@ class DocumentsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `knowledge_base_id` but received {knowledge_base_id!r}")
         if not source_id:
             raise ValueError(f"Expected a non-empty value for `source_id` but received {source_id!r}")
-        return self._get(
+        return self._get_api_list(
             f"/api/knowledge_bases/{knowledge_base_id}/sources/{source_id}/documents/",
+            page=SyncMyOffsetPage[Document],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -129,7 +127,7 @@ class DocumentsResource(SyncAPIResource):
                     document_list_params.DocumentListParams,
                 ),
             ),
-            cast_to=DocumentListResponse,
+            model=Document,
         )
 
 
@@ -192,7 +190,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
             cast_to=Document,
         )
 
-    async def list(
+    def list(
         self,
         source_id: str,
         *,
@@ -205,7 +203,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DocumentListResponse:
+    ) -> AsyncPaginator[Document, AsyncMyOffsetPage[Document]]:
         """
         List all documents for a knowledge base.
 
@@ -222,14 +220,15 @@ class AsyncDocumentsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `knowledge_base_id` but received {knowledge_base_id!r}")
         if not source_id:
             raise ValueError(f"Expected a non-empty value for `source_id` but received {source_id!r}")
-        return await self._get(
+        return self._get_api_list(
             f"/api/knowledge_bases/{knowledge_base_id}/sources/{source_id}/documents/",
+            page=AsyncMyOffsetPage[Document],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
+                query=maybe_transform(
                     {
                         "limit": limit,
                         "offset": offset,
@@ -237,7 +236,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
                     document_list_params.DocumentListParams,
                 ),
             ),
-            cast_to=DocumentListResponse,
+            model=Document,
         )
 
 

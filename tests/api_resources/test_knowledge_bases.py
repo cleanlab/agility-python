@@ -11,8 +11,8 @@ from agility import Agility, AsyncAgility
 from tests.utils import assert_matches_type
 from agility.types import (
     KnowledgeBaseWithConfig,
-    KnowledgeBaseListResponse,
 )
+from agility.pagination import SyncMyOffsetPage, AsyncMyOffsetPage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -183,7 +183,7 @@ class TestKnowledgeBases:
     @parametrize
     def test_method_list(self, client: Agility) -> None:
         knowledge_base = client.knowledge_bases.list()
-        assert_matches_type(KnowledgeBaseListResponse, knowledge_base, path=["response"])
+        assert_matches_type(SyncMyOffsetPage[KnowledgeBaseWithConfig], knowledge_base, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Agility) -> None:
@@ -191,7 +191,7 @@ class TestKnowledgeBases:
             limit=1,
             offset=0,
         )
-        assert_matches_type(KnowledgeBaseListResponse, knowledge_base, path=["response"])
+        assert_matches_type(SyncMyOffsetPage[KnowledgeBaseWithConfig], knowledge_base, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Agility) -> None:
@@ -200,7 +200,7 @@ class TestKnowledgeBases:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         knowledge_base = response.parse()
-        assert_matches_type(KnowledgeBaseListResponse, knowledge_base, path=["response"])
+        assert_matches_type(SyncMyOffsetPage[KnowledgeBaseWithConfig], knowledge_base, path=["response"])
 
     @parametrize
     def test_streaming_response_list(self, client: Agility) -> None:
@@ -209,7 +209,7 @@ class TestKnowledgeBases:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             knowledge_base = response.parse()
-            assert_matches_type(KnowledgeBaseListResponse, knowledge_base, path=["response"])
+            assert_matches_type(SyncMyOffsetPage[KnowledgeBaseWithConfig], knowledge_base, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -418,7 +418,7 @@ class TestAsyncKnowledgeBases:
     @parametrize
     async def test_method_list(self, async_client: AsyncAgility) -> None:
         knowledge_base = await async_client.knowledge_bases.list()
-        assert_matches_type(KnowledgeBaseListResponse, knowledge_base, path=["response"])
+        assert_matches_type(AsyncMyOffsetPage[KnowledgeBaseWithConfig], knowledge_base, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncAgility) -> None:
@@ -426,7 +426,7 @@ class TestAsyncKnowledgeBases:
             limit=1,
             offset=0,
         )
-        assert_matches_type(KnowledgeBaseListResponse, knowledge_base, path=["response"])
+        assert_matches_type(AsyncMyOffsetPage[KnowledgeBaseWithConfig], knowledge_base, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncAgility) -> None:
@@ -435,7 +435,7 @@ class TestAsyncKnowledgeBases:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         knowledge_base = await response.parse()
-        assert_matches_type(KnowledgeBaseListResponse, knowledge_base, path=["response"])
+        assert_matches_type(AsyncMyOffsetPage[KnowledgeBaseWithConfig], knowledge_base, path=["response"])
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncAgility) -> None:
@@ -444,7 +444,7 @@ class TestAsyncKnowledgeBases:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             knowledge_base = await response.parse()
-            assert_matches_type(KnowledgeBaseListResponse, knowledge_base, path=["response"])
+            assert_matches_type(AsyncMyOffsetPage[KnowledgeBaseWithConfig], knowledge_base, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
