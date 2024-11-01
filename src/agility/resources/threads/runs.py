@@ -21,7 +21,7 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.threads import run_create_params, run_stream_params, run_submit_tool_outputs_params
+from ...types.threads import run_create_params, run_stream_params
 from ...types.threads.run import Run
 
 __all__ = ["RunsResource", "AsyncRunsResource"]
@@ -57,7 +57,6 @@ class RunsResource(SyncAPIResource):
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         knowledge_base_id: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
-        tools: Optional[Iterable[run_create_params.Tool]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -89,7 +88,6 @@ class RunsResource(SyncAPIResource):
                     "instructions": instructions,
                     "knowledge_base_id": knowledge_base_id,
                     "model": model,
-                    "tools": tools,
                 },
                 run_create_params.RunCreateParams,
             ),
@@ -182,7 +180,6 @@ class RunsResource(SyncAPIResource):
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         knowledge_base_id: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
-        tools: Optional[Iterable[run_stream_params.Tool]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -214,7 +211,6 @@ class RunsResource(SyncAPIResource):
                     "instructions": instructions,
                     "knowledge_base_id": knowledge_base_id,
                     "model": model,
-                    "tools": tools,
                 },
                 run_stream_params.RunStreamParams,
             ),
@@ -222,46 +218,6 @@ class RunsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=object,
-        )
-
-    def submit_tool_outputs(
-        self,
-        run_id: str,
-        *,
-        thread_id: str,
-        body: Iterable[run_submit_tool_outputs_params.Body],
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Run:
-        """Submit the outputs from the tool calls once they're all completed.
-
-        The run must
-        have status: "requires_action" and required_action.type is submit_tool_outputs
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not thread_id:
-            raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
-        if not run_id:
-            raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
-        return self._post(
-            f"/api/threads/{thread_id}/runs/{run_id}/submit_tool_outputs",
-            body=maybe_transform(body, Iterable[run_submit_tool_outputs_params.Body]),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=Run,
         )
 
 
@@ -295,7 +251,6 @@ class AsyncRunsResource(AsyncAPIResource):
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         knowledge_base_id: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
-        tools: Optional[Iterable[run_create_params.Tool]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -327,7 +282,6 @@ class AsyncRunsResource(AsyncAPIResource):
                     "instructions": instructions,
                     "knowledge_base_id": knowledge_base_id,
                     "model": model,
-                    "tools": tools,
                 },
                 run_create_params.RunCreateParams,
             ),
@@ -420,7 +374,6 @@ class AsyncRunsResource(AsyncAPIResource):
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         knowledge_base_id: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
-        tools: Optional[Iterable[run_stream_params.Tool]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -452,7 +405,6 @@ class AsyncRunsResource(AsyncAPIResource):
                     "instructions": instructions,
                     "knowledge_base_id": knowledge_base_id,
                     "model": model,
-                    "tools": tools,
                 },
                 run_stream_params.RunStreamParams,
             ),
@@ -460,46 +412,6 @@ class AsyncRunsResource(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=object,
-        )
-
-    async def submit_tool_outputs(
-        self,
-        run_id: str,
-        *,
-        thread_id: str,
-        body: Iterable[run_submit_tool_outputs_params.Body],
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Run:
-        """Submit the outputs from the tool calls once they're all completed.
-
-        The run must
-        have status: "requires_action" and required_action.type is submit_tool_outputs
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not thread_id:
-            raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
-        if not run_id:
-            raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
-        return await self._post(
-            f"/api/threads/{thread_id}/runs/{run_id}/submit_tool_outputs",
-            body=await async_maybe_transform(body, Iterable[run_submit_tool_outputs_params.Body]),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=Run,
         )
 
 
@@ -519,9 +431,6 @@ class RunsResourceWithRawResponse:
         self.stream = to_raw_response_wrapper(
             runs.stream,
         )
-        self.submit_tool_outputs = to_raw_response_wrapper(
-            runs.submit_tool_outputs,
-        )
 
 
 class AsyncRunsResourceWithRawResponse:
@@ -539,9 +448,6 @@ class AsyncRunsResourceWithRawResponse:
         )
         self.stream = async_to_raw_response_wrapper(
             runs.stream,
-        )
-        self.submit_tool_outputs = async_to_raw_response_wrapper(
-            runs.submit_tool_outputs,
         )
 
 
@@ -561,9 +467,6 @@ class RunsResourceWithStreamingResponse:
         self.stream = to_streamed_response_wrapper(
             runs.stream,
         )
-        self.submit_tool_outputs = to_streamed_response_wrapper(
-            runs.submit_tool_outputs,
-        )
 
 
 class AsyncRunsResourceWithStreamingResponse:
@@ -581,7 +484,4 @@ class AsyncRunsResourceWithStreamingResponse:
         )
         self.stream = async_to_streamed_response_wrapper(
             runs.stream,
-        )
-        self.submit_tool_outputs = async_to_streamed_response_wrapper(
-            runs.submit_tool_outputs,
         )

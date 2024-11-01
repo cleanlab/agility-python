@@ -55,6 +55,7 @@ class TestSources:
                 "cron": "cron",
                 "utc_offset": 0,
             },
+            sync=True,
         )
         assert_matches_type(Source, source, path=["response"])
 
@@ -194,6 +195,7 @@ class TestSources:
                 "cron": "cron",
                 "utc_offset": 0,
             },
+            sync=True,
         )
         assert_matches_type(Source, source, path=["response"])
 
@@ -494,6 +496,7 @@ class TestAsyncSources:
                 "cron": "cron",
                 "utc_offset": 0,
             },
+            sync=True,
         )
         assert_matches_type(Source, source, path=["response"])
 
@@ -633,6 +636,7 @@ class TestAsyncSources:
                 "cron": "cron",
                 "utc_offset": 0,
             },
+            sync=True,
         )
         assert_matches_type(Source, source, path=["response"])
 

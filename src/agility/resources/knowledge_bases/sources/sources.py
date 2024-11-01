@@ -66,6 +66,7 @@ class SourcesResource(SyncAPIResource):
         name: str,
         source_params: source_create_params.SourceParams,
         source_schedule: source_create_params.SourceSchedule,
+        sync: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -103,7 +104,11 @@ class SourcesResource(SyncAPIResource):
                 source_create_params.SourceCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform({"sync": sync}, source_create_params.SourceCreateParams),
             ),
             cast_to=Source,
         )
@@ -153,6 +158,7 @@ class SourcesResource(SyncAPIResource):
         name: str,
         source_params: source_update_params.SourceParams,
         source_schedule: source_update_params.SourceSchedule,
+        sync: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -192,7 +198,11 @@ class SourcesResource(SyncAPIResource):
                 source_update_params.SourceUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform({"sync": sync}, source_update_params.SourceUpdateParams),
             ),
             cast_to=Source,
         )
@@ -384,6 +394,7 @@ class AsyncSourcesResource(AsyncAPIResource):
         name: str,
         source_params: source_create_params.SourceParams,
         source_schedule: source_create_params.SourceSchedule,
+        sync: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -421,7 +432,11 @@ class AsyncSourcesResource(AsyncAPIResource):
                 source_create_params.SourceCreateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform({"sync": sync}, source_create_params.SourceCreateParams),
             ),
             cast_to=Source,
         )
@@ -471,6 +486,7 @@ class AsyncSourcesResource(AsyncAPIResource):
         name: str,
         source_params: source_update_params.SourceParams,
         source_schedule: source_update_params.SourceSchedule,
+        sync: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -510,7 +526,11 @@ class AsyncSourcesResource(AsyncAPIResource):
                 source_update_params.SourceUpdateParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform({"sync": sync}, source_update_params.SourceUpdateParams),
             ),
             cast_to=Source,
         )

@@ -31,12 +31,12 @@ from agility import Agility
 
 client = Agility()
 
-assistant_with_config = client.assistants.create(
+assistant = client.assistants.create(
     description="description",
     knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
     name="name",
 )
-print(assistant_with_config.id)
+print(assistant.id)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -56,12 +56,12 @@ client = AsyncAgility()
 
 
 async def main() -> None:
-    assistant_with_config = await client.assistants.create(
+    assistant = await client.assistants.create(
         description="description",
         knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         name="name",
     )
-    print(assistant_with_config.id)
+    print(assistant.id)
 
 
 asyncio.run(main())

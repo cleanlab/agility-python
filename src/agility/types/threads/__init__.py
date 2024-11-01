@@ -9,4 +9,3 @@ from .run_stream_params import RunStreamParams as RunStreamParams
 from .message_list_params import MessageListParams as MessageListParams
 from .message_create_params import MessageCreateParams as MessageCreateParams
 from .message_list_response import MessageListResponse as MessageListResponse
-from .run_submit_tool_outputs_params import RunSubmitToolOutputsParams as RunSubmitToolOutputsParams

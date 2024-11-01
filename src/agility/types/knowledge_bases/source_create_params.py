@@ -26,6 +26,8 @@ class SourceCreateParams(TypedDict, total=False):
     source_schedule: Required[SourceSchedule]
     """Source schedule model."""
 
+    sync: bool
+
 
 class SourceParamsWebV0Params(TypedDict, total=False):
     urls: Required[List[str]]

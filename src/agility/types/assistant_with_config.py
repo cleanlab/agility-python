@@ -1,45 +1,12 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict, List, Optional
+from typing import List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
-from pydantic import Field as FieldInfo
-
 from .._models import BaseModel
 
-__all__ = ["AssistantWithConfig", "Tool", "ToolFunction", "ToolFunctionParameters"]
-
-
-class ToolFunctionParameters(BaseModel):
-    type: str
-
-    additional_properties: Optional[bool] = FieldInfo(alias="additionalProperties", default=None)
-
-    properties: Optional[Dict[str, object]] = None
-
-    required: Optional[List[str]] = None
-
-
-class ToolFunction(BaseModel):
-    description: str
-    """
-    A description of what the function does, used by the model to choose when and
-    how to call the function.
-    """
-
-    name: str
-    """The name of the function to be called."""
-
-    parameters: Optional[ToolFunctionParameters] = None
-
-    strict: Optional[bool] = None
-
-
-class Tool(BaseModel):
-    function: ToolFunction
-
-    type: Literal["function"]
+__all__ = ["AssistantWithConfig"]
 
 
 class AssistantWithConfig(BaseModel):
@@ -50,10 +17,12 @@ class AssistantWithConfig(BaseModel):
     deleted_at: Optional[datetime] = None
 
     description: str
+    """The description of the assistant"""
 
     knowledge_base_id: str
 
     name: str
+    """The name of the assistant"""
 
     updated_at: datetime
 
@@ -61,4 +30,8 @@ class AssistantWithConfig(BaseModel):
 
     model: Optional[Literal["gpt-4o"]] = None
 
-    tools: Optional[List[Tool]] = None
+    suggested_questions: Optional[List[str]] = None
+    """A list of suggested questions that can be asked to the assistant"""
+
+    url_slug: Optional[str] = None
+    """Optional URL suffix - unique identifier for the assistant's endpoint"""

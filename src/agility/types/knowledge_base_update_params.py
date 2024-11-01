@@ -13,10 +13,13 @@ __all__ = [
     "IngestionPipelineParamsCurateStepsRemoveExactDuplicatesParams",
     "IngestionPipelineParamsCurateStepsTagExactDuplicatesParams",
     "IngestionPipelineParamsCurateStepsPostpendContentParams",
+    "IngestionPipelineParamsCurateStepsRemoveEmbeddedImagesParams",
     "IngestionPipelineParamsCurateDocumentStore",
     "IngestionPipelineParamsTransform",
     "IngestionPipelineParamsTransformSteps",
     "IngestionPipelineParamsTransformStepsRecursiveCharacterSplitterV0Params",
+    "IngestionPipelineParamsTransformStepsSemanticMergeSplitterV0Params",
+    "IngestionPipelineParamsTransformStepsNodeSummarizerV0Params",
     "IngestionPipelineParamsTransformStepsNoopParams",
     "IngestionPipelineParamsVectorStore",
 ]
@@ -49,10 +52,15 @@ class IngestionPipelineParamsCurateStepsPostpendContentParams(TypedDict, total=F
     name: Literal["postpend_content.v0"]
 
 
+class IngestionPipelineParamsCurateStepsRemoveEmbeddedImagesParams(TypedDict, total=False):
+    name: Literal["remove_embedded_images.v0"]
+
+
 IngestionPipelineParamsCurateSteps: TypeAlias = Union[
     IngestionPipelineParamsCurateStepsRemoveExactDuplicatesParams,
     IngestionPipelineParamsCurateStepsTagExactDuplicatesParams,
     IngestionPipelineParamsCurateStepsPostpendContentParams,
+    IngestionPipelineParamsCurateStepsRemoveEmbeddedImagesParams,
 ]
 
 
@@ -72,12 +80,38 @@ class IngestionPipelineParamsTransformStepsRecursiveCharacterSplitterV0Params(Ty
     name: Literal["splitters.recursive_character.v0"]
 
 
+class IngestionPipelineParamsTransformStepsSemanticMergeSplitterV0Params(TypedDict, total=False):
+    appending_threshold: float
+
+    initial_threshold: float
+
+    max_chunk_size: int
+
+    merging_range: int
+
+    merging_threshold: float
+
+    name: Literal["splitters.semantic_merge.v0"]
+
+
+class IngestionPipelineParamsTransformStepsNodeSummarizerV0Params(TypedDict, total=False):
+    expected_summary_tokens: int
+
+    max_prompt_input_tokens: int
+
+    model: str
+
+    name: Literal["node_summarizer.v0"]
+
+
 class IngestionPipelineParamsTransformStepsNoopParams(TypedDict, total=False):
     name: Literal["noop"]
 
 
 IngestionPipelineParamsTransformSteps: TypeAlias = Union[
     IngestionPipelineParamsTransformStepsRecursiveCharacterSplitterV0Params,
+    IngestionPipelineParamsTransformStepsSemanticMergeSplitterV0Params,
+    IngestionPipelineParamsTransformStepsNodeSummarizerV0Params,
     IngestionPipelineParamsTransformStepsNoopParams,
 ]
 
