@@ -24,6 +24,14 @@ from .assistants import (
     AssistantsResourceWithStreamingResponse,
     AsyncAssistantsResourceWithStreamingResponse,
 )
+from .integrations import (
+    IntegrationsResource,
+    AsyncIntegrationsResource,
+    IntegrationsResourceWithRawResponse,
+    AsyncIntegrationsResourceWithRawResponse,
+    IntegrationsResourceWithStreamingResponse,
+    AsyncIntegrationsResourceWithStreamingResponse,
+)
 from .knowledge_bases import (
     KnowledgeBasesResource,
     AsyncKnowledgeBasesResource,
@@ -58,4 +66,10 @@ __all__ = [
     "AsyncThreadsResourceWithRawResponse",
     "ThreadsResourceWithStreamingResponse",
     "AsyncThreadsResourceWithStreamingResponse",
+    "IntegrationsResource",
+    "AsyncIntegrationsResource",
+    "IntegrationsResourceWithRawResponse",
+    "AsyncIntegrationsResourceWithRawResponse",
+    "IntegrationsResourceWithStreamingResponse",
+    "AsyncIntegrationsResourceWithStreamingResponse",
 ]

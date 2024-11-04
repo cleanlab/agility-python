@@ -13,6 +13,7 @@ __all__ = [
     "SourceParamsWebV0Params",
     "SourceParamsNotionParams",
     "SourceParamsS3PublicV0Params",
+    "SourceParamsS3PrivateV0Params",
     "SourceSchedule",
 ]
 
@@ -49,8 +50,22 @@ class SourceParamsS3PublicV0Params(BaseModel):
     name: Optional[Literal["s3_public_v0"]] = None
 
 
+class SourceParamsS3PrivateV0Params(BaseModel):
+    bucket_name: str
+
+    integration_id: str
+
+    limit: int
+
+    prefix: str
+
+    name: Optional[Literal["s3_private_v0"]] = None
+
+
 SourceParams: TypeAlias = Annotated[
-    Union[SourceParamsWebV0Params, SourceParamsNotionParams, SourceParamsS3PublicV0Params],
+    Union[
+        SourceParamsWebV0Params, SourceParamsNotionParams, SourceParamsS3PublicV0Params, SourceParamsS3PrivateV0Params
+    ],
     PropertyInfo(discriminator="name"),
 ]
 
