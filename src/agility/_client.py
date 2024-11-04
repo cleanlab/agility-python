@@ -58,6 +58,7 @@ class Agility(SyncAPIClient):
     knowledge_bases: resources.KnowledgeBasesResource
     users: resources.UsersResource
     threads: resources.ThreadsResource
+    integrations: resources.IntegrationsResource
     with_raw_response: AgilityWithRawResponse
     with_streaming_response: AgilityWithStreamedResponse
 
@@ -158,6 +159,7 @@ class Agility(SyncAPIClient):
         self.knowledge_bases = resources.KnowledgeBasesResource(self)
         self.users = resources.UsersResource(self)
         self.threads = resources.ThreadsResource(self)
+        self.integrations = resources.IntegrationsResource(self)
         self.with_raw_response = AgilityWithRawResponse(self)
         self.with_streaming_response = AgilityWithStreamedResponse(self)
 
@@ -301,6 +303,7 @@ class AsyncAgility(AsyncAPIClient):
     knowledge_bases: resources.AsyncKnowledgeBasesResource
     users: resources.AsyncUsersResource
     threads: resources.AsyncThreadsResource
+    integrations: resources.AsyncIntegrationsResource
     with_raw_response: AsyncAgilityWithRawResponse
     with_streaming_response: AsyncAgilityWithStreamedResponse
 
@@ -401,6 +404,7 @@ class AsyncAgility(AsyncAPIClient):
         self.knowledge_bases = resources.AsyncKnowledgeBasesResource(self)
         self.users = resources.AsyncUsersResource(self)
         self.threads = resources.AsyncThreadsResource(self)
+        self.integrations = resources.AsyncIntegrationsResource(self)
         self.with_raw_response = AsyncAgilityWithRawResponse(self)
         self.with_streaming_response = AsyncAgilityWithStreamedResponse(self)
 
@@ -545,6 +549,7 @@ class AgilityWithRawResponse:
         self.knowledge_bases = resources.KnowledgeBasesResourceWithRawResponse(client.knowledge_bases)
         self.users = resources.UsersResourceWithRawResponse(client.users)
         self.threads = resources.ThreadsResourceWithRawResponse(client.threads)
+        self.integrations = resources.IntegrationsResourceWithRawResponse(client.integrations)
 
 
 class AsyncAgilityWithRawResponse:
@@ -553,6 +558,7 @@ class AsyncAgilityWithRawResponse:
         self.knowledge_bases = resources.AsyncKnowledgeBasesResourceWithRawResponse(client.knowledge_bases)
         self.users = resources.AsyncUsersResourceWithRawResponse(client.users)
         self.threads = resources.AsyncThreadsResourceWithRawResponse(client.threads)
+        self.integrations = resources.AsyncIntegrationsResourceWithRawResponse(client.integrations)
 
 
 class AgilityWithStreamedResponse:
@@ -561,6 +567,7 @@ class AgilityWithStreamedResponse:
         self.knowledge_bases = resources.KnowledgeBasesResourceWithStreamingResponse(client.knowledge_bases)
         self.users = resources.UsersResourceWithStreamingResponse(client.users)
         self.threads = resources.ThreadsResourceWithStreamingResponse(client.threads)
+        self.integrations = resources.IntegrationsResourceWithStreamingResponse(client.integrations)
 
 
 class AsyncAgilityWithStreamedResponse:
@@ -569,6 +576,7 @@ class AsyncAgilityWithStreamedResponse:
         self.knowledge_bases = resources.AsyncKnowledgeBasesResourceWithStreamingResponse(client.knowledge_bases)
         self.users = resources.AsyncUsersResourceWithStreamingResponse(client.users)
         self.threads = resources.AsyncThreadsResourceWithStreamingResponse(client.threads)
+        self.integrations = resources.AsyncIntegrationsResourceWithStreamingResponse(client.integrations)
 
 
 Client = Agility

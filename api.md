@@ -143,3 +143,43 @@ Methods:
 - <code title="get /api/threads/{thread_id}/runs/{run_id}">client.threads.runs.<a href="./src/agility/resources/threads/runs.py">retrieve</a>(run_id, \*, thread_id) -> <a href="./src/agility/types/threads/run.py">Run</a></code>
 - <code title="delete /api/threads/{thread_id}/runs/{run_id}">client.threads.runs.<a href="./src/agility/resources/threads/runs.py">delete</a>(run_id, \*, thread_id) -> None</code>
 - <code title="post /api/threads/{thread_id}/runs/stream">client.threads.runs.<a href="./src/agility/resources/threads/runs.py">stream</a>(thread_id, \*\*<a href="src/agility/types/threads/run_stream_params.py">params</a>) -> <a href="./src/agility/types/threads/run_stream_response.py">object</a></code>
+
+# Integrations
+
+Types:
+
+```python
+from agility.types import (
+    GcSv0Integration,
+    Integration,
+    S3V0Integration,
+    IntegrationCreateResponse,
+    IntegrationRetrieveResponse,
+    IntegrationListResponse,
+)
+```
+
+Methods:
+
+- <code title="post /api/integrations/">client.integrations.<a href="./src/agility/resources/integrations/integrations.py">create</a>(\*\*<a href="src/agility/types/integration_create_params.py">params</a>) -> <a href="./src/agility/types/integration_create_response.py">IntegrationCreateResponse</a></code>
+- <code title="get /api/integrations/{integration_id}">client.integrations.<a href="./src/agility/resources/integrations/integrations.py">retrieve</a>(integration_id) -> <a href="./src/agility/types/integration_retrieve_response.py">IntegrationRetrieveResponse</a></code>
+- <code title="get /api/integrations/">client.integrations.<a href="./src/agility/resources/integrations/integrations.py">list</a>(\*\*<a href="src/agility/types/integration_list_params.py">params</a>) -> <a href="./src/agility/types/integration_list_response.py">SyncMyOffsetPage[IntegrationListResponse]</a></code>
+- <code title="delete /api/integrations/{integration_id}">client.integrations.<a href="./src/agility/resources/integrations/integrations.py">delete</a>(integration_id) -> None</code>
+
+## Available
+
+Types:
+
+```python
+from agility.types.integrations import IntegrationTypeDef, AvailableListResponse
+```
+
+Methods:
+
+- <code title="get /api/integrations/available">client.integrations.available.<a href="./src/agility/resources/integrations/available.py">list</a>() -> <a href="./src/agility/types/integrations/available_list_response.py">AvailableListResponse</a></code>
+
+## Rbac
+
+Methods:
+
+- <code title="post /api/integrations/rbac/{integration_id}/verify">client.integrations.rbac.<a href="./src/agility/resources/integrations/rbac.py">verify</a>(integration_id) -> <a href="./src/agility/types/integration.py">Integration</a></code>
