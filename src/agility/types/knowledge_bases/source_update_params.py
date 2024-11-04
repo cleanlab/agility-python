@@ -11,6 +11,7 @@ __all__ = [
     "SourceParamsWebV0Params",
     "SourceParamsNotionParams",
     "SourceParamsS3PublicV0Params",
+    "SourceParamsS3PrivateV0Params",
     "SourceSchedule",
 ]
 
@@ -63,7 +64,21 @@ class SourceParamsS3PublicV0Params(TypedDict, total=False):
     name: Literal["s3_public_v0"]
 
 
-SourceParams: TypeAlias = Union[SourceParamsWebV0Params, SourceParamsNotionParams, SourceParamsS3PublicV0Params]
+class SourceParamsS3PrivateV0Params(TypedDict, total=False):
+    bucket_name: Required[str]
+
+    integration_id: Required[str]
+
+    limit: Required[int]
+
+    prefix: Required[str]
+
+    name: Literal["s3_private_v0"]
+
+
+SourceParams: TypeAlias = Union[
+    SourceParamsWebV0Params, SourceParamsNotionParams, SourceParamsS3PublicV0Params, SourceParamsS3PrivateV0Params
+]
 
 
 class SourceSchedule(TypedDict, total=False):

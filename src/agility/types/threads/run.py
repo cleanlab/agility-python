@@ -38,6 +38,8 @@ class Run(BaseModel):
 
     knowledge_base_id: Optional[str] = None
 
+    last_error: Optional[str] = None
+
     model: Optional[Literal["gpt-4o"]] = None
 
     usage: Optional[Usage] = None
