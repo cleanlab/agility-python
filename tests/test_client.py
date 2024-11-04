@@ -10,6 +10,7 @@ import inspect
 import tracemalloc
 from typing import Any, Union, cast
 from unittest import mock
+from typing_extensions import Literal
 
 import httpx
 import pytest
@@ -541,6 +542,14 @@ class TestAgility:
             client = Agility(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
+        # explicit environment arg requires explicitness
+        with update_env(AGILITY_BASE_URL="http://localhost:5000/from/env"):
+            with pytest.raises(ValueError, match=r"you must pass base_url=None"):
+                Agility(api_key=api_key, _strict_response_validation=True, environment="production")
+
+            client = Agility(base_url=None, api_key=api_key, _strict_response_validation=True, environment="production")
+            assert str(client.base_url).startswith("https://api-agility.cleanlab.ai")
+
     @pytest.mark.parametrize(
         "client",
         [
@@ -735,7 +744,14 @@ class TestAgility:
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
     @mock.patch("agility._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    def test_retries_taken(self, client: Agility, failures_before_success: int, respx_mock: MockRouter) -> None:
+    @pytest.mark.parametrize("failure_mode", ["status", "exception"])
+    def test_retries_taken(
+        self,
+        client: Agility,
+        failures_before_success: int,
+        failure_mode: Literal["status", "exception"],
+        respx_mock: MockRouter,
+    ) -> None:
         client = client.with_options(max_retries=4)
 
         nb_retries = 0
@@ -744,6 +760,8 @@ class TestAgility:
             nonlocal nb_retries
             if nb_retries < failures_before_success:
                 nb_retries += 1
+                if failure_mode == "exception":
+                    raise RuntimeError("oops")
                 return httpx.Response(500)
             return httpx.Response(200)
 
@@ -1308,6 +1326,16 @@ class TestAsyncAgility:
             client = AsyncAgility(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
+        # explicit environment arg requires explicitness
+        with update_env(AGILITY_BASE_URL="http://localhost:5000/from/env"):
+            with pytest.raises(ValueError, match=r"you must pass base_url=None"):
+                AsyncAgility(api_key=api_key, _strict_response_validation=True, environment="production")
+
+            client = AsyncAgility(
+                base_url=None, api_key=api_key, _strict_response_validation=True, environment="production"
+            )
+            assert str(client.base_url).startswith("https://api-agility.cleanlab.ai")
+
     @pytest.mark.parametrize(
         "client",
         [
@@ -1515,8 +1543,13 @@ class TestAsyncAgility:
     @mock.patch("agility._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
+    @pytest.mark.parametrize("failure_mode", ["status", "exception"])
     async def test_retries_taken(
-        self, async_client: AsyncAgility, failures_before_success: int, respx_mock: MockRouter
+        self,
+        async_client: AsyncAgility,
+        failures_before_success: int,
+        failure_mode: Literal["status", "exception"],
+        respx_mock: MockRouter,
     ) -> None:
         client = async_client.with_options(max_retries=4)
 
@@ -1526,6 +1559,8 @@ class TestAsyncAgility:
             nonlocal nb_retries
             if nb_retries < failures_before_success:
                 nb_retries += 1
+                if failure_mode == "exception":
+                    raise RuntimeError("oops")
                 return httpx.Response(500)
             return httpx.Response(200)
 

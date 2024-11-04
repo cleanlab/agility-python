@@ -20,10 +20,10 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..._base_client import make_request_options
+from ...pagination import SyncMyOffsetPage, AsyncMyOffsetPage
+from ..._base_client import AsyncPaginator, make_request_options
 from ...types.assistants import access_key_list_params, access_key_create_params
 from ...types.assistants.access_key import AccessKey
-from ...types.assistants.access_key_list_response import AccessKeyListResponse
 
 __all__ = ["AccessKeysResource", "AsyncAccessKeysResource"]
 
@@ -92,42 +92,6 @@ class AccessKeysResource(SyncAPIResource):
             cast_to=AccessKey,
         )
 
-    def retrieve(
-        self,
-        access_key_id: str,
-        *,
-        assistant_id: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AccessKey:
-        """
-        Get a access_key by ID.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not assistant_id:
-            raise ValueError(f"Expected a non-empty value for `assistant_id` but received {assistant_id!r}")
-        if not access_key_id:
-            raise ValueError(f"Expected a non-empty value for `access_key_id` but received {access_key_id!r}")
-        return self._get(
-            f"/api/assistants/{assistant_id}/access_keys/{access_key_id}",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=AccessKey,
-        )
-
     def list(
         self,
         assistant_id: str,
@@ -140,7 +104,7 @@ class AccessKeysResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AccessKeyListResponse:
+    ) -> SyncMyOffsetPage[AccessKey]:
         """
         List all access keys for an assistant.
 
@@ -155,8 +119,9 @@ class AccessKeysResource(SyncAPIResource):
         """
         if not assistant_id:
             raise ValueError(f"Expected a non-empty value for `assistant_id` but received {assistant_id!r}")
-        return self._get(
+        return self._get_api_list(
             f"/api/assistants/{assistant_id}/access_keys/",
+            page=SyncMyOffsetPage[AccessKey],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -170,7 +135,7 @@ class AccessKeysResource(SyncAPIResource):
                     access_key_list_params.AccessKeyListParams,
                 ),
             ),
-            cast_to=AccessKeyListResponse,
+            model=AccessKey,
         )
 
 
@@ -238,43 +203,7 @@ class AsyncAccessKeysResource(AsyncAPIResource):
             cast_to=AccessKey,
         )
 
-    async def retrieve(
-        self,
-        access_key_id: str,
-        *,
-        assistant_id: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AccessKey:
-        """
-        Get a access_key by ID.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not assistant_id:
-            raise ValueError(f"Expected a non-empty value for `assistant_id` but received {assistant_id!r}")
-        if not access_key_id:
-            raise ValueError(f"Expected a non-empty value for `access_key_id` but received {access_key_id!r}")
-        return await self._get(
-            f"/api/assistants/{assistant_id}/access_keys/{access_key_id}",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=AccessKey,
-        )
-
-    async def list(
+    def list(
         self,
         assistant_id: str,
         *,
@@ -286,7 +215,7 @@ class AsyncAccessKeysResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AccessKeyListResponse:
+    ) -> AsyncPaginator[AccessKey, AsyncMyOffsetPage[AccessKey]]:
         """
         List all access keys for an assistant.
 
@@ -301,14 +230,15 @@ class AsyncAccessKeysResource(AsyncAPIResource):
         """
         if not assistant_id:
             raise ValueError(f"Expected a non-empty value for `assistant_id` but received {assistant_id!r}")
-        return await self._get(
+        return self._get_api_list(
             f"/api/assistants/{assistant_id}/access_keys/",
+            page=AsyncMyOffsetPage[AccessKey],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
+                query=maybe_transform(
                     {
                         "limit": limit,
                         "offset": offset,
@@ -316,7 +246,7 @@ class AsyncAccessKeysResource(AsyncAPIResource):
                     access_key_list_params.AccessKeyListParams,
                 ),
             ),
-            cast_to=AccessKeyListResponse,
+            model=AccessKey,
         )
 
 
@@ -326,9 +256,6 @@ class AccessKeysResourceWithRawResponse:
 
         self.create = to_raw_response_wrapper(
             access_keys.create,
-        )
-        self.retrieve = to_raw_response_wrapper(
-            access_keys.retrieve,
         )
         self.list = to_raw_response_wrapper(
             access_keys.list,
@@ -342,9 +269,6 @@ class AsyncAccessKeysResourceWithRawResponse:
         self.create = async_to_raw_response_wrapper(
             access_keys.create,
         )
-        self.retrieve = async_to_raw_response_wrapper(
-            access_keys.retrieve,
-        )
         self.list = async_to_raw_response_wrapper(
             access_keys.list,
         )
@@ -357,9 +281,6 @@ class AccessKeysResourceWithStreamingResponse:
         self.create = to_streamed_response_wrapper(
             access_keys.create,
         )
-        self.retrieve = to_streamed_response_wrapper(
-            access_keys.retrieve,
-        )
         self.list = to_streamed_response_wrapper(
             access_keys.list,
         )
@@ -371,9 +292,6 @@ class AsyncAccessKeysResourceWithStreamingResponse:
 
         self.create = async_to_streamed_response_wrapper(
             access_keys.create,
-        )
-        self.retrieve = async_to_streamed_response_wrapper(
-            access_keys.retrieve,
         )
         self.list = async_to_streamed_response_wrapper(
             access_keys.list,

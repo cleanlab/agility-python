@@ -10,6 +10,7 @@ __all__ = [
     "SourceParams",
     "SourceParamsWebV0Params",
     "SourceParamsNotionParams",
+    "SourceParamsS3PublicV0Params",
     "SourceSchedule",
 ]
 
@@ -26,6 +27,8 @@ class SourceUpdateParams(TypedDict, total=False):
 
     source_schedule: Required[SourceSchedule]
     """Source schedule model."""
+
+    sync: bool
 
 
 class SourceParamsWebV0Params(TypedDict, total=False):
@@ -50,7 +53,17 @@ class SourceParamsNotionParams(TypedDict, total=False):
     name: Literal["notion"]
 
 
-SourceParams: TypeAlias = Union[SourceParamsWebV0Params, SourceParamsNotionParams]
+class SourceParamsS3PublicV0Params(TypedDict, total=False):
+    bucket_name: Required[str]
+
+    limit: Required[int]
+
+    prefix: Required[str]
+
+    name: Literal["s3_public_v0"]
+
+
+SourceParams: TypeAlias = Union[SourceParamsWebV0Params, SourceParamsNotionParams, SourceParamsS3PublicV0Params]
 
 
 class SourceSchedule(TypedDict, total=False):

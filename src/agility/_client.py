@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Union, Mapping
-from typing_extensions import Self, override
+from typing import Any, Dict, Union, Mapping, cast
+from typing_extensions import Self, Literal, override
 
 import httpx
 
@@ -33,6 +33,7 @@ from ._base_client import (
 )
 
 __all__ = [
+    "ENVIRONMENTS",
     "Timeout",
     "Transport",
     "ProxiesTypes",
@@ -44,24 +45,37 @@ __all__ = [
     "AsyncClient",
 ]
 
+ENVIRONMENTS: Dict[str, str] = {
+    "production": "https://api-agility.cleanlab.ai",
+    "staging": "https://api-agility.staging-bc26qf4m.cleanlab.ai",
+    "dev": "https://api-agility.dev-bc26qf4m.cleanlab.ai",
+    "local": "http://localhost:8080",
+}
+
 
 class Agility(SyncAPIClient):
     assistants: resources.AssistantsResource
     knowledge_bases: resources.KnowledgeBasesResource
-    health: resources.HealthResource
     users: resources.UsersResource
     threads: resources.ThreadsResource
     with_raw_response: AgilityWithRawResponse
     with_streaming_response: AgilityWithStreamedResponse
 
     # client options
+    bearer_token: str | None
     api_key: str
+    access_key: str | None
+
+    _environment: Literal["production", "staging", "dev", "local"] | NotGiven
 
     def __init__(
         self,
         *,
+        bearer_token: str | None = None,
         api_key: str | None = None,
-        base_url: str | httpx.URL | None = None,
+        access_key: str | None = None,
+        environment: Literal["production", "staging", "dev", "local"] | NotGiven = NOT_GIVEN,
+        base_url: str | httpx.URL | None | NotGiven = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
@@ -82,8 +96,15 @@ class Agility(SyncAPIClient):
     ) -> None:
         """Construct a new synchronous agility client instance.
 
-        This automatically infers the `api_key` argument from the `AUTHENTICATED_API_KEY` environment variable if it is not provided.
+        This automatically infers the following arguments from their corresponding environment variables if they are not provided:
+        - `bearer_token` from `BEARER_TOKEN`
+        - `api_key` from `AUTHENTICATED_API_KEY`
+        - `access_key` from `PUBLIC_ACCESS_KEY`
         """
+        if bearer_token is None:
+            bearer_token = os.environ.get("BEARER_TOKEN")
+        self.bearer_token = bearer_token
+
         if api_key is None:
             api_key = os.environ.get("AUTHENTICATED_API_KEY")
         if api_key is None:
@@ -92,10 +113,35 @@ class Agility(SyncAPIClient):
             )
         self.api_key = api_key
 
-        if base_url is None:
-            base_url = os.environ.get("AGILITY_BASE_URL")
-        if base_url is None:
-            base_url = f"http://localhost:8080"
+        if access_key is None:
+            access_key = os.environ.get("PUBLIC_ACCESS_KEY")
+        self.access_key = access_key
+
+        self._environment = environment
+
+        base_url_env = os.environ.get("AGILITY_BASE_URL")
+        if is_given(base_url) and base_url is not None:
+            # cast required because mypy doesn't understand the type narrowing
+            base_url = cast("str | httpx.URL", base_url)  # pyright: ignore[reportUnnecessaryCast]
+        elif is_given(environment):
+            if base_url_env and base_url is not None:
+                raise ValueError(
+                    "Ambiguous URL; The `AGILITY_BASE_URL` env var and the `environment` argument are given. If you want to use the environment, you must pass base_url=None",
+                )
+
+            try:
+                base_url = ENVIRONMENTS[environment]
+            except KeyError as exc:
+                raise ValueError(f"Unknown environment: {environment}") from exc
+        elif base_url_env is not None:
+            base_url = base_url_env
+        else:
+            self._environment = environment = "production"
+
+            try:
+                base_url = ENVIRONMENTS[environment]
+            except KeyError as exc:
+                raise ValueError(f"Unknown environment: {environment}") from exc
 
         super().__init__(
             version=__version__,
@@ -110,7 +156,6 @@ class Agility(SyncAPIClient):
 
         self.assistants = resources.AssistantsResource(self)
         self.knowledge_bases = resources.KnowledgeBasesResource(self)
-        self.health = resources.HealthResource(self)
         self.users = resources.UsersResource(self)
         self.threads = resources.ThreadsResource(self)
         self.with_raw_response = AgilityWithRawResponse(self)
@@ -124,8 +169,32 @@ class Agility(SyncAPIClient):
     @property
     @override
     def auth_headers(self) -> dict[str, str]:
+        if self._http_bearer:
+            return self._http_bearer
+        if self._authenticated_api_key:
+            return self._authenticated_api_key
+        if self._public_access_key:
+            return self._public_access_key
+        return {}
+
+    @property
+    def _http_bearer(self) -> dict[str, str]:
+        bearer_token = self.bearer_token
+        if bearer_token is None:
+            return {}
+        return {"Authorization": f"Bearer {bearer_token}"}
+
+    @property
+    def _authenticated_api_key(self) -> dict[str, str]:
         api_key = self.api_key
         return {"X-API-Key": api_key}
+
+    @property
+    def _public_access_key(self) -> dict[str, str]:
+        access_key = self.access_key
+        if access_key is None:
+            return {}
+        return {"X-Access-Key": access_key}
 
     @property
     @override
@@ -139,7 +208,10 @@ class Agility(SyncAPIClient):
     def copy(
         self,
         *,
+        bearer_token: str | None = None,
         api_key: str | None = None,
+        access_key: str | None = None,
+        environment: Literal["production", "staging", "dev", "local"] | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.Client | None = None,
@@ -173,8 +245,11 @@ class Agility(SyncAPIClient):
 
         http_client = http_client or self._client
         return self.__class__(
+            bearer_token=bearer_token or self.bearer_token,
             api_key=api_key or self.api_key,
+            access_key=access_key or self.access_key,
             base_url=base_url or self.base_url,
+            environment=environment or self._environment,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
             max_retries=max_retries if is_given(max_retries) else self.max_retries,
@@ -224,20 +299,26 @@ class Agility(SyncAPIClient):
 class AsyncAgility(AsyncAPIClient):
     assistants: resources.AsyncAssistantsResource
     knowledge_bases: resources.AsyncKnowledgeBasesResource
-    health: resources.AsyncHealthResource
     users: resources.AsyncUsersResource
     threads: resources.AsyncThreadsResource
     with_raw_response: AsyncAgilityWithRawResponse
     with_streaming_response: AsyncAgilityWithStreamedResponse
 
     # client options
+    bearer_token: str | None
     api_key: str
+    access_key: str | None
+
+    _environment: Literal["production", "staging", "dev", "local"] | NotGiven
 
     def __init__(
         self,
         *,
+        bearer_token: str | None = None,
         api_key: str | None = None,
-        base_url: str | httpx.URL | None = None,
+        access_key: str | None = None,
+        environment: Literal["production", "staging", "dev", "local"] | NotGiven = NOT_GIVEN,
+        base_url: str | httpx.URL | None | NotGiven = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
@@ -258,8 +339,15 @@ class AsyncAgility(AsyncAPIClient):
     ) -> None:
         """Construct a new async agility client instance.
 
-        This automatically infers the `api_key` argument from the `AUTHENTICATED_API_KEY` environment variable if it is not provided.
+        This automatically infers the following arguments from their corresponding environment variables if they are not provided:
+        - `bearer_token` from `BEARER_TOKEN`
+        - `api_key` from `AUTHENTICATED_API_KEY`
+        - `access_key` from `PUBLIC_ACCESS_KEY`
         """
+        if bearer_token is None:
+            bearer_token = os.environ.get("BEARER_TOKEN")
+        self.bearer_token = bearer_token
+
         if api_key is None:
             api_key = os.environ.get("AUTHENTICATED_API_KEY")
         if api_key is None:
@@ -268,10 +356,35 @@ class AsyncAgility(AsyncAPIClient):
             )
         self.api_key = api_key
 
-        if base_url is None:
-            base_url = os.environ.get("AGILITY_BASE_URL")
-        if base_url is None:
-            base_url = f"http://localhost:8080"
+        if access_key is None:
+            access_key = os.environ.get("PUBLIC_ACCESS_KEY")
+        self.access_key = access_key
+
+        self._environment = environment
+
+        base_url_env = os.environ.get("AGILITY_BASE_URL")
+        if is_given(base_url) and base_url is not None:
+            # cast required because mypy doesn't understand the type narrowing
+            base_url = cast("str | httpx.URL", base_url)  # pyright: ignore[reportUnnecessaryCast]
+        elif is_given(environment):
+            if base_url_env and base_url is not None:
+                raise ValueError(
+                    "Ambiguous URL; The `AGILITY_BASE_URL` env var and the `environment` argument are given. If you want to use the environment, you must pass base_url=None",
+                )
+
+            try:
+                base_url = ENVIRONMENTS[environment]
+            except KeyError as exc:
+                raise ValueError(f"Unknown environment: {environment}") from exc
+        elif base_url_env is not None:
+            base_url = base_url_env
+        else:
+            self._environment = environment = "production"
+
+            try:
+                base_url = ENVIRONMENTS[environment]
+            except KeyError as exc:
+                raise ValueError(f"Unknown environment: {environment}") from exc
 
         super().__init__(
             version=__version__,
@@ -286,7 +399,6 @@ class AsyncAgility(AsyncAPIClient):
 
         self.assistants = resources.AsyncAssistantsResource(self)
         self.knowledge_bases = resources.AsyncKnowledgeBasesResource(self)
-        self.health = resources.AsyncHealthResource(self)
         self.users = resources.AsyncUsersResource(self)
         self.threads = resources.AsyncThreadsResource(self)
         self.with_raw_response = AsyncAgilityWithRawResponse(self)
@@ -300,8 +412,32 @@ class AsyncAgility(AsyncAPIClient):
     @property
     @override
     def auth_headers(self) -> dict[str, str]:
+        if self._http_bearer:
+            return self._http_bearer
+        if self._authenticated_api_key:
+            return self._authenticated_api_key
+        if self._public_access_key:
+            return self._public_access_key
+        return {}
+
+    @property
+    def _http_bearer(self) -> dict[str, str]:
+        bearer_token = self.bearer_token
+        if bearer_token is None:
+            return {}
+        return {"Authorization": f"Bearer {bearer_token}"}
+
+    @property
+    def _authenticated_api_key(self) -> dict[str, str]:
         api_key = self.api_key
         return {"X-API-Key": api_key}
+
+    @property
+    def _public_access_key(self) -> dict[str, str]:
+        access_key = self.access_key
+        if access_key is None:
+            return {}
+        return {"X-Access-Key": access_key}
 
     @property
     @override
@@ -315,7 +451,10 @@ class AsyncAgility(AsyncAPIClient):
     def copy(
         self,
         *,
+        bearer_token: str | None = None,
         api_key: str | None = None,
+        access_key: str | None = None,
+        environment: Literal["production", "staging", "dev", "local"] | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.AsyncClient | None = None,
@@ -349,8 +488,11 @@ class AsyncAgility(AsyncAPIClient):
 
         http_client = http_client or self._client
         return self.__class__(
+            bearer_token=bearer_token or self.bearer_token,
             api_key=api_key or self.api_key,
+            access_key=access_key or self.access_key,
             base_url=base_url or self.base_url,
+            environment=environment or self._environment,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
             max_retries=max_retries if is_given(max_retries) else self.max_retries,
@@ -401,7 +543,6 @@ class AgilityWithRawResponse:
     def __init__(self, client: Agility) -> None:
         self.assistants = resources.AssistantsResourceWithRawResponse(client.assistants)
         self.knowledge_bases = resources.KnowledgeBasesResourceWithRawResponse(client.knowledge_bases)
-        self.health = resources.HealthResourceWithRawResponse(client.health)
         self.users = resources.UsersResourceWithRawResponse(client.users)
         self.threads = resources.ThreadsResourceWithRawResponse(client.threads)
 
@@ -410,7 +551,6 @@ class AsyncAgilityWithRawResponse:
     def __init__(self, client: AsyncAgility) -> None:
         self.assistants = resources.AsyncAssistantsResourceWithRawResponse(client.assistants)
         self.knowledge_bases = resources.AsyncKnowledgeBasesResourceWithRawResponse(client.knowledge_bases)
-        self.health = resources.AsyncHealthResourceWithRawResponse(client.health)
         self.users = resources.AsyncUsersResourceWithRawResponse(client.users)
         self.threads = resources.AsyncThreadsResourceWithRawResponse(client.threads)
 
@@ -419,7 +559,6 @@ class AgilityWithStreamedResponse:
     def __init__(self, client: Agility) -> None:
         self.assistants = resources.AssistantsResourceWithStreamingResponse(client.assistants)
         self.knowledge_bases = resources.KnowledgeBasesResourceWithStreamingResponse(client.knowledge_bases)
-        self.health = resources.HealthResourceWithStreamingResponse(client.health)
         self.users = resources.UsersResourceWithStreamingResponse(client.users)
         self.threads = resources.ThreadsResourceWithStreamingResponse(client.threads)
 
@@ -428,7 +567,6 @@ class AsyncAgilityWithStreamedResponse:
     def __init__(self, client: AsyncAgility) -> None:
         self.assistants = resources.AsyncAssistantsResourceWithStreamingResponse(client.assistants)
         self.knowledge_bases = resources.AsyncKnowledgeBasesResourceWithStreamingResponse(client.knowledge_bases)
-        self.health = resources.AsyncHealthResourceWithStreamingResponse(client.health)
         self.users = resources.AsyncUsersResourceWithStreamingResponse(client.users)
         self.threads = resources.AsyncThreadsResourceWithStreamingResponse(client.threads)
 

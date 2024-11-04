@@ -9,9 +9,9 @@ import pytest
 
 from agility import Agility, AsyncAgility
 from tests.utils import assert_matches_type
+from agility.pagination import SyncMyOffsetPage, AsyncMyOffsetPage
 from agility.types.knowledge_bases import (
     Source,
-    SourceListResponse,
     SourceStatusResponse,
 )
 
@@ -55,6 +55,7 @@ class TestSources:
                 "cron": "cron",
                 "utc_offset": 0,
             },
+            sync=True,
         )
         assert_matches_type(Source, source, path=["response"])
 
@@ -194,6 +195,7 @@ class TestSources:
                 "cron": "cron",
                 "utc_offset": 0,
             },
+            sync=True,
         )
         assert_matches_type(Source, source, path=["response"])
 
@@ -270,7 +272,7 @@ class TestSources:
         source = client.knowledge_bases.sources.list(
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(SourceListResponse, source, path=["response"])
+        assert_matches_type(SyncMyOffsetPage[Source], source, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Agility) -> None:
@@ -279,7 +281,7 @@ class TestSources:
             limit=1,
             offset=0,
         )
-        assert_matches_type(SourceListResponse, source, path=["response"])
+        assert_matches_type(SyncMyOffsetPage[Source], source, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Agility) -> None:
@@ -290,7 +292,7 @@ class TestSources:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         source = response.parse()
-        assert_matches_type(SourceListResponse, source, path=["response"])
+        assert_matches_type(SyncMyOffsetPage[Source], source, path=["response"])
 
     @parametrize
     def test_streaming_response_list(self, client: Agility) -> None:
@@ -301,7 +303,7 @@ class TestSources:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             source = response.parse()
-            assert_matches_type(SourceListResponse, source, path=["response"])
+            assert_matches_type(SyncMyOffsetPage[Source], source, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -494,6 +496,7 @@ class TestAsyncSources:
                 "cron": "cron",
                 "utc_offset": 0,
             },
+            sync=True,
         )
         assert_matches_type(Source, source, path=["response"])
 
@@ -633,6 +636,7 @@ class TestAsyncSources:
                 "cron": "cron",
                 "utc_offset": 0,
             },
+            sync=True,
         )
         assert_matches_type(Source, source, path=["response"])
 
@@ -709,7 +713,7 @@ class TestAsyncSources:
         source = await async_client.knowledge_bases.sources.list(
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(SourceListResponse, source, path=["response"])
+        assert_matches_type(AsyncMyOffsetPage[Source], source, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncAgility) -> None:
@@ -718,7 +722,7 @@ class TestAsyncSources:
             limit=1,
             offset=0,
         )
-        assert_matches_type(SourceListResponse, source, path=["response"])
+        assert_matches_type(AsyncMyOffsetPage[Source], source, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncAgility) -> None:
@@ -729,7 +733,7 @@ class TestAsyncSources:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         source = await response.parse()
-        assert_matches_type(SourceListResponse, source, path=["response"])
+        assert_matches_type(AsyncMyOffsetPage[Source], source, path=["response"])
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncAgility) -> None:
@@ -740,7 +744,7 @@ class TestAsyncSources:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             source = await response.parse()
-            assert_matches_type(SourceListResponse, source, path=["response"])
+            assert_matches_type(AsyncMyOffsetPage[Source], source, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

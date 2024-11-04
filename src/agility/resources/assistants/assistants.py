@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import Literal
 
 import httpx
@@ -29,10 +29,10 @@ from .access_keys import (
     AccessKeysResourceWithStreamingResponse,
     AsyncAccessKeysResourceWithStreamingResponse,
 )
-from ..._base_client import make_request_options
+from ...pagination import SyncMyOffsetPage, AsyncMyOffsetPage
+from ..._base_client import AsyncPaginator, make_request_options
 from ...types.assistant import Assistant
 from ...types.assistant_with_config import AssistantWithConfig
-from ...types.assistant_list_response import AssistantListResponse
 
 __all__ = ["AssistantsResource", "AsyncAssistantsResource"]
 
@@ -69,6 +69,8 @@ class AssistantsResource(SyncAPIResource):
         name: str,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
+        suggested_questions: List[str] | NotGiven = NOT_GIVEN,
+        url_slug: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -80,6 +82,14 @@ class AssistantsResource(SyncAPIResource):
         Create a new assistant.
 
         Args:
+          description: The description of the assistant
+
+          name: The name of the assistant
+
+          suggested_questions: A list of suggested questions that can be asked to the assistant
+
+          url_slug: Optional URL suffix - unique identifier for the assistant's endpoint
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -97,6 +107,8 @@ class AssistantsResource(SyncAPIResource):
                     "name": name,
                     "instructions": instructions,
                     "model": model,
+                    "suggested_questions": suggested_questions,
+                    "url_slug": url_slug,
                 },
                 assistant_create_params.AssistantCreateParams,
             ),
@@ -149,6 +161,8 @@ class AssistantsResource(SyncAPIResource):
         name: str,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
+        suggested_questions: List[str] | NotGiven = NOT_GIVEN,
+        url_slug: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -160,6 +174,14 @@ class AssistantsResource(SyncAPIResource):
         Update an assistant.
 
         Args:
+          description: The description of the assistant
+
+          name: The name of the assistant
+
+          suggested_questions: A list of suggested questions that can be asked to the assistant
+
+          url_slug: Optional URL suffix - unique identifier for the assistant's endpoint
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -180,6 +202,8 @@ class AssistantsResource(SyncAPIResource):
                     "name": name,
                     "instructions": instructions,
                     "model": model,
+                    "suggested_questions": suggested_questions,
+                    "url_slug": url_slug,
                 },
                 assistant_update_params.AssistantUpdateParams,
             ),
@@ -200,7 +224,7 @@ class AssistantsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AssistantListResponse:
+    ) -> SyncMyOffsetPage[AssistantWithConfig]:
         """
         Get all assistants for the current user.
 
@@ -213,8 +237,9 @@ class AssistantsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._get(
+        return self._get_api_list(
             "/api/assistants/",
+            page=SyncMyOffsetPage[AssistantWithConfig],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -228,7 +253,7 @@ class AssistantsResource(SyncAPIResource):
                     assistant_list_params.AssistantListParams,
                 ),
             ),
-            cast_to=AssistantListResponse,
+            model=AssistantWithConfig,
         )
 
     def delete(
@@ -298,6 +323,8 @@ class AsyncAssistantsResource(AsyncAPIResource):
         name: str,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
+        suggested_questions: List[str] | NotGiven = NOT_GIVEN,
+        url_slug: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -309,6 +336,14 @@ class AsyncAssistantsResource(AsyncAPIResource):
         Create a new assistant.
 
         Args:
+          description: The description of the assistant
+
+          name: The name of the assistant
+
+          suggested_questions: A list of suggested questions that can be asked to the assistant
+
+          url_slug: Optional URL suffix - unique identifier for the assistant's endpoint
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -326,6 +361,8 @@ class AsyncAssistantsResource(AsyncAPIResource):
                     "name": name,
                     "instructions": instructions,
                     "model": model,
+                    "suggested_questions": suggested_questions,
+                    "url_slug": url_slug,
                 },
                 assistant_create_params.AssistantCreateParams,
             ),
@@ -378,6 +415,8 @@ class AsyncAssistantsResource(AsyncAPIResource):
         name: str,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
+        suggested_questions: List[str] | NotGiven = NOT_GIVEN,
+        url_slug: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -389,6 +428,14 @@ class AsyncAssistantsResource(AsyncAPIResource):
         Update an assistant.
 
         Args:
+          description: The description of the assistant
+
+          name: The name of the assistant
+
+          suggested_questions: A list of suggested questions that can be asked to the assistant
+
+          url_slug: Optional URL suffix - unique identifier for the assistant's endpoint
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -409,6 +456,8 @@ class AsyncAssistantsResource(AsyncAPIResource):
                     "name": name,
                     "instructions": instructions,
                     "model": model,
+                    "suggested_questions": suggested_questions,
+                    "url_slug": url_slug,
                 },
                 assistant_update_params.AssistantUpdateParams,
             ),
@@ -418,7 +467,7 @@ class AsyncAssistantsResource(AsyncAPIResource):
             cast_to=AssistantWithConfig,
         )
 
-    async def list(
+    def list(
         self,
         *,
         limit: int | NotGiven = NOT_GIVEN,
@@ -429,7 +478,7 @@ class AsyncAssistantsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AssistantListResponse:
+    ) -> AsyncPaginator[AssistantWithConfig, AsyncMyOffsetPage[AssistantWithConfig]]:
         """
         Get all assistants for the current user.
 
@@ -442,14 +491,15 @@ class AsyncAssistantsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return await self._get(
+        return self._get_api_list(
             "/api/assistants/",
+            page=AsyncMyOffsetPage[AssistantWithConfig],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
+                query=maybe_transform(
                     {
                         "limit": limit,
                         "offset": offset,
@@ -457,7 +507,7 @@ class AsyncAssistantsResource(AsyncAPIResource):
                     assistant_list_params.AssistantListParams,
                 ),
             ),
-            cast_to=AssistantListResponse,
+            model=AssistantWithConfig,
         )
 
     async def delete(

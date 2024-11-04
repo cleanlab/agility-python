@@ -15,10 +15,13 @@ __all__ = [
     "IngestionPipelineParamsCurateStepsRemoveExactDuplicatesParams",
     "IngestionPipelineParamsCurateStepsTagExactDuplicatesParams",
     "IngestionPipelineParamsCurateStepsPostpendContentParams",
+    "IngestionPipelineParamsCurateStepsRemoveEmbeddedImagesParams",
     "IngestionPipelineParamsCurateDocumentStore",
     "IngestionPipelineParamsTransform",
     "IngestionPipelineParamsTransformSteps",
     "IngestionPipelineParamsTransformStepsRecursiveCharacterSplitterV0Params",
+    "IngestionPipelineParamsTransformStepsSemanticMergeSplitterV0Params",
+    "IngestionPipelineParamsTransformStepsNodeSummarizerV0Params",
     "IngestionPipelineParamsTransformStepsNoopParams",
     "IngestionPipelineParamsVectorStore",
 ]
@@ -39,11 +42,16 @@ class IngestionPipelineParamsCurateStepsPostpendContentParams(BaseModel):
     name: Optional[Literal["postpend_content.v0"]] = None
 
 
+class IngestionPipelineParamsCurateStepsRemoveEmbeddedImagesParams(BaseModel):
+    name: Optional[Literal["remove_embedded_images.v0"]] = None
+
+
 IngestionPipelineParamsCurateSteps: TypeAlias = Annotated[
     Union[
         IngestionPipelineParamsCurateStepsRemoveExactDuplicatesParams,
         IngestionPipelineParamsCurateStepsTagExactDuplicatesParams,
         IngestionPipelineParamsCurateStepsPostpendContentParams,
+        IngestionPipelineParamsCurateStepsRemoveEmbeddedImagesParams,
     ],
     PropertyInfo(discriminator="name"),
 ]
@@ -65,12 +73,38 @@ class IngestionPipelineParamsTransformStepsRecursiveCharacterSplitterV0Params(Ba
     name: Optional[Literal["splitters.recursive_character.v0"]] = None
 
 
+class IngestionPipelineParamsTransformStepsSemanticMergeSplitterV0Params(BaseModel):
+    appending_threshold: Optional[float] = None
+
+    initial_threshold: Optional[float] = None
+
+    max_chunk_size: Optional[int] = None
+
+    merging_range: Optional[int] = None
+
+    merging_threshold: Optional[float] = None
+
+    name: Optional[Literal["splitters.semantic_merge.v0"]] = None
+
+
+class IngestionPipelineParamsTransformStepsNodeSummarizerV0Params(BaseModel):
+    expected_summary_tokens: Optional[int] = None
+
+    max_prompt_input_tokens: Optional[int] = None
+
+    model: Optional[str] = None
+
+    name: Optional[Literal["node_summarizer.v0"]] = None
+
+
 class IngestionPipelineParamsTransformStepsNoopParams(BaseModel):
     name: Optional[Literal["noop"]] = None
 
 
 IngestionPipelineParamsTransformSteps: TypeAlias = Union[
     IngestionPipelineParamsTransformStepsRecursiveCharacterSplitterV0Params,
+    IngestionPipelineParamsTransformStepsSemanticMergeSplitterV0Params,
+    IngestionPipelineParamsTransformStepsNodeSummarizerV0Params,
     IngestionPipelineParamsTransformStepsNoopParams,
 ]
 
@@ -81,6 +115,10 @@ class IngestionPipelineParamsTransform(BaseModel):
 
 class IngestionPipelineParamsVectorStore(BaseModel):
     weaviate_collection_name: str
+    """The name of the Weaviate collection to use for storing documents.
+
+    Must start with AgilityKB and be valid.
+    """
 
     node_tags: Optional[Dict[str, str]] = None
 

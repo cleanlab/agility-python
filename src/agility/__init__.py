@@ -3,7 +3,18 @@
 from . import types
 from ._types import NOT_GIVEN, NoneType, NotGiven, Transport, ProxiesTypes
 from ._utils import file_from_path
-from ._client import Client, Stream, Agility, Timeout, Transport, AsyncClient, AsyncStream, AsyncAgility, RequestOptions
+from ._client import (
+    ENVIRONMENTS,
+    Client,
+    Stream,
+    Agility,
+    Timeout,
+    Transport,
+    AsyncClient,
+    AsyncStream,
+    AsyncAgility,
+    RequestOptions,
+)
 from ._models import BaseModel
 from ._version import __title__, __version__
 from ._response import APIResponse as APIResponse, AsyncAPIResponse as AsyncAPIResponse
@@ -58,6 +69,7 @@ __all__ = [
     "AsyncStream",
     "Agility",
     "AsyncAgility",
+    "ENVIRONMENTS",
     "file_from_path",
     "BaseModel",
     "DEFAULT_TIMEOUT",

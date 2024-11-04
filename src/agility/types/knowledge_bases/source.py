@@ -7,7 +7,14 @@ from typing_extensions import Literal, Annotated, TypeAlias
 from ..._utils import PropertyInfo
 from ..._models import BaseModel
 
-__all__ = ["Source", "SourceParams", "SourceParamsWebV0Params", "SourceParamsNotionParams", "SourceSchedule"]
+__all__ = [
+    "Source",
+    "SourceParams",
+    "SourceParamsWebV0Params",
+    "SourceParamsNotionParams",
+    "SourceParamsS3PublicV0Params",
+    "SourceSchedule",
+]
 
 
 class SourceParamsWebV0Params(BaseModel):
@@ -32,8 +39,19 @@ class SourceParamsNotionParams(BaseModel):
     name: Optional[Literal["notion"]] = None
 
 
+class SourceParamsS3PublicV0Params(BaseModel):
+    bucket_name: str
+
+    limit: int
+
+    prefix: str
+
+    name: Optional[Literal["s3_public_v0"]] = None
+
+
 SourceParams: TypeAlias = Annotated[
-    Union[SourceParamsWebV0Params, SourceParamsNotionParams], PropertyInfo(discriminator="name")
+    Union[SourceParamsWebV0Params, SourceParamsNotionParams, SourceParamsS3PublicV0Params],
+    PropertyInfo(discriminator="name"),
 ]
 
 

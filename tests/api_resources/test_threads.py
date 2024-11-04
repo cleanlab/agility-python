@@ -9,7 +9,8 @@ import pytest
 
 from agility import Agility, AsyncAgility
 from tests.utils import assert_matches_type
-from agility.types import Thread, ThreadListResponse
+from agility.types import Thread
+from agility.pagination import SyncMyOffsetPage, AsyncMyOffsetPage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -83,7 +84,7 @@ class TestThreads:
     @parametrize
     def test_method_list(self, client: Agility) -> None:
         thread = client.threads.list()
-        assert_matches_type(ThreadListResponse, thread, path=["response"])
+        assert_matches_type(SyncMyOffsetPage[Thread], thread, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Agility) -> None:
@@ -91,7 +92,7 @@ class TestThreads:
             limit=1,
             offset=0,
         )
-        assert_matches_type(ThreadListResponse, thread, path=["response"])
+        assert_matches_type(SyncMyOffsetPage[Thread], thread, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Agility) -> None:
@@ -100,7 +101,7 @@ class TestThreads:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         thread = response.parse()
-        assert_matches_type(ThreadListResponse, thread, path=["response"])
+        assert_matches_type(SyncMyOffsetPage[Thread], thread, path=["response"])
 
     @parametrize
     def test_streaming_response_list(self, client: Agility) -> None:
@@ -109,7 +110,7 @@ class TestThreads:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             thread = response.parse()
-            assert_matches_type(ThreadListResponse, thread, path=["response"])
+            assert_matches_type(SyncMyOffsetPage[Thread], thread, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -221,7 +222,7 @@ class TestAsyncThreads:
     @parametrize
     async def test_method_list(self, async_client: AsyncAgility) -> None:
         thread = await async_client.threads.list()
-        assert_matches_type(ThreadListResponse, thread, path=["response"])
+        assert_matches_type(AsyncMyOffsetPage[Thread], thread, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncAgility) -> None:
@@ -229,7 +230,7 @@ class TestAsyncThreads:
             limit=1,
             offset=0,
         )
-        assert_matches_type(ThreadListResponse, thread, path=["response"])
+        assert_matches_type(AsyncMyOffsetPage[Thread], thread, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncAgility) -> None:
@@ -238,7 +239,7 @@ class TestAsyncThreads:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         thread = await response.parse()
-        assert_matches_type(ThreadListResponse, thread, path=["response"])
+        assert_matches_type(AsyncMyOffsetPage[Thread], thread, path=["response"])
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncAgility) -> None:
@@ -247,7 +248,7 @@ class TestAsyncThreads:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             thread = await response.parse()
-            assert_matches_type(ThreadListResponse, thread, path=["response"])
+            assert_matches_type(AsyncMyOffsetPage[Thread], thread, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
