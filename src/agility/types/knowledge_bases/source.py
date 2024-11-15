@@ -11,11 +11,20 @@ __all__ = [
     "Source",
     "SourceParams",
     "SourceParamsWebV0Params",
+    "SourceParamsWebV0ParamsScrapeOptions",
     "SourceParamsNotionParams",
     "SourceParamsS3PublicV0Params",
     "SourceParamsS3PrivateV0Params",
     "SourceSchedule",
 ]
+
+
+class SourceParamsWebV0ParamsScrapeOptions(BaseModel):
+    wait_for: Optional[int] = None
+    """
+    Amount of time (in milliseconds) to wait for each page to load before scraping
+    content.
+    """
 
 
 class SourceParamsWebV0Params(BaseModel):
@@ -34,6 +43,9 @@ class SourceParamsWebV0Params(BaseModel):
     max_depth: Optional[int] = None
 
     name: Optional[Literal["web_v0"]] = None
+
+    scrape_options: Optional[SourceParamsWebV0ParamsScrapeOptions] = None
+    """Parameters for scraping each crawled page."""
 
 
 class SourceParamsNotionParams(BaseModel):

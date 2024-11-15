@@ -9,6 +9,7 @@ __all__ = [
     "SourceUpdateParams",
     "SourceParams",
     "SourceParamsWebV0Params",
+    "SourceParamsWebV0ParamsScrapeOptions",
     "SourceParamsNotionParams",
     "SourceParamsS3PublicV0Params",
     "SourceParamsS3PrivateV0Params",
@@ -32,6 +33,14 @@ class SourceUpdateParams(TypedDict, total=False):
     sync: bool
 
 
+class SourceParamsWebV0ParamsScrapeOptions(TypedDict, total=False):
+    wait_for: int
+    """
+    Amount of time (in milliseconds) to wait for each page to load before scraping
+    content.
+    """
+
+
 class SourceParamsWebV0Params(TypedDict, total=False):
     urls: Required[List[str]]
 
@@ -48,6 +57,9 @@ class SourceParamsWebV0Params(TypedDict, total=False):
     max_depth: int
 
     name: Literal["web_v0"]
+
+    scrape_options: SourceParamsWebV0ParamsScrapeOptions
+    """Parameters for scraping each crawled page."""
 
 
 class SourceParamsNotionParams(TypedDict, total=False):

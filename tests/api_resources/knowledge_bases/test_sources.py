@@ -50,6 +50,7 @@ class TestSources:
                 "limit": 0,
                 "max_depth": 0,
                 "name": "web_v0",
+                "scrape_options": {"wait_for": 0},
             },
             source_schedule={
                 "cron": "cron",
@@ -190,6 +191,7 @@ class TestSources:
                 "limit": 0,
                 "max_depth": 0,
                 "name": "web_v0",
+                "scrape_options": {"wait_for": 0},
             },
             source_schedule={
                 "cron": "cron",
@@ -491,6 +493,7 @@ class TestAsyncSources:
                 "limit": 0,
                 "max_depth": 0,
                 "name": "web_v0",
+                "scrape_options": {"wait_for": 0},
             },
             source_schedule={
                 "cron": "cron",
@@ -631,6 +634,7 @@ class TestAsyncSources:
                 "limit": 0,
                 "max_depth": 0,
                 "name": "web_v0",
+                "scrape_options": {"wait_for": 0},
             },
             source_schedule={
                 "cron": "cron",
