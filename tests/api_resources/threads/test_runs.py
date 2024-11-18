@@ -37,19 +37,7 @@ class TestRuns:
                     "metadata": {"trustworthiness_score": 0},
                     "role": "user",
                     "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                },
-                {
-                    "content": "content",
-                    "metadata": {"trustworthiness_score": 0},
-                    "role": "user",
-                    "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                },
-                {
-                    "content": "content",
-                    "metadata": {"trustworthiness_score": 0},
-                    "role": "user",
-                    "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                },
+                }
             ],
             instructions="instructions",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -207,19 +195,7 @@ class TestRuns:
                     "metadata": {"trustworthiness_score": 0},
                     "role": "user",
                     "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                },
-                {
-                    "content": "content",
-                    "metadata": {"trustworthiness_score": 0},
-                    "role": "user",
-                    "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                },
-                {
-                    "content": "content",
-                    "metadata": {"trustworthiness_score": 0},
-                    "role": "user",
-                    "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                },
+                }
             ],
             instructions="instructions",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -285,19 +261,7 @@ class TestAsyncRuns:
                     "metadata": {"trustworthiness_score": 0},
                     "role": "user",
                     "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                },
-                {
-                    "content": "content",
-                    "metadata": {"trustworthiness_score": 0},
-                    "role": "user",
-                    "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                },
-                {
-                    "content": "content",
-                    "metadata": {"trustworthiness_score": 0},
-                    "role": "user",
-                    "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                },
+                }
             ],
             instructions="instructions",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -455,19 +419,7 @@ class TestAsyncRuns:
                     "metadata": {"trustworthiness_score": 0},
                     "role": "user",
                     "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                },
-                {
-                    "content": "content",
-                    "metadata": {"trustworthiness_score": 0},
-                    "role": "user",
-                    "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                },
-                {
-                    "content": "content",
-                    "metadata": {"trustworthiness_score": 0},
-                    "role": "user",
-                    "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                },
+                }
             ],
             instructions="instructions",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",

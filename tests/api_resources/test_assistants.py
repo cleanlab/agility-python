@@ -38,7 +38,7 @@ class TestAssistants:
             name="name",
             instructions="instructions",
             model="gpt-4o",
-            suggested_questions=["string", "string", "string"],
+            suggested_questions=["string"],
             url_slug="url_slug",
         )
         assert_matches_type(Assistant, assistant, path=["response"])
@@ -130,7 +130,7 @@ class TestAssistants:
             name="name",
             instructions="instructions",
             model="gpt-4o",
-            suggested_questions=["string", "string", "string"],
+            suggested_questions=["string"],
             url_slug="url_slug",
         )
         assert_matches_type(AssistantWithConfig, assistant, path=["response"])
@@ -270,7 +270,7 @@ class TestAsyncAssistants:
             name="name",
             instructions="instructions",
             model="gpt-4o",
-            suggested_questions=["string", "string", "string"],
+            suggested_questions=["string"],
             url_slug="url_slug",
         )
         assert_matches_type(Assistant, assistant, path=["response"])
@@ -362,7 +362,7 @@ class TestAsyncAssistants:
             name="name",
             instructions="instructions",
             model="gpt-4o",
-            suggested_questions=["string", "string", "string"],
+            suggested_questions=["string"],
             url_slug="url_slug",
         )
         assert_matches_type(AssistantWithConfig, assistant, path=["response"])

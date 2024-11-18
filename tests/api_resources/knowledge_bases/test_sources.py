@@ -27,7 +27,7 @@ class TestSources:
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             description="description",
             name="name",
-            source_params={"urls": ["string", "string", "string"]},
+            source_params={"urls": ["string"]},
             source_schedule={
                 "cron": "cron",
                 "utc_offset": 0,
@@ -42,7 +42,7 @@ class TestSources:
             description="description",
             name="name",
             source_params={
-                "urls": ["string", "string", "string"],
+                "urls": ["string"],
                 "allow_backward_links": True,
                 "allow_external_links": True,
                 "exclude_regex": "exclude_regex",
@@ -66,7 +66,7 @@ class TestSources:
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             description="description",
             name="name",
-            source_params={"urls": ["string", "string", "string"]},
+            source_params={"urls": ["string"]},
             source_schedule={
                 "cron": "cron",
                 "utc_offset": 0,
@@ -84,7 +84,7 @@ class TestSources:
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             description="description",
             name="name",
-            source_params={"urls": ["string", "string", "string"]},
+            source_params={"urls": ["string"]},
             source_schedule={
                 "cron": "cron",
                 "utc_offset": 0,
@@ -105,7 +105,7 @@ class TestSources:
                 knowledge_base_id="",
                 description="description",
                 name="name",
-                source_params={"urls": ["string", "string", "string"]},
+                source_params={"urls": ["string"]},
                 source_schedule={
                     "cron": "cron",
                     "utc_offset": 0,
@@ -167,7 +167,7 @@ class TestSources:
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             description="description",
             name="name",
-            source_params={"urls": ["string", "string", "string"]},
+            source_params={"urls": ["string"]},
             source_schedule={
                 "cron": "cron",
                 "utc_offset": 0,
@@ -183,7 +183,7 @@ class TestSources:
             description="description",
             name="name",
             source_params={
-                "urls": ["string", "string", "string"],
+                "urls": ["string"],
                 "allow_backward_links": True,
                 "allow_external_links": True,
                 "exclude_regex": "exclude_regex",
@@ -208,7 +208,7 @@ class TestSources:
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             description="description",
             name="name",
-            source_params={"urls": ["string", "string", "string"]},
+            source_params={"urls": ["string"]},
             source_schedule={
                 "cron": "cron",
                 "utc_offset": 0,
@@ -227,7 +227,7 @@ class TestSources:
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             description="description",
             name="name",
-            source_params={"urls": ["string", "string", "string"]},
+            source_params={"urls": ["string"]},
             source_schedule={
                 "cron": "cron",
                 "utc_offset": 0,
@@ -249,7 +249,7 @@ class TestSources:
                 knowledge_base_id="",
                 description="description",
                 name="name",
-                source_params={"urls": ["string", "string", "string"]},
+                source_params={"urls": ["string"]},
                 source_schedule={
                     "cron": "cron",
                     "utc_offset": 0,
@@ -262,7 +262,7 @@ class TestSources:
                 knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 description="description",
                 name="name",
-                source_params={"urls": ["string", "string", "string"]},
+                source_params={"urls": ["string"]},
                 source_schedule={
                     "cron": "cron",
                     "utc_offset": 0,
@@ -470,7 +470,7 @@ class TestAsyncSources:
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             description="description",
             name="name",
-            source_params={"urls": ["string", "string", "string"]},
+            source_params={"urls": ["string"]},
             source_schedule={
                 "cron": "cron",
                 "utc_offset": 0,
@@ -485,7 +485,7 @@ class TestAsyncSources:
             description="description",
             name="name",
             source_params={
-                "urls": ["string", "string", "string"],
+                "urls": ["string"],
                 "allow_backward_links": True,
                 "allow_external_links": True,
                 "exclude_regex": "exclude_regex",
@@ -509,7 +509,7 @@ class TestAsyncSources:
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             description="description",
             name="name",
-            source_params={"urls": ["string", "string", "string"]},
+            source_params={"urls": ["string"]},
             source_schedule={
                 "cron": "cron",
                 "utc_offset": 0,
@@ -527,7 +527,7 @@ class TestAsyncSources:
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             description="description",
             name="name",
-            source_params={"urls": ["string", "string", "string"]},
+            source_params={"urls": ["string"]},
             source_schedule={
                 "cron": "cron",
                 "utc_offset": 0,
@@ -548,7 +548,7 @@ class TestAsyncSources:
                 knowledge_base_id="",
                 description="description",
                 name="name",
-                source_params={"urls": ["string", "string", "string"]},
+                source_params={"urls": ["string"]},
                 source_schedule={
                     "cron": "cron",
                     "utc_offset": 0,
@@ -610,7 +610,7 @@ class TestAsyncSources:
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             description="description",
             name="name",
-            source_params={"urls": ["string", "string", "string"]},
+            source_params={"urls": ["string"]},
             source_schedule={
                 "cron": "cron",
                 "utc_offset": 0,
@@ -626,7 +626,7 @@ class TestAsyncSources:
             description="description",
             name="name",
             source_params={
-                "urls": ["string", "string", "string"],
+                "urls": ["string"],
                 "allow_backward_links": True,
                 "allow_external_links": True,
                 "exclude_regex": "exclude_regex",
@@ -651,7 +651,7 @@ class TestAsyncSources:
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             description="description",
             name="name",
-            source_params={"urls": ["string", "string", "string"]},
+            source_params={"urls": ["string"]},
             source_schedule={
                 "cron": "cron",
                 "utc_offset": 0,
@@ -670,7 +670,7 @@ class TestAsyncSources:
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             description="description",
             name="name",
-            source_params={"urls": ["string", "string", "string"]},
+            source_params={"urls": ["string"]},
             source_schedule={
                 "cron": "cron",
                 "utc_offset": 0,
@@ -692,7 +692,7 @@ class TestAsyncSources:
                 knowledge_base_id="",
                 description="description",
                 name="name",
-                source_params={"urls": ["string", "string", "string"]},
+                source_params={"urls": ["string"]},
                 source_schedule={
                     "cron": "cron",
                     "utc_offset": 0,
@@ -705,7 +705,7 @@ class TestAsyncSources:
                 knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 description="description",
                 name="name",
-                source_params={"urls": ["string", "string", "string"]},
+                source_params={"urls": ["string"]},
                 source_schedule={
                     "cron": "cron",
                     "utc_offset": 0,
