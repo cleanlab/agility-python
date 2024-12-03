@@ -12,7 +12,7 @@ __all__ = [
     "SourceParams",
     "SourceParamsWebV0Params",
     "SourceParamsWebV0ParamsScrapeOptions",
-    "SourceParamsNotionParams",
+    "SourceParamsNotionV0Params",
     "SourceParamsS3PublicV0Params",
     "SourceParamsS3PrivateV0Params",
     "SourceSchedule",
@@ -48,8 +48,12 @@ class SourceParamsWebV0Params(BaseModel):
     """Parameters for scraping each crawled page."""
 
 
-class SourceParamsNotionParams(BaseModel):
-    name: Optional[Literal["notion"]] = None
+class SourceParamsNotionV0Params(BaseModel):
+    integration_id: str
+
+    limit: Optional[int] = None
+
+    name: Optional[Literal["notion_v0"]] = None
 
 
 class SourceParamsS3PublicV0Params(BaseModel):
@@ -76,7 +80,7 @@ class SourceParamsS3PrivateV0Params(BaseModel):
 
 SourceParams: TypeAlias = Annotated[
     Union[
-        SourceParamsWebV0Params, SourceParamsNotionParams, SourceParamsS3PublicV0Params, SourceParamsS3PrivateV0Params
+        SourceParamsWebV0Params, SourceParamsNotionV0Params, SourceParamsS3PublicV0Params, SourceParamsS3PrivateV0Params
     ],
     PropertyInfo(discriminator="name"),
 ]

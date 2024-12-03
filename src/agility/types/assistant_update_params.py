@@ -14,7 +14,7 @@ class AssistantUpdateParams(TypedDict, total=False):
     description: Required[str]
     """The description of the assistant"""
 
-    knowledge_base_id: Required[str]
+    knowledge_base_id: Required[Optional[str]]
 
     name: Required[str]
     """The name of the assistant"""

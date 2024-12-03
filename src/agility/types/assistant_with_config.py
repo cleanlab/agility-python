@@ -19,7 +19,7 @@ class AssistantWithConfig(BaseModel):
     description: str
     """The description of the assistant"""
 
-    knowledge_base_id: str
+    knowledge_base_id: Optional[str] = None
 
     name: str
     """The name of the assistant"""

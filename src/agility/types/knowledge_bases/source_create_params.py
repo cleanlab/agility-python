@@ -10,7 +10,7 @@ __all__ = [
     "SourceParams",
     "SourceParamsWebV0Params",
     "SourceParamsWebV0ParamsScrapeOptions",
-    "SourceParamsNotionParams",
+    "SourceParamsNotionV0Params",
     "SourceParamsS3PublicV0Params",
     "SourceParamsS3PrivateV0Params",
     "SourceSchedule",
@@ -60,8 +60,12 @@ class SourceParamsWebV0Params(TypedDict, total=False):
     """Parameters for scraping each crawled page."""
 
 
-class SourceParamsNotionParams(TypedDict, total=False):
-    name: Literal["notion"]
+class SourceParamsNotionV0Params(TypedDict, total=False):
+    integration_id: Required[str]
+
+    limit: Optional[int]
+
+    name: Literal["notion_v0"]
 
 
 class SourceParamsS3PublicV0Params(TypedDict, total=False):
@@ -87,7 +91,7 @@ class SourceParamsS3PrivateV0Params(TypedDict, total=False):
 
 
 SourceParams: TypeAlias = Union[
-    SourceParamsWebV0Params, SourceParamsNotionParams, SourceParamsS3PublicV0Params, SourceParamsS3PrivateV0Params
+    SourceParamsWebV0Params, SourceParamsNotionV0Params, SourceParamsS3PublicV0Params, SourceParamsS3PrivateV0Params
 ]
 
 
