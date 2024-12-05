@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Union, Optional
+from typing import Dict, List, Union, Optional
 from datetime import datetime
 from typing_extensions import Literal, Annotated, TypeAlias
 
@@ -20,6 +20,18 @@ __all__ = [
 
 
 class SourceParamsWebV0ParamsScrapeOptions(BaseModel):
+    headers: Optional[Dict[str, str]] = None
+    """HTTP headers to send with each request.
+
+    Can be used to send cookies, user-agent, etc.
+    """
+
+    only_main_content: Optional[bool] = None
+    """
+    Whether to only scrape the main content of the page (excluding headers, navs,
+    footers, etc.).
+    """
+
     wait_for: Optional[int] = None
     """
     Amount of time (in milliseconds) to wait for each page to load before scraping
@@ -29,18 +41,28 @@ class SourceParamsWebV0ParamsScrapeOptions(BaseModel):
 
 class SourceParamsWebV0Params(BaseModel):
     urls: List[str]
+    """List of URLs to crawl."""
 
     allow_backward_links: Optional[bool] = None
+    """Whether to allow the crawler to navigate backwards from the given URL."""
 
     allow_external_links: Optional[bool] = None
+    """Whether to allow the crawler to follow links to external websites."""
 
     exclude_regex: Optional[str] = None
+    """Regex pattern to exclude URLs that match the pattern."""
+
+    ignore_sitemap: Optional[bool] = None
+    """Whether to ignore the website sitemap when crawling."""
 
     include_regex: Optional[str] = None
+    """Regex pattern to include URLs that match the pattern."""
 
     limit: Optional[int] = None
+    """Maximum number of pages to crawl per URL."""
 
     max_depth: Optional[int] = None
+    """Maximum depth of pages to crawl relative to the root URL."""
 
     name: Optional[Literal["web_v0"]] = None
 

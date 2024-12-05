@@ -12,6 +12,7 @@ from .thread_list_params import ThreadListParams as ThreadListParams
 from .assistant_list_params import AssistantListParams as AssistantListParams
 from .assistant_with_config import AssistantWithConfig as AssistantWithConfig
 from .assistant_create_params import AssistantCreateParams as AssistantCreateParams
+from .assistant_list_response import AssistantListResponse as AssistantListResponse
 from .assistant_update_params import AssistantUpdateParams as AssistantUpdateParams
 from .integration_list_params import IntegrationListParams as IntegrationListParams
 from .integration_create_params import IntegrationCreateParams as IntegrationCreateParams

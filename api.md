@@ -3,7 +3,7 @@
 Types:
 
 ```python
-from agility.types import Assistant, AssistantWithConfig
+from agility.types import Assistant, AssistantWithConfig, AssistantListResponse
 ```
 
 Methods:
@@ -11,7 +11,7 @@ Methods:
 - <code title="post /api/assistants/">client.assistants.<a href="./src/agility/resources/assistants/assistants.py">create</a>(\*\*<a href="src/agility/types/assistant_create_params.py">params</a>) -> <a href="./src/agility/types/assistant.py">Assistant</a></code>
 - <code title="get /api/assistants/{assistant_id}">client.assistants.<a href="./src/agility/resources/assistants/assistants.py">retrieve</a>(assistant_id) -> <a href="./src/agility/types/assistant_with_config.py">AssistantWithConfig</a></code>
 - <code title="put /api/assistants/{assistant_id}">client.assistants.<a href="./src/agility/resources/assistants/assistants.py">update</a>(assistant_id, \*\*<a href="src/agility/types/assistant_update_params.py">params</a>) -> <a href="./src/agility/types/assistant_with_config.py">AssistantWithConfig</a></code>
-- <code title="get /api/assistants/">client.assistants.<a href="./src/agility/resources/assistants/assistants.py">list</a>(\*\*<a href="src/agility/types/assistant_list_params.py">params</a>) -> <a href="./src/agility/types/assistant_with_config.py">SyncMyOffsetPage[AssistantWithConfig]</a></code>
+- <code title="get /api/assistants/">client.assistants.<a href="./src/agility/resources/assistants/assistants.py">list</a>(\*\*<a href="src/agility/types/assistant_list_params.py">params</a>) -> <a href="./src/agility/types/assistant_list_response.py">SyncMyOffsetPage[AssistantListResponse]</a></code>
 - <code title="delete /api/assistants/{assistant_id}">client.assistants.<a href="./src/agility/resources/assistants/assistants.py">delete</a>(assistant_id) -> None</code>
 
 ## AccessKeys

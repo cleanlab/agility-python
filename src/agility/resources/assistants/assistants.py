@@ -33,6 +33,7 @@ from ...pagination import SyncMyOffsetPage, AsyncMyOffsetPage
 from ..._base_client import AsyncPaginator, make_request_options
 from ...types.assistant import Assistant
 from ...types.assistant_with_config import AssistantWithConfig
+from ...types.assistant_list_response import AssistantListResponse
 
 __all__ = ["AssistantsResource", "AsyncAssistantsResource"]
 
@@ -224,7 +225,7 @@ class AssistantsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncMyOffsetPage[AssistantWithConfig]:
+    ) -> SyncMyOffsetPage[AssistantListResponse]:
         """
         Get all assistants for the current user.
 
@@ -239,7 +240,7 @@ class AssistantsResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/api/assistants/",
-            page=SyncMyOffsetPage[AssistantWithConfig],
+            page=SyncMyOffsetPage[AssistantListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -253,7 +254,7 @@ class AssistantsResource(SyncAPIResource):
                     assistant_list_params.AssistantListParams,
                 ),
             ),
-            model=AssistantWithConfig,
+            model=AssistantListResponse,
         )
 
     def delete(
@@ -478,7 +479,7 @@ class AsyncAssistantsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[AssistantWithConfig, AsyncMyOffsetPage[AssistantWithConfig]]:
+    ) -> AsyncPaginator[AssistantListResponse, AsyncMyOffsetPage[AssistantListResponse]]:
         """
         Get all assistants for the current user.
 
@@ -493,7 +494,7 @@ class AsyncAssistantsResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/api/assistants/",
-            page=AsyncMyOffsetPage[AssistantWithConfig],
+            page=AsyncMyOffsetPage[AssistantListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -507,7 +508,7 @@ class AsyncAssistantsResource(AsyncAPIResource):
                     assistant_list_params.AssistantListParams,
                 ),
             ),
-            model=AssistantWithConfig,
+            model=AssistantListResponse,
         )
 
     async def delete(
