@@ -19,6 +19,7 @@ __all__ = [
     "IngestionPipelineParamsTransformSteps",
     "IngestionPipelineParamsTransformStepsRecursiveCharacterSplitterV0Params",
     "IngestionPipelineParamsTransformStepsSemanticMergeSplitterV0Params",
+    "IngestionPipelineParamsTransformStepsMarkdownNodeExpanderParams",
     "IngestionPipelineParamsTransformStepsNodeSummarizerV0Params",
     "IngestionPipelineParamsTransformStepsNoopParams",
     "IngestionPipelineParamsVectorStore",
@@ -94,6 +95,25 @@ class IngestionPipelineParamsTransformStepsSemanticMergeSplitterV0Params(TypedDi
     name: Literal["splitters.semantic_merge.v0"]
 
 
+class IngestionPipelineParamsTransformStepsMarkdownNodeExpanderParams(TypedDict, total=False):
+    code_block_pattern: str
+    """A regex pattern used to identify code blocks in markdown.
+
+    Matches both multi-line code blocks enclosed in triple backticks and inline code
+    wrapped in single backticks.
+    """
+
+    name: Literal["node_expander.v0"]
+    """The version identifier for the node expander."""
+
+    section_delimiter_pattern: str
+    """A regex pattern used to identify markdown sections.
+
+    Matches headers of level 1 to 6, capturing the section title and content until
+    the next header.
+    """
+
+
 class IngestionPipelineParamsTransformStepsNodeSummarizerV0Params(TypedDict, total=False):
     expected_summary_tokens: int
 
@@ -111,6 +131,7 @@ class IngestionPipelineParamsTransformStepsNoopParams(TypedDict, total=False):
 IngestionPipelineParamsTransformSteps: TypeAlias = Union[
     IngestionPipelineParamsTransformStepsRecursiveCharacterSplitterV0Params,
     IngestionPipelineParamsTransformStepsSemanticMergeSplitterV0Params,
+    IngestionPipelineParamsTransformStepsMarkdownNodeExpanderParams,
     IngestionPipelineParamsTransformStepsNodeSummarizerV0Params,
     IngestionPipelineParamsTransformStepsNoopParams,
 ]
