@@ -34,7 +34,10 @@ class TestRuns:
             additional_messages=[
                 {
                     "content": "content",
-                    "metadata": {"trustworthiness_score": 0},
+                    "metadata": {
+                        "citations": ["string"],
+                        "trustworthiness_score": 0,
+                    },
                     "role": "user",
                     "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 }
@@ -192,7 +195,10 @@ class TestRuns:
             additional_messages=[
                 {
                     "content": "content",
-                    "metadata": {"trustworthiness_score": 0},
+                    "metadata": {
+                        "citations": ["string"],
+                        "trustworthiness_score": 0,
+                    },
                     "role": "user",
                     "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 }
@@ -258,7 +264,10 @@ class TestAsyncRuns:
             additional_messages=[
                 {
                     "content": "content",
-                    "metadata": {"trustworthiness_score": 0},
+                    "metadata": {
+                        "citations": ["string"],
+                        "trustworthiness_score": 0,
+                    },
                     "role": "user",
                     "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 }
@@ -416,7 +425,10 @@ class TestAsyncRuns:
             additional_messages=[
                 {
                     "content": "content",
-                    "metadata": {"trustworthiness_score": 0},
+                    "metadata": {
+                        "citations": ["string"],
+                        "trustworthiness_score": 0,
+                    },
                     "role": "user",
                     "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 }

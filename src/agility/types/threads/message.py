@@ -10,6 +10,8 @@ __all__ = ["Message", "Metadata"]
 
 
 class Metadata(BaseModel):
+    citations: Optional[str] = None
+
     trustworthiness_score: Optional[float] = None
 
 

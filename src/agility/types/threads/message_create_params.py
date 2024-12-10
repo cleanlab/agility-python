@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["MessageCreateParams", "Metadata"]
@@ -17,4 +17,6 @@ class MessageCreateParams(TypedDict, total=False):
 
 
 class Metadata(TypedDict, total=False):
+    citations: Optional[List[str]]
+
     trustworthiness_score: Optional[float]

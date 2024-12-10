@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Iterable, Optional
+from typing import List, Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["RunCreateParams", "AdditionalMessage", "AdditionalMessageMetadata"]
@@ -23,6 +23,8 @@ class RunCreateParams(TypedDict, total=False):
 
 
 class AdditionalMessageMetadata(TypedDict, total=False):
+    citations: Optional[List[str]]
+
     trustworthiness_score: Optional[float]
 
 
