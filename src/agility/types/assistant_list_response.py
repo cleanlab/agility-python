@@ -28,6 +28,9 @@ class AssistantListResponse(BaseModel):
 
     updated_at: datetime
 
+    context_limit: Optional[int] = None
+    """The maximum number of context chunks to include in a run."""
+
     instructions: Optional[str] = None
 
     model: Optional[Literal["gpt-4o"]] = None

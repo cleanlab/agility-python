@@ -68,6 +68,7 @@ class AssistantsResource(SyncAPIResource):
         description: str,
         knowledge_base_id: Optional[str],
         name: str,
+        context_limit: Optional[int] | NotGiven = NOT_GIVEN,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
         suggested_questions: List[str] | NotGiven = NOT_GIVEN,
@@ -86,6 +87,8 @@ class AssistantsResource(SyncAPIResource):
           description: The description of the assistant
 
           name: The name of the assistant
+
+          context_limit: The maximum number of context chunks to include in a run.
 
           suggested_questions: A list of suggested questions that can be asked to the assistant
 
@@ -106,6 +109,7 @@ class AssistantsResource(SyncAPIResource):
                     "description": description,
                     "knowledge_base_id": knowledge_base_id,
                     "name": name,
+                    "context_limit": context_limit,
                     "instructions": instructions,
                     "model": model,
                     "suggested_questions": suggested_questions,
@@ -160,6 +164,7 @@ class AssistantsResource(SyncAPIResource):
         description: str,
         knowledge_base_id: Optional[str],
         name: str,
+        context_limit: Optional[int] | NotGiven = NOT_GIVEN,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
         suggested_questions: List[str] | NotGiven = NOT_GIVEN,
@@ -178,6 +183,8 @@ class AssistantsResource(SyncAPIResource):
           description: The description of the assistant
 
           name: The name of the assistant
+
+          context_limit: The maximum number of context chunks to include in a run.
 
           suggested_questions: A list of suggested questions that can be asked to the assistant
 
@@ -201,6 +208,7 @@ class AssistantsResource(SyncAPIResource):
                     "description": description,
                     "knowledge_base_id": knowledge_base_id,
                     "name": name,
+                    "context_limit": context_limit,
                     "instructions": instructions,
                     "model": model,
                     "suggested_questions": suggested_questions,
@@ -322,6 +330,7 @@ class AsyncAssistantsResource(AsyncAPIResource):
         description: str,
         knowledge_base_id: Optional[str],
         name: str,
+        context_limit: Optional[int] | NotGiven = NOT_GIVEN,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
         suggested_questions: List[str] | NotGiven = NOT_GIVEN,
@@ -340,6 +349,8 @@ class AsyncAssistantsResource(AsyncAPIResource):
           description: The description of the assistant
 
           name: The name of the assistant
+
+          context_limit: The maximum number of context chunks to include in a run.
 
           suggested_questions: A list of suggested questions that can be asked to the assistant
 
@@ -360,6 +371,7 @@ class AsyncAssistantsResource(AsyncAPIResource):
                     "description": description,
                     "knowledge_base_id": knowledge_base_id,
                     "name": name,
+                    "context_limit": context_limit,
                     "instructions": instructions,
                     "model": model,
                     "suggested_questions": suggested_questions,
@@ -414,6 +426,7 @@ class AsyncAssistantsResource(AsyncAPIResource):
         description: str,
         knowledge_base_id: Optional[str],
         name: str,
+        context_limit: Optional[int] | NotGiven = NOT_GIVEN,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
         suggested_questions: List[str] | NotGiven = NOT_GIVEN,
@@ -432,6 +445,8 @@ class AsyncAssistantsResource(AsyncAPIResource):
           description: The description of the assistant
 
           name: The name of the assistant
+
+          context_limit: The maximum number of context chunks to include in a run.
 
           suggested_questions: A list of suggested questions that can be asked to the assistant
 
@@ -455,6 +470,7 @@ class AsyncAssistantsResource(AsyncAPIResource):
                     "description": description,
                     "knowledge_base_id": knowledge_base_id,
                     "name": name,
+                    "context_limit": context_limit,
                     "instructions": instructions,
                     "model": model,
                     "suggested_questions": suggested_questions,

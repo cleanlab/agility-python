@@ -16,6 +16,11 @@ __all__ = [
     "SourceParamsS3PublicV0Params",
     "SourceParamsS3PrivateV0Params",
     "SourceSchedule",
+    "Progress",
+    "ProgressComplete",
+    "ProgressCurate",
+    "ProgressLoad",
+    "ProgressTransform",
 ]
 
 
@@ -114,6 +119,58 @@ class SourceSchedule(BaseModel):
     utc_offset: int
 
 
+class ProgressComplete(BaseModel):
+    processed_documents: Optional[int] = None
+
+    processed_nodes: Optional[int] = None
+
+    result_documents: Optional[int] = None
+
+    result_nodes: Optional[int] = None
+
+
+class ProgressCurate(BaseModel):
+    processed_documents: Optional[int] = None
+
+    processed_nodes: Optional[int] = None
+
+    result_documents: Optional[int] = None
+
+    result_nodes: Optional[int] = None
+
+
+class ProgressLoad(BaseModel):
+    processed_documents: Optional[int] = None
+
+    processed_nodes: Optional[int] = None
+
+    result_documents: Optional[int] = None
+
+    result_nodes: Optional[int] = None
+
+
+class ProgressTransform(BaseModel):
+    processed_documents: Optional[int] = None
+
+    processed_nodes: Optional[int] = None
+
+    result_documents: Optional[int] = None
+
+    result_nodes: Optional[int] = None
+
+
+class Progress(BaseModel):
+    complete: Optional[ProgressComplete] = None
+    """Step progress model."""
+
+    curate: Optional[Dict[str, ProgressCurate]] = None
+
+    load: Optional[ProgressLoad] = None
+    """Step progress model."""
+
+    transform: Optional[Dict[str, ProgressTransform]] = None
+
+
 class Source(BaseModel):
     id: str
 
@@ -137,3 +194,6 @@ class Source(BaseModel):
     """Source status enum."""
 
     updated_at: datetime
+
+    progress: Optional[Progress] = None
+    """Source progress model."""

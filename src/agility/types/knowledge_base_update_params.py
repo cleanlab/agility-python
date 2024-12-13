@@ -18,6 +18,7 @@ __all__ = [
     "IngestionPipelineParamsTransform",
     "IngestionPipelineParamsTransformSteps",
     "IngestionPipelineParamsTransformStepsRecursiveCharacterSplitterV0Params",
+    "IngestionPipelineParamsTransformStepsCharacterSplitterV0Params",
     "IngestionPipelineParamsTransformStepsSemanticMergeSplitterV0Params",
     "IngestionPipelineParamsTransformStepsMarkdownNodeExpanderParams",
     "IngestionPipelineParamsTransformStepsNodeSummarizerV0Params",
@@ -81,6 +82,14 @@ class IngestionPipelineParamsTransformStepsRecursiveCharacterSplitterV0Params(Ty
     name: Literal["splitters.recursive_character.v0"]
 
 
+class IngestionPipelineParamsTransformStepsCharacterSplitterV0Params(TypedDict, total=False):
+    chunk_overlap: int
+
+    chunk_size: int
+
+    name: Literal["splitters.character.v0"]
+
+
 class IngestionPipelineParamsTransformStepsSemanticMergeSplitterV0Params(TypedDict, total=False):
     appending_threshold: float
 
@@ -130,6 +139,7 @@ class IngestionPipelineParamsTransformStepsNoopParams(TypedDict, total=False):
 
 IngestionPipelineParamsTransformSteps: TypeAlias = Union[
     IngestionPipelineParamsTransformStepsRecursiveCharacterSplitterV0Params,
+    IngestionPipelineParamsTransformStepsCharacterSplitterV0Params,
     IngestionPipelineParamsTransformStepsSemanticMergeSplitterV0Params,
     IngestionPipelineParamsTransformStepsMarkdownNodeExpanderParams,
     IngestionPipelineParamsTransformStepsNodeSummarizerV0Params,

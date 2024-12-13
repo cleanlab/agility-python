@@ -32,6 +32,9 @@ class Run(BaseModel):
 
     additional_instructions: Optional[str] = None
 
+    context_limit: Optional[int] = None
+    """The maximum number of context chunks to include."""
+
     deleted_at: Optional[datetime] = None
 
     instructions: Optional[str] = None

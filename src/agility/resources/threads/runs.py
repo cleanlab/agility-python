@@ -54,6 +54,7 @@ class RunsResource(SyncAPIResource):
         assistant_id: str,
         additional_instructions: Optional[str] | NotGiven = NOT_GIVEN,
         additional_messages: Iterable[run_create_params.AdditionalMessage] | NotGiven = NOT_GIVEN,
+        context_limit: Optional[int] | NotGiven = NOT_GIVEN,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         knowledge_base_id: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
@@ -68,6 +69,8 @@ class RunsResource(SyncAPIResource):
         Creates a new run, starting it in the background.
 
         Args:
+          context_limit: The maximum number of context chunks to include.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -85,6 +88,7 @@ class RunsResource(SyncAPIResource):
                     "assistant_id": assistant_id,
                     "additional_instructions": additional_instructions,
                     "additional_messages": additional_messages,
+                    "context_limit": context_limit,
                     "instructions": instructions,
                     "knowledge_base_id": knowledge_base_id,
                     "model": model,
@@ -177,6 +181,7 @@ class RunsResource(SyncAPIResource):
         assistant_id: str,
         additional_instructions: Optional[str] | NotGiven = NOT_GIVEN,
         additional_messages: Iterable[run_stream_params.AdditionalMessage] | NotGiven = NOT_GIVEN,
+        context_limit: Optional[int] | NotGiven = NOT_GIVEN,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         knowledge_base_id: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
@@ -191,6 +196,8 @@ class RunsResource(SyncAPIResource):
         Creates a new run and streams the results.
 
         Args:
+          context_limit: The maximum number of context chunks to include.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -208,6 +215,7 @@ class RunsResource(SyncAPIResource):
                     "assistant_id": assistant_id,
                     "additional_instructions": additional_instructions,
                     "additional_messages": additional_messages,
+                    "context_limit": context_limit,
                     "instructions": instructions,
                     "knowledge_base_id": knowledge_base_id,
                     "model": model,
@@ -248,6 +256,7 @@ class AsyncRunsResource(AsyncAPIResource):
         assistant_id: str,
         additional_instructions: Optional[str] | NotGiven = NOT_GIVEN,
         additional_messages: Iterable[run_create_params.AdditionalMessage] | NotGiven = NOT_GIVEN,
+        context_limit: Optional[int] | NotGiven = NOT_GIVEN,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         knowledge_base_id: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
@@ -262,6 +271,8 @@ class AsyncRunsResource(AsyncAPIResource):
         Creates a new run, starting it in the background.
 
         Args:
+          context_limit: The maximum number of context chunks to include.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -279,6 +290,7 @@ class AsyncRunsResource(AsyncAPIResource):
                     "assistant_id": assistant_id,
                     "additional_instructions": additional_instructions,
                     "additional_messages": additional_messages,
+                    "context_limit": context_limit,
                     "instructions": instructions,
                     "knowledge_base_id": knowledge_base_id,
                     "model": model,
@@ -371,6 +383,7 @@ class AsyncRunsResource(AsyncAPIResource):
         assistant_id: str,
         additional_instructions: Optional[str] | NotGiven = NOT_GIVEN,
         additional_messages: Iterable[run_stream_params.AdditionalMessage] | NotGiven = NOT_GIVEN,
+        context_limit: Optional[int] | NotGiven = NOT_GIVEN,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         knowledge_base_id: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
@@ -385,6 +398,8 @@ class AsyncRunsResource(AsyncAPIResource):
         Creates a new run and streams the results.
 
         Args:
+          context_limit: The maximum number of context chunks to include.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -402,6 +417,7 @@ class AsyncRunsResource(AsyncAPIResource):
                     "assistant_id": assistant_id,
                     "additional_instructions": additional_instructions,
                     "additional_messages": additional_messages,
+                    "context_limit": context_limit,
                     "instructions": instructions,
                     "knowledge_base_id": knowledge_base_id,
                     "model": model,

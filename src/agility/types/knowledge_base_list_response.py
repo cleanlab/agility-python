@@ -8,7 +8,7 @@ from .._utils import PropertyInfo
 from .._models import BaseModel
 
 __all__ = [
-    "KnowledgeBaseWithConfig",
+    "KnowledgeBaseListResponse",
     "IngestionPipelineParams",
     "IngestionPipelineParamsCurate",
     "IngestionPipelineParamsCurateSteps",
@@ -176,7 +176,7 @@ class IngestionPipelineParams(BaseModel):
     """Vector store params."""
 
 
-class KnowledgeBaseWithConfig(BaseModel):
+class KnowledgeBaseListResponse(BaseModel):
     id: str
 
     created_at: datetime
@@ -192,5 +192,8 @@ class KnowledgeBaseWithConfig(BaseModel):
     """
 
     name: str
+
+    status: Literal["pending", "syncing", "synced", "failed"]
+    """Source status enum."""
 
     updated_at: datetime

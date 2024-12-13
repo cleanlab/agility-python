@@ -19,6 +19,9 @@ class AssistantUpdateParams(TypedDict, total=False):
     name: Required[str]
     """The name of the assistant"""
 
+    context_limit: Optional[int]
+    """The maximum number of context chunks to include in a run."""
+
     instructions: Optional[str]
 
     model: Optional[Literal["gpt-4o"]]

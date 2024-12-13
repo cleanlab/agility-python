@@ -42,6 +42,7 @@ class TestRuns:
                     "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 }
             ],
+            context_limit=1,
             instructions="instructions",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             model="gpt-4o",
@@ -203,6 +204,7 @@ class TestRuns:
                     "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 }
             ],
+            context_limit=1,
             instructions="instructions",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             model="gpt-4o",
@@ -272,6 +274,7 @@ class TestAsyncRuns:
                     "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 }
             ],
+            context_limit=1,
             instructions="instructions",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             model="gpt-4o",
@@ -433,6 +436,7 @@ class TestAsyncRuns:
                     "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 }
             ],
+            context_limit=1,
             instructions="instructions",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             model="gpt-4o",

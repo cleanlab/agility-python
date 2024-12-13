@@ -15,6 +15,9 @@ class RunCreateParams(TypedDict, total=False):
 
     additional_messages: Iterable[AdditionalMessage]
 
+    context_limit: Optional[int]
+    """The maximum number of context chunks to include."""
+
     instructions: Optional[str]
 
     knowledge_base_id: Optional[str]
