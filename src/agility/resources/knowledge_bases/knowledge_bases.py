@@ -9,14 +9,6 @@ from ...types import (
     knowledge_base_create_params,
     knowledge_base_update_params,
 )
-from .sources import (
-    SourcesResource,
-    AsyncSourcesResource,
-    SourcesResourceWithRawResponse,
-    AsyncSourcesResourceWithRawResponse,
-    SourcesResourceWithStreamingResponse,
-    AsyncSourcesResourceWithStreamingResponse,
-)
 from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from ..._utils import (
     maybe_transform,
@@ -32,7 +24,14 @@ from ..._response import (
 )
 from ...pagination import SyncMyOffsetPage, AsyncMyOffsetPage
 from ..._base_client import AsyncPaginator, make_request_options
-from .sources.sources import SourcesResource, AsyncSourcesResource
+from .sources.sources import (
+    SourcesResource,
+    AsyncSourcesResource,
+    SourcesResourceWithRawResponse,
+    AsyncSourcesResourceWithRawResponse,
+    SourcesResourceWithStreamingResponse,
+    AsyncSourcesResourceWithStreamingResponse,
+)
 from ...types.knowledge_base_with_config import KnowledgeBaseWithConfig
 from ...types.knowledge_base_list_response import KnowledgeBaseListResponse
 

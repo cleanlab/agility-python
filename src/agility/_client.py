@@ -8,7 +8,7 @@ from typing_extensions import Self, Literal, override
 
 import httpx
 
-from . import resources, _exceptions
+from . import _exceptions
 from ._qs import Querystring
 from ._types import (
     NOT_GIVEN,
@@ -31,6 +31,11 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
+from .resources.users import users
+from .resources.threads import threads
+from .resources.assistants import assistants
+from .resources.integrations import integrations
+from .resources.knowledge_bases import knowledge_bases
 
 __all__ = [
     "ENVIRONMENTS",
@@ -38,7 +43,6 @@ __all__ = [
     "Transport",
     "ProxiesTypes",
     "RequestOptions",
-    "resources",
     "Agility",
     "AsyncAgility",
     "Client",
@@ -54,11 +58,11 @@ ENVIRONMENTS: Dict[str, str] = {
 
 
 class Agility(SyncAPIClient):
-    assistants: resources.AssistantsResource
-    knowledge_bases: resources.KnowledgeBasesResource
-    users: resources.UsersResource
-    threads: resources.ThreadsResource
-    integrations: resources.IntegrationsResource
+    assistants: assistants.AssistantsResource
+    knowledge_bases: knowledge_bases.KnowledgeBasesResource
+    users: users.UsersResource
+    threads: threads.ThreadsResource
+    integrations: integrations.IntegrationsResource
     with_raw_response: AgilityWithRawResponse
     with_streaming_response: AgilityWithStreamedResponse
 
@@ -155,11 +159,11 @@ class Agility(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.assistants = resources.AssistantsResource(self)
-        self.knowledge_bases = resources.KnowledgeBasesResource(self)
-        self.users = resources.UsersResource(self)
-        self.threads = resources.ThreadsResource(self)
-        self.integrations = resources.IntegrationsResource(self)
+        self.assistants = assistants.AssistantsResource(self)
+        self.knowledge_bases = knowledge_bases.KnowledgeBasesResource(self)
+        self.users = users.UsersResource(self)
+        self.threads = threads.ThreadsResource(self)
+        self.integrations = integrations.IntegrationsResource(self)
         self.with_raw_response = AgilityWithRawResponse(self)
         self.with_streaming_response = AgilityWithStreamedResponse(self)
 
@@ -299,11 +303,11 @@ class Agility(SyncAPIClient):
 
 
 class AsyncAgility(AsyncAPIClient):
-    assistants: resources.AsyncAssistantsResource
-    knowledge_bases: resources.AsyncKnowledgeBasesResource
-    users: resources.AsyncUsersResource
-    threads: resources.AsyncThreadsResource
-    integrations: resources.AsyncIntegrationsResource
+    assistants: assistants.AsyncAssistantsResource
+    knowledge_bases: knowledge_bases.AsyncKnowledgeBasesResource
+    users: users.AsyncUsersResource
+    threads: threads.AsyncThreadsResource
+    integrations: integrations.AsyncIntegrationsResource
     with_raw_response: AsyncAgilityWithRawResponse
     with_streaming_response: AsyncAgilityWithStreamedResponse
 
@@ -400,11 +404,11 @@ class AsyncAgility(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.assistants = resources.AsyncAssistantsResource(self)
-        self.knowledge_bases = resources.AsyncKnowledgeBasesResource(self)
-        self.users = resources.AsyncUsersResource(self)
-        self.threads = resources.AsyncThreadsResource(self)
-        self.integrations = resources.AsyncIntegrationsResource(self)
+        self.assistants = assistants.AsyncAssistantsResource(self)
+        self.knowledge_bases = knowledge_bases.AsyncKnowledgeBasesResource(self)
+        self.users = users.AsyncUsersResource(self)
+        self.threads = threads.AsyncThreadsResource(self)
+        self.integrations = integrations.AsyncIntegrationsResource(self)
         self.with_raw_response = AsyncAgilityWithRawResponse(self)
         self.with_streaming_response = AsyncAgilityWithStreamedResponse(self)
 
@@ -545,38 +549,38 @@ class AsyncAgility(AsyncAPIClient):
 
 class AgilityWithRawResponse:
     def __init__(self, client: Agility) -> None:
-        self.assistants = resources.AssistantsResourceWithRawResponse(client.assistants)
-        self.knowledge_bases = resources.KnowledgeBasesResourceWithRawResponse(client.knowledge_bases)
-        self.users = resources.UsersResourceWithRawResponse(client.users)
-        self.threads = resources.ThreadsResourceWithRawResponse(client.threads)
-        self.integrations = resources.IntegrationsResourceWithRawResponse(client.integrations)
+        self.assistants = assistants.AssistantsResourceWithRawResponse(client.assistants)
+        self.knowledge_bases = knowledge_bases.KnowledgeBasesResourceWithRawResponse(client.knowledge_bases)
+        self.users = users.UsersResourceWithRawResponse(client.users)
+        self.threads = threads.ThreadsResourceWithRawResponse(client.threads)
+        self.integrations = integrations.IntegrationsResourceWithRawResponse(client.integrations)
 
 
 class AsyncAgilityWithRawResponse:
     def __init__(self, client: AsyncAgility) -> None:
-        self.assistants = resources.AsyncAssistantsResourceWithRawResponse(client.assistants)
-        self.knowledge_bases = resources.AsyncKnowledgeBasesResourceWithRawResponse(client.knowledge_bases)
-        self.users = resources.AsyncUsersResourceWithRawResponse(client.users)
-        self.threads = resources.AsyncThreadsResourceWithRawResponse(client.threads)
-        self.integrations = resources.AsyncIntegrationsResourceWithRawResponse(client.integrations)
+        self.assistants = assistants.AsyncAssistantsResourceWithRawResponse(client.assistants)
+        self.knowledge_bases = knowledge_bases.AsyncKnowledgeBasesResourceWithRawResponse(client.knowledge_bases)
+        self.users = users.AsyncUsersResourceWithRawResponse(client.users)
+        self.threads = threads.AsyncThreadsResourceWithRawResponse(client.threads)
+        self.integrations = integrations.AsyncIntegrationsResourceWithRawResponse(client.integrations)
 
 
 class AgilityWithStreamedResponse:
     def __init__(self, client: Agility) -> None:
-        self.assistants = resources.AssistantsResourceWithStreamingResponse(client.assistants)
-        self.knowledge_bases = resources.KnowledgeBasesResourceWithStreamingResponse(client.knowledge_bases)
-        self.users = resources.UsersResourceWithStreamingResponse(client.users)
-        self.threads = resources.ThreadsResourceWithStreamingResponse(client.threads)
-        self.integrations = resources.IntegrationsResourceWithStreamingResponse(client.integrations)
+        self.assistants = assistants.AssistantsResourceWithStreamingResponse(client.assistants)
+        self.knowledge_bases = knowledge_bases.KnowledgeBasesResourceWithStreamingResponse(client.knowledge_bases)
+        self.users = users.UsersResourceWithStreamingResponse(client.users)
+        self.threads = threads.ThreadsResourceWithStreamingResponse(client.threads)
+        self.integrations = integrations.IntegrationsResourceWithStreamingResponse(client.integrations)
 
 
 class AsyncAgilityWithStreamedResponse:
     def __init__(self, client: AsyncAgility) -> None:
-        self.assistants = resources.AsyncAssistantsResourceWithStreamingResponse(client.assistants)
-        self.knowledge_bases = resources.AsyncKnowledgeBasesResourceWithStreamingResponse(client.knowledge_bases)
-        self.users = resources.AsyncUsersResourceWithStreamingResponse(client.users)
-        self.threads = resources.AsyncThreadsResourceWithStreamingResponse(client.threads)
-        self.integrations = resources.AsyncIntegrationsResourceWithStreamingResponse(client.integrations)
+        self.assistants = assistants.AsyncAssistantsResourceWithStreamingResponse(client.assistants)
+        self.knowledge_bases = knowledge_bases.AsyncKnowledgeBasesResourceWithStreamingResponse(client.knowledge_bases)
+        self.users = users.AsyncUsersResourceWithStreamingResponse(client.users)
+        self.threads = threads.AsyncThreadsResourceWithStreamingResponse(client.threads)
+        self.integrations = integrations.AsyncIntegrationsResourceWithStreamingResponse(client.integrations)
 
 
 Client = Agility
