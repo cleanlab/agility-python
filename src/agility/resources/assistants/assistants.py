@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import List, Iterable, Optional
 from typing_extensions import Literal
 
 import httpx
@@ -72,6 +72,7 @@ class AssistantsResource(SyncAPIResource):
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
         suggested_questions: List[str] | NotGiven = NOT_GIVEN,
+        tools: Optional[Iterable[assistant_create_params.Tool]] | NotGiven = NOT_GIVEN,
         url_slug: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -113,6 +114,7 @@ class AssistantsResource(SyncAPIResource):
                     "instructions": instructions,
                     "model": model,
                     "suggested_questions": suggested_questions,
+                    "tools": tools,
                     "url_slug": url_slug,
                 },
                 assistant_create_params.AssistantCreateParams,
@@ -168,6 +170,7 @@ class AssistantsResource(SyncAPIResource):
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
         suggested_questions: List[str] | NotGiven = NOT_GIVEN,
+        tools: Optional[Iterable[assistant_update_params.Tool]] | NotGiven = NOT_GIVEN,
         url_slug: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -212,6 +215,7 @@ class AssistantsResource(SyncAPIResource):
                     "instructions": instructions,
                     "model": model,
                     "suggested_questions": suggested_questions,
+                    "tools": tools,
                     "url_slug": url_slug,
                 },
                 assistant_update_params.AssistantUpdateParams,
@@ -334,6 +338,7 @@ class AsyncAssistantsResource(AsyncAPIResource):
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
         suggested_questions: List[str] | NotGiven = NOT_GIVEN,
+        tools: Optional[Iterable[assistant_create_params.Tool]] | NotGiven = NOT_GIVEN,
         url_slug: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -375,6 +380,7 @@ class AsyncAssistantsResource(AsyncAPIResource):
                     "instructions": instructions,
                     "model": model,
                     "suggested_questions": suggested_questions,
+                    "tools": tools,
                     "url_slug": url_slug,
                 },
                 assistant_create_params.AssistantCreateParams,
@@ -430,6 +436,7 @@ class AsyncAssistantsResource(AsyncAPIResource):
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
         suggested_questions: List[str] | NotGiven = NOT_GIVEN,
+        tools: Optional[Iterable[assistant_update_params.Tool]] | NotGiven = NOT_GIVEN,
         url_slug: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -474,6 +481,7 @@ class AsyncAssistantsResource(AsyncAPIResource):
                     "instructions": instructions,
                     "model": model,
                     "suggested_questions": suggested_questions,
+                    "tools": tools,
                     "url_slug": url_slug,
                 },
                 assistant_update_params.AssistantUpdateParams,

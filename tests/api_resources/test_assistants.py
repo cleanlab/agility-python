@@ -41,6 +41,13 @@ class TestAssistants:
             instructions="instructions",
             model="gpt-4o",
             suggested_questions=["string"],
+            tools=[
+                {
+                    "access_key": "access_key",
+                    "project_id": 0,
+                    "name": "alpha_v0",
+                }
+            ],
             url_slug="url_slug",
         )
         assert_matches_type(Assistant, assistant, path=["response"])
@@ -134,6 +141,13 @@ class TestAssistants:
             instructions="instructions",
             model="gpt-4o",
             suggested_questions=["string"],
+            tools=[
+                {
+                    "access_key": "access_key",
+                    "project_id": 0,
+                    "name": "alpha_v0",
+                }
+            ],
             url_slug="url_slug",
         )
         assert_matches_type(AssistantWithConfig, assistant, path=["response"])
@@ -275,6 +289,13 @@ class TestAsyncAssistants:
             instructions="instructions",
             model="gpt-4o",
             suggested_questions=["string"],
+            tools=[
+                {
+                    "access_key": "access_key",
+                    "project_id": 0,
+                    "name": "alpha_v0",
+                }
+            ],
             url_slug="url_slug",
         )
         assert_matches_type(Assistant, assistant, path=["response"])
@@ -368,6 +389,13 @@ class TestAsyncAssistants:
             instructions="instructions",
             model="gpt-4o",
             suggested_questions=["string"],
+            tools=[
+                {
+                    "access_key": "access_key",
+                    "project_id": 0,
+                    "name": "alpha_v0",
+                }
+            ],
             url_slug="url_slug",
         )
         assert_matches_type(AssistantWithConfig, assistant, path=["response"])

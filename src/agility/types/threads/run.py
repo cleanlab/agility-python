@@ -1,12 +1,27 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import List, Union, Optional
 from datetime import datetime
-from typing_extensions import Literal
+from typing_extensions import Literal, TypeAlias
 
 from ..._models import BaseModel
 
-__all__ = ["Run", "Usage"]
+__all__ = ["Run", "Tool", "ToolAlphaV0Tool", "ToolNoOpTool", "Usage"]
+
+
+class ToolAlphaV0Tool(BaseModel):
+    access_key: str
+
+    project_id: int
+
+    name: Optional[Literal["alpha_v0"]] = None
+
+
+class ToolNoOpTool(BaseModel):
+    name: Optional[Literal["noop"]] = None
+
+
+Tool: TypeAlias = Union[ToolAlphaV0Tool, ToolNoOpTool]
 
 
 class Usage(BaseModel):
@@ -44,5 +59,7 @@ class Run(BaseModel):
     last_error: Optional[str] = None
 
     model: Optional[Literal["gpt-4o"]] = None
+
+    tools: Optional[List[Tool]] = None
 
     usage: Optional[Usage] = None

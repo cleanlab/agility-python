@@ -2,10 +2,17 @@
 
 from __future__ import annotations
 
-from typing import List, Iterable, Optional
-from typing_extensions import Literal, Required, TypedDict
+from typing import List, Union, Iterable, Optional
+from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
-__all__ = ["RunCreateParams", "AdditionalMessage", "AdditionalMessageMetadata"]
+__all__ = [
+    "RunCreateParams",
+    "AdditionalMessage",
+    "AdditionalMessageMetadata",
+    "Tool",
+    "ToolAlphaV0Tool",
+    "ToolNoOpTool",
+]
 
 
 class RunCreateParams(TypedDict, total=False):
@@ -24,6 +31,8 @@ class RunCreateParams(TypedDict, total=False):
 
     model: Optional[Literal["gpt-4o"]]
 
+    tools: Optional[Iterable[Tool]]
+
 
 class AdditionalMessageMetadata(TypedDict, total=False):
     citations: Optional[List[str]]
@@ -39,3 +48,18 @@ class AdditionalMessage(TypedDict, total=False):
     role: Required[Literal["user", "assistant"]]
 
     thread_id: Required[str]
+
+
+class ToolAlphaV0Tool(TypedDict, total=False):
+    access_key: Required[str]
+
+    project_id: Required[int]
+
+    name: Literal["alpha_v0"]
+
+
+class ToolNoOpTool(TypedDict, total=False):
+    name: Literal["noop"]
+
+
+Tool: TypeAlias = Union[ToolAlphaV0Tool, ToolNoOpTool]

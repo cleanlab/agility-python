@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
-from typing import List, Optional
-from typing_extensions import Literal, Required, TypedDict
+from typing import List, Union, Iterable, Optional
+from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
-__all__ = ["AssistantCreateParams"]
+__all__ = ["AssistantCreateParams", "Tool", "ToolAlphaV0Tool", "ToolNoOpTool"]
 
 
 class AssistantCreateParams(TypedDict, total=False):
@@ -27,5 +27,22 @@ class AssistantCreateParams(TypedDict, total=False):
     suggested_questions: List[str]
     """A list of suggested questions that can be asked to the assistant"""
 
+    tools: Optional[Iterable[Tool]]
+
     url_slug: Optional[str]
     """Optional URL suffix - unique identifier for the assistant's endpoint"""
+
+
+class ToolAlphaV0Tool(TypedDict, total=False):
+    access_key: Required[str]
+
+    project_id: Required[int]
+
+    name: Literal["alpha_v0"]
+
+
+class ToolNoOpTool(TypedDict, total=False):
+    name: Literal["noop"]
+
+
+Tool: TypeAlias = Union[ToolAlphaV0Tool, ToolNoOpTool]
