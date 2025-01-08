@@ -54,9 +54,11 @@ class RunsResource(SyncAPIResource):
         assistant_id: str,
         additional_instructions: Optional[str] | NotGiven = NOT_GIVEN,
         additional_messages: Iterable[run_create_params.AdditionalMessage] | NotGiven = NOT_GIVEN,
+        context_limit: Optional[int] | NotGiven = NOT_GIVEN,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         knowledge_base_id: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
+        tools: Optional[Iterable[run_create_params.Tool]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -68,6 +70,8 @@ class RunsResource(SyncAPIResource):
         Creates a new run, starting it in the background.
 
         Args:
+          context_limit: The maximum number of context chunks to include.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -85,9 +89,11 @@ class RunsResource(SyncAPIResource):
                     "assistant_id": assistant_id,
                     "additional_instructions": additional_instructions,
                     "additional_messages": additional_messages,
+                    "context_limit": context_limit,
                     "instructions": instructions,
                     "knowledge_base_id": knowledge_base_id,
                     "model": model,
+                    "tools": tools,
                 },
                 run_create_params.RunCreateParams,
             ),
@@ -177,9 +183,11 @@ class RunsResource(SyncAPIResource):
         assistant_id: str,
         additional_instructions: Optional[str] | NotGiven = NOT_GIVEN,
         additional_messages: Iterable[run_stream_params.AdditionalMessage] | NotGiven = NOT_GIVEN,
+        context_limit: Optional[int] | NotGiven = NOT_GIVEN,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         knowledge_base_id: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
+        tools: Optional[Iterable[run_stream_params.Tool]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -191,6 +199,8 @@ class RunsResource(SyncAPIResource):
         Creates a new run and streams the results.
 
         Args:
+          context_limit: The maximum number of context chunks to include.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -208,9 +218,11 @@ class RunsResource(SyncAPIResource):
                     "assistant_id": assistant_id,
                     "additional_instructions": additional_instructions,
                     "additional_messages": additional_messages,
+                    "context_limit": context_limit,
                     "instructions": instructions,
                     "knowledge_base_id": knowledge_base_id,
                     "model": model,
+                    "tools": tools,
                 },
                 run_stream_params.RunStreamParams,
             ),
@@ -248,9 +260,11 @@ class AsyncRunsResource(AsyncAPIResource):
         assistant_id: str,
         additional_instructions: Optional[str] | NotGiven = NOT_GIVEN,
         additional_messages: Iterable[run_create_params.AdditionalMessage] | NotGiven = NOT_GIVEN,
+        context_limit: Optional[int] | NotGiven = NOT_GIVEN,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         knowledge_base_id: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
+        tools: Optional[Iterable[run_create_params.Tool]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -262,6 +276,8 @@ class AsyncRunsResource(AsyncAPIResource):
         Creates a new run, starting it in the background.
 
         Args:
+          context_limit: The maximum number of context chunks to include.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -279,9 +295,11 @@ class AsyncRunsResource(AsyncAPIResource):
                     "assistant_id": assistant_id,
                     "additional_instructions": additional_instructions,
                     "additional_messages": additional_messages,
+                    "context_limit": context_limit,
                     "instructions": instructions,
                     "knowledge_base_id": knowledge_base_id,
                     "model": model,
+                    "tools": tools,
                 },
                 run_create_params.RunCreateParams,
             ),
@@ -371,9 +389,11 @@ class AsyncRunsResource(AsyncAPIResource):
         assistant_id: str,
         additional_instructions: Optional[str] | NotGiven = NOT_GIVEN,
         additional_messages: Iterable[run_stream_params.AdditionalMessage] | NotGiven = NOT_GIVEN,
+        context_limit: Optional[int] | NotGiven = NOT_GIVEN,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         knowledge_base_id: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
+        tools: Optional[Iterable[run_stream_params.Tool]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -385,6 +405,8 @@ class AsyncRunsResource(AsyncAPIResource):
         Creates a new run and streams the results.
 
         Args:
+          context_limit: The maximum number of context chunks to include.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -402,9 +424,11 @@ class AsyncRunsResource(AsyncAPIResource):
                     "assistant_id": assistant_id,
                     "additional_instructions": additional_instructions,
                     "additional_messages": additional_messages,
+                    "context_limit": context_limit,
                     "instructions": instructions,
                     "knowledge_base_id": knowledge_base_id,
                     "model": model,
+                    "tools": tools,
                 },
                 run_stream_params.RunStreamParams,
             ),

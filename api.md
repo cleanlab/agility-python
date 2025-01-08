@@ -3,7 +3,7 @@
 Types:
 
 ```python
-from agility.types import Assistant, AssistantWithConfig
+from agility.types import Assistant, AssistantWithConfig, AssistantListResponse
 ```
 
 Methods:
@@ -11,7 +11,7 @@ Methods:
 - <code title="post /api/assistants/">client.assistants.<a href="./src/agility/resources/assistants/assistants.py">create</a>(\*\*<a href="src/agility/types/assistant_create_params.py">params</a>) -> <a href="./src/agility/types/assistant.py">Assistant</a></code>
 - <code title="get /api/assistants/{assistant_id}">client.assistants.<a href="./src/agility/resources/assistants/assistants.py">retrieve</a>(assistant_id) -> <a href="./src/agility/types/assistant_with_config.py">AssistantWithConfig</a></code>
 - <code title="put /api/assistants/{assistant_id}">client.assistants.<a href="./src/agility/resources/assistants/assistants.py">update</a>(assistant_id, \*\*<a href="src/agility/types/assistant_update_params.py">params</a>) -> <a href="./src/agility/types/assistant_with_config.py">AssistantWithConfig</a></code>
-- <code title="get /api/assistants/">client.assistants.<a href="./src/agility/resources/assistants/assistants.py">list</a>(\*\*<a href="src/agility/types/assistant_list_params.py">params</a>) -> <a href="./src/agility/types/assistant_with_config.py">SyncMyOffsetPage[AssistantWithConfig]</a></code>
+- <code title="get /api/assistants/">client.assistants.<a href="./src/agility/resources/assistants/assistants.py">list</a>(\*\*<a href="src/agility/types/assistant_list_params.py">params</a>) -> <a href="./src/agility/types/assistant_list_response.py">SyncMyOffsetPage[AssistantListResponse]</a></code>
 - <code title="delete /api/assistants/{assistant_id}">client.assistants.<a href="./src/agility/resources/assistants/assistants.py">delete</a>(assistant_id) -> None</code>
 
 ## AccessKeys
@@ -32,7 +32,7 @@ Methods:
 Types:
 
 ```python
-from agility.types import KnowledgeBaseWithConfig
+from agility.types import KnowledgeBaseWithConfig, KnowledgeBaseListResponse
 ```
 
 Methods:
@@ -40,7 +40,7 @@ Methods:
 - <code title="post /api/knowledge_bases/">client.knowledge_bases.<a href="./src/agility/resources/knowledge_bases/knowledge_bases.py">create</a>(\*\*<a href="src/agility/types/knowledge_base_create_params.py">params</a>) -> <a href="./src/agility/types/knowledge_base_with_config.py">KnowledgeBaseWithConfig</a></code>
 - <code title="get /api/knowledge_bases/{knowledge_base_id}">client.knowledge_bases.<a href="./src/agility/resources/knowledge_bases/knowledge_bases.py">retrieve</a>(knowledge_base_id) -> <a href="./src/agility/types/knowledge_base_with_config.py">KnowledgeBaseWithConfig</a></code>
 - <code title="put /api/knowledge_bases/{knowledge_base_id}">client.knowledge_bases.<a href="./src/agility/resources/knowledge_bases/knowledge_bases.py">update</a>(knowledge_base_id, \*\*<a href="src/agility/types/knowledge_base_update_params.py">params</a>) -> <a href="./src/agility/types/knowledge_base_with_config.py">KnowledgeBaseWithConfig</a></code>
-- <code title="get /api/knowledge_bases/">client.knowledge_bases.<a href="./src/agility/resources/knowledge_bases/knowledge_bases.py">list</a>(\*\*<a href="src/agility/types/knowledge_base_list_params.py">params</a>) -> <a href="./src/agility/types/knowledge_base_with_config.py">SyncMyOffsetPage[KnowledgeBaseWithConfig]</a></code>
+- <code title="get /api/knowledge_bases/">client.knowledge_bases.<a href="./src/agility/resources/knowledge_bases/knowledge_bases.py">list</a>(\*\*<a href="src/agility/types/knowledge_base_list_params.py">params</a>) -> <a href="./src/agility/types/knowledge_base_list_response.py">SyncMyOffsetPage[KnowledgeBaseListResponse]</a></code>
 - <code title="delete /api/knowledge_bases/{knowledge_base_id}">client.knowledge_bases.<a href="./src/agility/resources/knowledge_bases/knowledge_bases.py">delete</a>(knowledge_base_id) -> None</code>
 
 ## Sources

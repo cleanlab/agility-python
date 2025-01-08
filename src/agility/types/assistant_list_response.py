@@ -6,7 +6,7 @@ from typing_extensions import Literal, TypeAlias
 
 from .._models import BaseModel
 
-__all__ = ["AssistantWithConfig", "Tool", "ToolAlphaV0Tool", "ToolNoOpTool"]
+__all__ = ["AssistantListResponse", "Tool", "ToolAlphaV0Tool", "ToolNoOpTool"]
 
 
 class ToolAlphaV0Tool(BaseModel):
@@ -24,7 +24,7 @@ class ToolNoOpTool(BaseModel):
 Tool: TypeAlias = Union[ToolAlphaV0Tool, ToolNoOpTool]
 
 
-class AssistantWithConfig(BaseModel):
+class AssistantListResponse(BaseModel):
     id: str
 
     created_at: datetime
@@ -35,6 +35,8 @@ class AssistantWithConfig(BaseModel):
     """The description of the assistant"""
 
     knowledge_base_id: Optional[str] = None
+
+    knowledge_base_name: str
 
     name: str
     """The name of the assistant"""

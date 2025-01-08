@@ -10,8 +10,8 @@ __all__ = ["Integration"]
 class Integration(BaseModel):
     id: str
 
-    integration_category: Literal["rbac"]
+    integration_category: Literal["rbac", "oauth"]
 
-    integration_type: Literal["s3/v0", "gcs/v0"]
+    integration_type: Literal["s3/v0", "gcs/v0", "notion/v0", "slack/v0"]
 
     state: Literal["ready", "pending", "error"]

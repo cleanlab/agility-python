@@ -9,14 +9,6 @@ from ...types import (
     knowledge_base_create_params,
     knowledge_base_update_params,
 )
-from .sources import (
-    SourcesResource,
-    AsyncSourcesResource,
-    SourcesResourceWithRawResponse,
-    AsyncSourcesResourceWithRawResponse,
-    SourcesResourceWithStreamingResponse,
-    AsyncSourcesResourceWithStreamingResponse,
-)
 from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from ..._utils import (
     maybe_transform,
@@ -32,8 +24,16 @@ from ..._response import (
 )
 from ...pagination import SyncMyOffsetPage, AsyncMyOffsetPage
 from ..._base_client import AsyncPaginator, make_request_options
-from .sources.sources import SourcesResource, AsyncSourcesResource
+from .sources.sources import (
+    SourcesResource,
+    AsyncSourcesResource,
+    SourcesResourceWithRawResponse,
+    AsyncSourcesResourceWithRawResponse,
+    SourcesResourceWithStreamingResponse,
+    AsyncSourcesResourceWithStreamingResponse,
+)
 from ...types.knowledge_base_with_config import KnowledgeBaseWithConfig
+from ...types.knowledge_base_list_response import KnowledgeBaseListResponse
 
 __all__ = ["KnowledgeBasesResource", "AsyncKnowledgeBasesResource"]
 
@@ -199,7 +199,7 @@ class KnowledgeBasesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncMyOffsetPage[KnowledgeBaseWithConfig]:
+    ) -> SyncMyOffsetPage[KnowledgeBaseListResponse]:
         """
         List all knowledge bases.
 
@@ -214,7 +214,7 @@ class KnowledgeBasesResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/api/knowledge_bases/",
-            page=SyncMyOffsetPage[KnowledgeBaseWithConfig],
+            page=SyncMyOffsetPage[KnowledgeBaseListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -228,7 +228,7 @@ class KnowledgeBasesResource(SyncAPIResource):
                     knowledge_base_list_params.KnowledgeBaseListParams,
                 ),
             ),
-            model=KnowledgeBaseWithConfig,
+            model=KnowledgeBaseListResponse,
         )
 
     def delete(
@@ -427,7 +427,7 @@ class AsyncKnowledgeBasesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[KnowledgeBaseWithConfig, AsyncMyOffsetPage[KnowledgeBaseWithConfig]]:
+    ) -> AsyncPaginator[KnowledgeBaseListResponse, AsyncMyOffsetPage[KnowledgeBaseListResponse]]:
         """
         List all knowledge bases.
 
@@ -442,7 +442,7 @@ class AsyncKnowledgeBasesResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/api/knowledge_bases/",
-            page=AsyncMyOffsetPage[KnowledgeBaseWithConfig],
+            page=AsyncMyOffsetPage[KnowledgeBaseListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -456,7 +456,7 @@ class AsyncKnowledgeBasesResource(AsyncAPIResource):
                     knowledge_base_list_params.KnowledgeBaseListParams,
                 ),
             ),
-            model=KnowledgeBaseWithConfig,
+            model=KnowledgeBaseListResponse,
         )
 
     async def delete(
