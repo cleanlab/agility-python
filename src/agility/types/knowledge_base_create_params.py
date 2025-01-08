@@ -18,9 +18,7 @@ __all__ = [
     "IngestionPipelineParamsTransform",
     "IngestionPipelineParamsTransformSteps",
     "IngestionPipelineParamsTransformStepsRecursiveCharacterSplitterV0Params",
-    "IngestionPipelineParamsTransformStepsCharacterSplitterV0Params",
     "IngestionPipelineParamsTransformStepsSemanticMergeSplitterV0Params",
-    "IngestionPipelineParamsTransformStepsMarkdownNodeExpanderParams",
     "IngestionPipelineParamsTransformStepsNodeSummarizerV0Params",
     "IngestionPipelineParamsTransformStepsNoopParams",
     "IngestionPipelineParamsVectorStore",
@@ -82,14 +80,6 @@ class IngestionPipelineParamsTransformStepsRecursiveCharacterSplitterV0Params(Ty
     name: Literal["splitters.recursive_character.v0"]
 
 
-class IngestionPipelineParamsTransformStepsCharacterSplitterV0Params(TypedDict, total=False):
-    chunk_overlap: int
-
-    chunk_size: int
-
-    name: Literal["splitters.character.v0"]
-
-
 class IngestionPipelineParamsTransformStepsSemanticMergeSplitterV0Params(TypedDict, total=False):
     appending_threshold: float
 
@@ -102,25 +92,6 @@ class IngestionPipelineParamsTransformStepsSemanticMergeSplitterV0Params(TypedDi
     merging_threshold: float
 
     name: Literal["splitters.semantic_merge.v0"]
-
-
-class IngestionPipelineParamsTransformStepsMarkdownNodeExpanderParams(TypedDict, total=False):
-    code_block_pattern: str
-    """A regex pattern used to identify code blocks in markdown.
-
-    Matches both multi-line code blocks enclosed in triple backticks and inline code
-    wrapped in single backticks.
-    """
-
-    name: Literal["node_expander.v0"]
-    """The version identifier for the node expander."""
-
-    section_delimiter_pattern: str
-    """A regex pattern used to identify markdown sections.
-
-    Matches headers of level 1 to 6, capturing the section title and content until
-    the next header.
-    """
 
 
 class IngestionPipelineParamsTransformStepsNodeSummarizerV0Params(TypedDict, total=False):
@@ -139,9 +110,7 @@ class IngestionPipelineParamsTransformStepsNoopParams(TypedDict, total=False):
 
 IngestionPipelineParamsTransformSteps: TypeAlias = Union[
     IngestionPipelineParamsTransformStepsRecursiveCharacterSplitterV0Params,
-    IngestionPipelineParamsTransformStepsCharacterSplitterV0Params,
     IngestionPipelineParamsTransformStepsSemanticMergeSplitterV0Params,
-    IngestionPipelineParamsTransformStepsMarkdownNodeExpanderParams,
     IngestionPipelineParamsTransformStepsNodeSummarizerV0Params,
     IngestionPipelineParamsTransformStepsNoopParams,
 ]

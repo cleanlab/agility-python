@@ -2,17 +2,10 @@
 
 from __future__ import annotations
 
-from typing import List, Union, Iterable, Optional
-from typing_extensions import Literal, Required, TypeAlias, TypedDict
+from typing import Iterable, Optional
+from typing_extensions import Literal, Required, TypedDict
 
-__all__ = [
-    "RunCreateParams",
-    "AdditionalMessage",
-    "AdditionalMessageMetadata",
-    "Tool",
-    "ToolAlphaV0Tool",
-    "ToolNoOpTool",
-]
+__all__ = ["RunCreateParams", "AdditionalMessage", "AdditionalMessageMetadata"]
 
 
 class RunCreateParams(TypedDict, total=False):
@@ -22,21 +15,14 @@ class RunCreateParams(TypedDict, total=False):
 
     additional_messages: Iterable[AdditionalMessage]
 
-    context_limit: Optional[int]
-    """The maximum number of context chunks to include."""
-
     instructions: Optional[str]
 
     knowledge_base_id: Optional[str]
 
     model: Optional[Literal["gpt-4o"]]
 
-    tools: Optional[Iterable[Tool]]
-
 
 class AdditionalMessageMetadata(TypedDict, total=False):
-    citations: Optional[List[str]]
-
     trustworthiness_score: Optional[float]
 
 
@@ -48,18 +34,3 @@ class AdditionalMessage(TypedDict, total=False):
     role: Required[Literal["user", "assistant"]]
 
     thread_id: Required[str]
-
-
-class ToolAlphaV0Tool(TypedDict, total=False):
-    access_key: Required[str]
-
-    project_id: Required[int]
-
-    name: Literal["alpha_v0"]
-
-
-class ToolNoOpTool(TypedDict, total=False):
-    name: Literal["noop"]
-
-
-Tool: TypeAlias = Union[ToolAlphaV0Tool, ToolNoOpTool]

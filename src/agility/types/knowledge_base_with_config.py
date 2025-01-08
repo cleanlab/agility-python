@@ -20,9 +20,7 @@ __all__ = [
     "IngestionPipelineParamsTransform",
     "IngestionPipelineParamsTransformSteps",
     "IngestionPipelineParamsTransformStepsRecursiveCharacterSplitterV0Params",
-    "IngestionPipelineParamsTransformStepsCharacterSplitterV0Params",
     "IngestionPipelineParamsTransformStepsSemanticMergeSplitterV0Params",
-    "IngestionPipelineParamsTransformStepsMarkdownNodeExpanderParams",
     "IngestionPipelineParamsTransformStepsNodeSummarizerV0Params",
     "IngestionPipelineParamsTransformStepsNoopParams",
     "IngestionPipelineParamsVectorStore",
@@ -75,14 +73,6 @@ class IngestionPipelineParamsTransformStepsRecursiveCharacterSplitterV0Params(Ba
     name: Optional[Literal["splitters.recursive_character.v0"]] = None
 
 
-class IngestionPipelineParamsTransformStepsCharacterSplitterV0Params(BaseModel):
-    chunk_overlap: Optional[int] = None
-
-    chunk_size: Optional[int] = None
-
-    name: Optional[Literal["splitters.character.v0"]] = None
-
-
 class IngestionPipelineParamsTransformStepsSemanticMergeSplitterV0Params(BaseModel):
     appending_threshold: Optional[float] = None
 
@@ -95,25 +85,6 @@ class IngestionPipelineParamsTransformStepsSemanticMergeSplitterV0Params(BaseMod
     merging_threshold: Optional[float] = None
 
     name: Optional[Literal["splitters.semantic_merge.v0"]] = None
-
-
-class IngestionPipelineParamsTransformStepsMarkdownNodeExpanderParams(BaseModel):
-    code_block_pattern: Optional[str] = None
-    """A regex pattern used to identify code blocks in markdown.
-
-    Matches both multi-line code blocks enclosed in triple backticks and inline code
-    wrapped in single backticks.
-    """
-
-    name: Optional[Literal["node_expander.v0"]] = None
-    """The version identifier for the node expander."""
-
-    section_delimiter_pattern: Optional[str] = None
-    """A regex pattern used to identify markdown sections.
-
-    Matches headers of level 1 to 6, capturing the section title and content until
-    the next header.
-    """
 
 
 class IngestionPipelineParamsTransformStepsNodeSummarizerV0Params(BaseModel):
@@ -132,9 +103,7 @@ class IngestionPipelineParamsTransformStepsNoopParams(BaseModel):
 
 IngestionPipelineParamsTransformSteps: TypeAlias = Union[
     IngestionPipelineParamsTransformStepsRecursiveCharacterSplitterV0Params,
-    IngestionPipelineParamsTransformStepsCharacterSplitterV0Params,
     IngestionPipelineParamsTransformStepsSemanticMergeSplitterV0Params,
-    IngestionPipelineParamsTransformStepsMarkdownNodeExpanderParams,
     IngestionPipelineParamsTransformStepsNodeSummarizerV0Params,
     IngestionPipelineParamsTransformStepsNoopParams,
 ]

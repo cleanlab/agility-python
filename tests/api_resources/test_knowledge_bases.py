@@ -11,7 +11,6 @@ from agility import Agility, AsyncAgility
 from tests.utils import assert_matches_type
 from agility.types import (
     KnowledgeBaseWithConfig,
-    KnowledgeBaseListResponse,
 )
 from agility.pagination import SyncMyOffsetPage, AsyncMyOffsetPage
 
@@ -76,14 +75,14 @@ class TestKnowledgeBases:
     @parametrize
     def test_method_retrieve(self, client: Agility) -> None:
         knowledge_base = client.knowledge_bases.retrieve(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "knowledge_base_id",
         )
         assert_matches_type(KnowledgeBaseWithConfig, knowledge_base, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Agility) -> None:
         response = client.knowledge_bases.with_raw_response.retrieve(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "knowledge_base_id",
         )
 
         assert response.is_closed is True
@@ -94,7 +93,7 @@ class TestKnowledgeBases:
     @parametrize
     def test_streaming_response_retrieve(self, client: Agility) -> None:
         with client.knowledge_bases.with_streaming_response.retrieve(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "knowledge_base_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -114,7 +113,7 @@ class TestKnowledgeBases:
     @parametrize
     def test_method_update(self, client: Agility) -> None:
         knowledge_base = client.knowledge_bases.update(
-            knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            knowledge_base_id="knowledge_base_id",
             description="description",
             ingestion_pipeline_params={
                 "curate": {},
@@ -129,7 +128,7 @@ class TestKnowledgeBases:
     @parametrize
     def test_raw_response_update(self, client: Agility) -> None:
         response = client.knowledge_bases.with_raw_response.update(
-            knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            knowledge_base_id="knowledge_base_id",
             description="description",
             ingestion_pipeline_params={
                 "curate": {},
@@ -148,7 +147,7 @@ class TestKnowledgeBases:
     @parametrize
     def test_streaming_response_update(self, client: Agility) -> None:
         with client.knowledge_bases.with_streaming_response.update(
-            knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            knowledge_base_id="knowledge_base_id",
             description="description",
             ingestion_pipeline_params={
                 "curate": {},
@@ -184,7 +183,7 @@ class TestKnowledgeBases:
     @parametrize
     def test_method_list(self, client: Agility) -> None:
         knowledge_base = client.knowledge_bases.list()
-        assert_matches_type(SyncMyOffsetPage[KnowledgeBaseListResponse], knowledge_base, path=["response"])
+        assert_matches_type(SyncMyOffsetPage[KnowledgeBaseWithConfig], knowledge_base, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Agility) -> None:
@@ -192,7 +191,7 @@ class TestKnowledgeBases:
             limit=1,
             offset=0,
         )
-        assert_matches_type(SyncMyOffsetPage[KnowledgeBaseListResponse], knowledge_base, path=["response"])
+        assert_matches_type(SyncMyOffsetPage[KnowledgeBaseWithConfig], knowledge_base, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Agility) -> None:
@@ -201,7 +200,7 @@ class TestKnowledgeBases:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         knowledge_base = response.parse()
-        assert_matches_type(SyncMyOffsetPage[KnowledgeBaseListResponse], knowledge_base, path=["response"])
+        assert_matches_type(SyncMyOffsetPage[KnowledgeBaseWithConfig], knowledge_base, path=["response"])
 
     @parametrize
     def test_streaming_response_list(self, client: Agility) -> None:
@@ -210,21 +209,21 @@ class TestKnowledgeBases:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             knowledge_base = response.parse()
-            assert_matches_type(SyncMyOffsetPage[KnowledgeBaseListResponse], knowledge_base, path=["response"])
+            assert_matches_type(SyncMyOffsetPage[KnowledgeBaseWithConfig], knowledge_base, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_delete(self, client: Agility) -> None:
         knowledge_base = client.knowledge_bases.delete(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "knowledge_base_id",
         )
         assert knowledge_base is None
 
     @parametrize
     def test_raw_response_delete(self, client: Agility) -> None:
         response = client.knowledge_bases.with_raw_response.delete(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "knowledge_base_id",
         )
 
         assert response.is_closed is True
@@ -235,7 +234,7 @@ class TestKnowledgeBases:
     @parametrize
     def test_streaming_response_delete(self, client: Agility) -> None:
         with client.knowledge_bases.with_streaming_response.delete(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "knowledge_base_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -311,14 +310,14 @@ class TestAsyncKnowledgeBases:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncAgility) -> None:
         knowledge_base = await async_client.knowledge_bases.retrieve(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "knowledge_base_id",
         )
         assert_matches_type(KnowledgeBaseWithConfig, knowledge_base, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncAgility) -> None:
         response = await async_client.knowledge_bases.with_raw_response.retrieve(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "knowledge_base_id",
         )
 
         assert response.is_closed is True
@@ -329,7 +328,7 @@ class TestAsyncKnowledgeBases:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncAgility) -> None:
         async with async_client.knowledge_bases.with_streaming_response.retrieve(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "knowledge_base_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -349,7 +348,7 @@ class TestAsyncKnowledgeBases:
     @parametrize
     async def test_method_update(self, async_client: AsyncAgility) -> None:
         knowledge_base = await async_client.knowledge_bases.update(
-            knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            knowledge_base_id="knowledge_base_id",
             description="description",
             ingestion_pipeline_params={
                 "curate": {},
@@ -364,7 +363,7 @@ class TestAsyncKnowledgeBases:
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncAgility) -> None:
         response = await async_client.knowledge_bases.with_raw_response.update(
-            knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            knowledge_base_id="knowledge_base_id",
             description="description",
             ingestion_pipeline_params={
                 "curate": {},
@@ -383,7 +382,7 @@ class TestAsyncKnowledgeBases:
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncAgility) -> None:
         async with async_client.knowledge_bases.with_streaming_response.update(
-            knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            knowledge_base_id="knowledge_base_id",
             description="description",
             ingestion_pipeline_params={
                 "curate": {},
@@ -419,7 +418,7 @@ class TestAsyncKnowledgeBases:
     @parametrize
     async def test_method_list(self, async_client: AsyncAgility) -> None:
         knowledge_base = await async_client.knowledge_bases.list()
-        assert_matches_type(AsyncMyOffsetPage[KnowledgeBaseListResponse], knowledge_base, path=["response"])
+        assert_matches_type(AsyncMyOffsetPage[KnowledgeBaseWithConfig], knowledge_base, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncAgility) -> None:
@@ -427,7 +426,7 @@ class TestAsyncKnowledgeBases:
             limit=1,
             offset=0,
         )
-        assert_matches_type(AsyncMyOffsetPage[KnowledgeBaseListResponse], knowledge_base, path=["response"])
+        assert_matches_type(AsyncMyOffsetPage[KnowledgeBaseWithConfig], knowledge_base, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncAgility) -> None:
@@ -436,7 +435,7 @@ class TestAsyncKnowledgeBases:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         knowledge_base = await response.parse()
-        assert_matches_type(AsyncMyOffsetPage[KnowledgeBaseListResponse], knowledge_base, path=["response"])
+        assert_matches_type(AsyncMyOffsetPage[KnowledgeBaseWithConfig], knowledge_base, path=["response"])
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncAgility) -> None:
@@ -445,21 +444,21 @@ class TestAsyncKnowledgeBases:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             knowledge_base = await response.parse()
-            assert_matches_type(AsyncMyOffsetPage[KnowledgeBaseListResponse], knowledge_base, path=["response"])
+            assert_matches_type(AsyncMyOffsetPage[KnowledgeBaseWithConfig], knowledge_base, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_delete(self, async_client: AsyncAgility) -> None:
         knowledge_base = await async_client.knowledge_bases.delete(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "knowledge_base_id",
         )
         assert knowledge_base is None
 
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncAgility) -> None:
         response = await async_client.knowledge_bases.with_raw_response.delete(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "knowledge_base_id",
         )
 
         assert response.is_closed is True
@@ -470,7 +469,7 @@ class TestAsyncKnowledgeBases:
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncAgility) -> None:
         async with async_client.knowledge_bases.with_streaming_response.delete(
-            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            "knowledge_base_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

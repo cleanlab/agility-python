@@ -12,7 +12,6 @@ from .thread_list_params import ThreadListParams as ThreadListParams
 from .assistant_list_params import AssistantListParams as AssistantListParams
 from .assistant_with_config import AssistantWithConfig as AssistantWithConfig
 from .assistant_create_params import AssistantCreateParams as AssistantCreateParams
-from .assistant_list_response import AssistantListResponse as AssistantListResponse
 from .assistant_update_params import AssistantUpdateParams as AssistantUpdateParams
 from .integration_list_params import IntegrationListParams as IntegrationListParams
 from .integration_create_params import IntegrationCreateParams as IntegrationCreateParams
@@ -21,6 +20,5 @@ from .knowledge_base_list_params import KnowledgeBaseListParams as KnowledgeBase
 from .knowledge_base_with_config import KnowledgeBaseWithConfig as KnowledgeBaseWithConfig
 from .integration_create_response import IntegrationCreateResponse as IntegrationCreateResponse
 from .knowledge_base_create_params import KnowledgeBaseCreateParams as KnowledgeBaseCreateParams
-from .knowledge_base_list_response import KnowledgeBaseListResponse as KnowledgeBaseListResponse
 from .knowledge_base_update_params import KnowledgeBaseUpdateParams as KnowledgeBaseUpdateParams
 from .integration_retrieve_response import IntegrationRetrieveResponse as IntegrationRetrieveResponse

@@ -10,8 +10,8 @@ __all__ = ["IntegrationTypeDef"]
 class IntegrationTypeDef(BaseModel):
     description: str
 
-    integration_category: Literal["rbac", "oauth"]
+    integration_category: Literal["rbac"]
 
-    integration_type: Literal["s3/v0", "gcs/v0", "notion/v0", "slack/v0"]
+    integration_type: Literal["s3/v0", "gcs/v0"]
 
     name: str

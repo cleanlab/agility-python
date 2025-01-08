@@ -33,10 +33,7 @@ class TestMessages:
         message = client.threads.messages.create(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             content="content",
-            metadata={
-                "citations": ["string"],
-                "trustworthiness_score": 0,
-            },
+            metadata={"trustworthiness_score": 0},
             role="user",
         )
         assert_matches_type(Message, message, path=["response"])
@@ -243,10 +240,7 @@ class TestAsyncMessages:
         message = await async_client.threads.messages.create(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             content="content",
-            metadata={
-                "citations": ["string"],
-                "trustworthiness_score": 0,
-            },
+            metadata={"trustworthiness_score": 0},
             role="user",
         )
         assert_matches_type(Message, message, path=["response"])

@@ -12,7 +12,6 @@ from tests.utils import assert_matches_type
 from agility.types import (
     Assistant,
     AssistantWithConfig,
-    AssistantListResponse,
 )
 from agility.pagination import SyncMyOffsetPage, AsyncMyOffsetPage
 
@@ -37,17 +36,9 @@ class TestAssistants:
             description="description",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             name="name",
-            context_limit=1,
             instructions="instructions",
             model="gpt-4o",
-            suggested_questions=["string"],
-            tools=[
-                {
-                    "access_key": "access_key",
-                    "project_id": 0,
-                    "name": "alpha_v0",
-                }
-            ],
+            suggested_questions=["string", "string", "string"],
             url_slug="url_slug",
         )
         assert_matches_type(Assistant, assistant, path=["response"])
@@ -137,17 +128,9 @@ class TestAssistants:
             description="description",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             name="name",
-            context_limit=1,
             instructions="instructions",
             model="gpt-4o",
-            suggested_questions=["string"],
-            tools=[
-                {
-                    "access_key": "access_key",
-                    "project_id": 0,
-                    "name": "alpha_v0",
-                }
-            ],
+            suggested_questions=["string", "string", "string"],
             url_slug="url_slug",
         )
         assert_matches_type(AssistantWithConfig, assistant, path=["response"])
@@ -198,7 +181,7 @@ class TestAssistants:
     @parametrize
     def test_method_list(self, client: Agility) -> None:
         assistant = client.assistants.list()
-        assert_matches_type(SyncMyOffsetPage[AssistantListResponse], assistant, path=["response"])
+        assert_matches_type(SyncMyOffsetPage[AssistantWithConfig], assistant, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Agility) -> None:
@@ -206,7 +189,7 @@ class TestAssistants:
             limit=1,
             offset=0,
         )
-        assert_matches_type(SyncMyOffsetPage[AssistantListResponse], assistant, path=["response"])
+        assert_matches_type(SyncMyOffsetPage[AssistantWithConfig], assistant, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Agility) -> None:
@@ -215,7 +198,7 @@ class TestAssistants:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         assistant = response.parse()
-        assert_matches_type(SyncMyOffsetPage[AssistantListResponse], assistant, path=["response"])
+        assert_matches_type(SyncMyOffsetPage[AssistantWithConfig], assistant, path=["response"])
 
     @parametrize
     def test_streaming_response_list(self, client: Agility) -> None:
@@ -224,7 +207,7 @@ class TestAssistants:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             assistant = response.parse()
-            assert_matches_type(SyncMyOffsetPage[AssistantListResponse], assistant, path=["response"])
+            assert_matches_type(SyncMyOffsetPage[AssistantWithConfig], assistant, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -285,17 +268,9 @@ class TestAsyncAssistants:
             description="description",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             name="name",
-            context_limit=1,
             instructions="instructions",
             model="gpt-4o",
-            suggested_questions=["string"],
-            tools=[
-                {
-                    "access_key": "access_key",
-                    "project_id": 0,
-                    "name": "alpha_v0",
-                }
-            ],
+            suggested_questions=["string", "string", "string"],
             url_slug="url_slug",
         )
         assert_matches_type(Assistant, assistant, path=["response"])
@@ -385,17 +360,9 @@ class TestAsyncAssistants:
             description="description",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             name="name",
-            context_limit=1,
             instructions="instructions",
             model="gpt-4o",
-            suggested_questions=["string"],
-            tools=[
-                {
-                    "access_key": "access_key",
-                    "project_id": 0,
-                    "name": "alpha_v0",
-                }
-            ],
+            suggested_questions=["string", "string", "string"],
             url_slug="url_slug",
         )
         assert_matches_type(AssistantWithConfig, assistant, path=["response"])
@@ -446,7 +413,7 @@ class TestAsyncAssistants:
     @parametrize
     async def test_method_list(self, async_client: AsyncAgility) -> None:
         assistant = await async_client.assistants.list()
-        assert_matches_type(AsyncMyOffsetPage[AssistantListResponse], assistant, path=["response"])
+        assert_matches_type(AsyncMyOffsetPage[AssistantWithConfig], assistant, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncAgility) -> None:
@@ -454,7 +421,7 @@ class TestAsyncAssistants:
             limit=1,
             offset=0,
         )
-        assert_matches_type(AsyncMyOffsetPage[AssistantListResponse], assistant, path=["response"])
+        assert_matches_type(AsyncMyOffsetPage[AssistantWithConfig], assistant, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncAgility) -> None:
@@ -463,7 +430,7 @@ class TestAsyncAssistants:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         assistant = await response.parse()
-        assert_matches_type(AsyncMyOffsetPage[AssistantListResponse], assistant, path=["response"])
+        assert_matches_type(AsyncMyOffsetPage[AssistantWithConfig], assistant, path=["response"])
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncAgility) -> None:
@@ -472,7 +439,7 @@ class TestAsyncAssistants:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             assistant = await response.parse()
-            assert_matches_type(AsyncMyOffsetPage[AssistantListResponse], assistant, path=["response"])
+            assert_matches_type(AsyncMyOffsetPage[AssistantWithConfig], assistant, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

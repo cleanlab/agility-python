@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Iterable, Optional
+from typing import List, Optional
 from typing_extensions import Literal
 
 import httpx
@@ -33,7 +33,6 @@ from ...pagination import SyncMyOffsetPage, AsyncMyOffsetPage
 from ..._base_client import AsyncPaginator, make_request_options
 from ...types.assistant import Assistant
 from ...types.assistant_with_config import AssistantWithConfig
-from ...types.assistant_list_response import AssistantListResponse
 
 __all__ = ["AssistantsResource", "AsyncAssistantsResource"]
 
@@ -66,13 +65,11 @@ class AssistantsResource(SyncAPIResource):
         self,
         *,
         description: str,
-        knowledge_base_id: Optional[str],
+        knowledge_base_id: str,
         name: str,
-        context_limit: Optional[int] | NotGiven = NOT_GIVEN,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
         suggested_questions: List[str] | NotGiven = NOT_GIVEN,
-        tools: Optional[Iterable[assistant_create_params.Tool]] | NotGiven = NOT_GIVEN,
         url_slug: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -88,8 +85,6 @@ class AssistantsResource(SyncAPIResource):
           description: The description of the assistant
 
           name: The name of the assistant
-
-          context_limit: The maximum number of context chunks to include in a run.
 
           suggested_questions: A list of suggested questions that can be asked to the assistant
 
@@ -110,11 +105,9 @@ class AssistantsResource(SyncAPIResource):
                     "description": description,
                     "knowledge_base_id": knowledge_base_id,
                     "name": name,
-                    "context_limit": context_limit,
                     "instructions": instructions,
                     "model": model,
                     "suggested_questions": suggested_questions,
-                    "tools": tools,
                     "url_slug": url_slug,
                 },
                 assistant_create_params.AssistantCreateParams,
@@ -164,13 +157,11 @@ class AssistantsResource(SyncAPIResource):
         *,
         id: str,
         description: str,
-        knowledge_base_id: Optional[str],
+        knowledge_base_id: str,
         name: str,
-        context_limit: Optional[int] | NotGiven = NOT_GIVEN,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
         suggested_questions: List[str] | NotGiven = NOT_GIVEN,
-        tools: Optional[Iterable[assistant_update_params.Tool]] | NotGiven = NOT_GIVEN,
         url_slug: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -186,8 +177,6 @@ class AssistantsResource(SyncAPIResource):
           description: The description of the assistant
 
           name: The name of the assistant
-
-          context_limit: The maximum number of context chunks to include in a run.
 
           suggested_questions: A list of suggested questions that can be asked to the assistant
 
@@ -211,11 +200,9 @@ class AssistantsResource(SyncAPIResource):
                     "description": description,
                     "knowledge_base_id": knowledge_base_id,
                     "name": name,
-                    "context_limit": context_limit,
                     "instructions": instructions,
                     "model": model,
                     "suggested_questions": suggested_questions,
-                    "tools": tools,
                     "url_slug": url_slug,
                 },
                 assistant_update_params.AssistantUpdateParams,
@@ -237,7 +224,7 @@ class AssistantsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncMyOffsetPage[AssistantListResponse]:
+    ) -> SyncMyOffsetPage[AssistantWithConfig]:
         """
         Get all assistants for the current user.
 
@@ -252,7 +239,7 @@ class AssistantsResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/api/assistants/",
-            page=SyncMyOffsetPage[AssistantListResponse],
+            page=SyncMyOffsetPage[AssistantWithConfig],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -266,7 +253,7 @@ class AssistantsResource(SyncAPIResource):
                     assistant_list_params.AssistantListParams,
                 ),
             ),
-            model=AssistantListResponse,
+            model=AssistantWithConfig,
         )
 
     def delete(
@@ -332,13 +319,11 @@ class AsyncAssistantsResource(AsyncAPIResource):
         self,
         *,
         description: str,
-        knowledge_base_id: Optional[str],
+        knowledge_base_id: str,
         name: str,
-        context_limit: Optional[int] | NotGiven = NOT_GIVEN,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
         suggested_questions: List[str] | NotGiven = NOT_GIVEN,
-        tools: Optional[Iterable[assistant_create_params.Tool]] | NotGiven = NOT_GIVEN,
         url_slug: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -354,8 +339,6 @@ class AsyncAssistantsResource(AsyncAPIResource):
           description: The description of the assistant
 
           name: The name of the assistant
-
-          context_limit: The maximum number of context chunks to include in a run.
 
           suggested_questions: A list of suggested questions that can be asked to the assistant
 
@@ -376,11 +359,9 @@ class AsyncAssistantsResource(AsyncAPIResource):
                     "description": description,
                     "knowledge_base_id": knowledge_base_id,
                     "name": name,
-                    "context_limit": context_limit,
                     "instructions": instructions,
                     "model": model,
                     "suggested_questions": suggested_questions,
-                    "tools": tools,
                     "url_slug": url_slug,
                 },
                 assistant_create_params.AssistantCreateParams,
@@ -430,13 +411,11 @@ class AsyncAssistantsResource(AsyncAPIResource):
         *,
         id: str,
         description: str,
-        knowledge_base_id: Optional[str],
+        knowledge_base_id: str,
         name: str,
-        context_limit: Optional[int] | NotGiven = NOT_GIVEN,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
         suggested_questions: List[str] | NotGiven = NOT_GIVEN,
-        tools: Optional[Iterable[assistant_update_params.Tool]] | NotGiven = NOT_GIVEN,
         url_slug: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -452,8 +431,6 @@ class AsyncAssistantsResource(AsyncAPIResource):
           description: The description of the assistant
 
           name: The name of the assistant
-
-          context_limit: The maximum number of context chunks to include in a run.
 
           suggested_questions: A list of suggested questions that can be asked to the assistant
 
@@ -477,11 +454,9 @@ class AsyncAssistantsResource(AsyncAPIResource):
                     "description": description,
                     "knowledge_base_id": knowledge_base_id,
                     "name": name,
-                    "context_limit": context_limit,
                     "instructions": instructions,
                     "model": model,
                     "suggested_questions": suggested_questions,
-                    "tools": tools,
                     "url_slug": url_slug,
                 },
                 assistant_update_params.AssistantUpdateParams,
@@ -503,7 +478,7 @@ class AsyncAssistantsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[AssistantListResponse, AsyncMyOffsetPage[AssistantListResponse]]:
+    ) -> AsyncPaginator[AssistantWithConfig, AsyncMyOffsetPage[AssistantWithConfig]]:
         """
         Get all assistants for the current user.
 
@@ -518,7 +493,7 @@ class AsyncAssistantsResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/api/assistants/",
-            page=AsyncMyOffsetPage[AssistantListResponse],
+            page=AsyncMyOffsetPage[AssistantWithConfig],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -532,7 +507,7 @@ class AsyncAssistantsResource(AsyncAPIResource):
                     assistant_list_params.AssistantListParams,
                 ),
             ),
-            model=AssistantListResponse,
+            model=AssistantWithConfig,
         )
 
     async def delete(

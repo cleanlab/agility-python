@@ -31,6 +31,6 @@ class S3V0Integration(BaseModel):
 
     state: Literal["ready", "pending", "error"]
 
-    integration_category: Optional[Literal["rbac", "oauth"]] = None
+    integration_category: Optional[Literal["rbac"]] = None
 
-    integration_type: Optional[Literal["s3/v0", "gcs/v0", "notion/v0", "slack/v0"]] = None
+    integration_type: Optional[Literal["s3/v0", "gcs/v0"]] = None

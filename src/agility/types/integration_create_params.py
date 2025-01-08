@@ -12,7 +12,6 @@ __all__ = [
     "IntegrationParamsS3IntegrationParamsV0Resource",
     "IntegrationParamsGcsIntegrationParamsV0",
     "IntegrationParamsGcsIntegrationParamsV0Resource",
-    "IntegrationParamsNotionIntegrationParamsV0",
 ]
 
 
@@ -32,7 +31,7 @@ class IntegrationParamsS3IntegrationParamsV0Resource(TypedDict, total=False):
 class IntegrationParamsS3IntegrationParamsV0(TypedDict, total=False):
     resource: Required[IntegrationParamsS3IntegrationParamsV0Resource]
 
-    integration_category: Literal["rbac", "oauth"]
+    integration_category: Literal["rbac"]
 
     integration_type: Literal["s3/v0"]
 
@@ -44,21 +43,9 @@ class IntegrationParamsGcsIntegrationParamsV0Resource(TypedDict, total=False):
 class IntegrationParamsGcsIntegrationParamsV0(TypedDict, total=False):
     resource: Required[IntegrationParamsGcsIntegrationParamsV0Resource]
 
-    integration_category: Literal["rbac", "oauth"]
+    integration_category: Literal["rbac"]
 
     integration_type: Literal["gcs/v0"]
 
 
-class IntegrationParamsNotionIntegrationParamsV0(TypedDict, total=False):
-    authorization_code: Required[str]
-
-    integration_category: Literal["rbac", "oauth"]
-
-    integration_type: Literal["notion/v0"]
-
-
-IntegrationParams: TypeAlias = Union[
-    IntegrationParamsS3IntegrationParamsV0,
-    IntegrationParamsGcsIntegrationParamsV0,
-    IntegrationParamsNotionIntegrationParamsV0,
-]
+IntegrationParams: TypeAlias = Union[IntegrationParamsS3IntegrationParamsV0, IntegrationParamsGcsIntegrationParamsV0]

@@ -1,27 +1,12 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Union, Optional
+from typing import List, Optional
 from datetime import datetime
-from typing_extensions import Literal, TypeAlias
+from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["AssistantWithConfig", "Tool", "ToolAlphaV0Tool", "ToolNoOpTool"]
-
-
-class ToolAlphaV0Tool(BaseModel):
-    access_key: str
-
-    project_id: int
-
-    name: Optional[Literal["alpha_v0"]] = None
-
-
-class ToolNoOpTool(BaseModel):
-    name: Optional[Literal["noop"]] = None
-
-
-Tool: TypeAlias = Union[ToolAlphaV0Tool, ToolNoOpTool]
+__all__ = ["AssistantWithConfig"]
 
 
 class AssistantWithConfig(BaseModel):
@@ -34,15 +19,12 @@ class AssistantWithConfig(BaseModel):
     description: str
     """The description of the assistant"""
 
-    knowledge_base_id: Optional[str] = None
+    knowledge_base_id: str
 
     name: str
     """The name of the assistant"""
 
     updated_at: datetime
-
-    context_limit: Optional[int] = None
-    """The maximum number of context chunks to include in a run."""
 
     instructions: Optional[str] = None
 
@@ -50,8 +32,6 @@ class AssistantWithConfig(BaseModel):
 
     suggested_questions: Optional[List[str]] = None
     """A list of suggested questions that can be asked to the assistant"""
-
-    tools: Optional[List[Tool]] = None
 
     url_slug: Optional[str] = None
     """Optional URL suffix - unique identifier for the assistant's endpoint"""

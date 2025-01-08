@@ -34,25 +34,26 @@ class TestRuns:
             additional_messages=[
                 {
                     "content": "content",
-                    "metadata": {
-                        "citations": ["string"],
-                        "trustworthiness_score": 0,
-                    },
+                    "metadata": {"trustworthiness_score": 0},
                     "role": "user",
                     "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                }
+                },
+                {
+                    "content": "content",
+                    "metadata": {"trustworthiness_score": 0},
+                    "role": "user",
+                    "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                },
+                {
+                    "content": "content",
+                    "metadata": {"trustworthiness_score": 0},
+                    "role": "user",
+                    "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                },
             ],
-            context_limit=1,
             instructions="instructions",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             model="gpt-4o",
-            tools=[
-                {
-                    "access_key": "access_key",
-                    "project_id": 0,
-                    "name": "alpha_v0",
-                }
-            ],
         )
         assert_matches_type(Run, run, path=["response"])
 
@@ -203,25 +204,26 @@ class TestRuns:
             additional_messages=[
                 {
                     "content": "content",
-                    "metadata": {
-                        "citations": ["string"],
-                        "trustworthiness_score": 0,
-                    },
+                    "metadata": {"trustworthiness_score": 0},
                     "role": "user",
                     "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                }
+                },
+                {
+                    "content": "content",
+                    "metadata": {"trustworthiness_score": 0},
+                    "role": "user",
+                    "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                },
+                {
+                    "content": "content",
+                    "metadata": {"trustworthiness_score": 0},
+                    "role": "user",
+                    "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                },
             ],
-            context_limit=1,
             instructions="instructions",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             model="gpt-4o",
-            tools=[
-                {
-                    "access_key": "access_key",
-                    "project_id": 0,
-                    "name": "alpha_v0",
-                }
-            ],
         )
         assert_matches_type(object, run, path=["response"])
 
@@ -280,25 +282,26 @@ class TestAsyncRuns:
             additional_messages=[
                 {
                     "content": "content",
-                    "metadata": {
-                        "citations": ["string"],
-                        "trustworthiness_score": 0,
-                    },
+                    "metadata": {"trustworthiness_score": 0},
                     "role": "user",
                     "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                }
+                },
+                {
+                    "content": "content",
+                    "metadata": {"trustworthiness_score": 0},
+                    "role": "user",
+                    "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                },
+                {
+                    "content": "content",
+                    "metadata": {"trustworthiness_score": 0},
+                    "role": "user",
+                    "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                },
             ],
-            context_limit=1,
             instructions="instructions",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             model="gpt-4o",
-            tools=[
-                {
-                    "access_key": "access_key",
-                    "project_id": 0,
-                    "name": "alpha_v0",
-                }
-            ],
         )
         assert_matches_type(Run, run, path=["response"])
 
@@ -449,25 +452,26 @@ class TestAsyncRuns:
             additional_messages=[
                 {
                     "content": "content",
-                    "metadata": {
-                        "citations": ["string"],
-                        "trustworthiness_score": 0,
-                    },
+                    "metadata": {"trustworthiness_score": 0},
                     "role": "user",
                     "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                }
+                },
+                {
+                    "content": "content",
+                    "metadata": {"trustworthiness_score": 0},
+                    "role": "user",
+                    "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                },
+                {
+                    "content": "content",
+                    "metadata": {"trustworthiness_score": 0},
+                    "role": "user",
+                    "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                },
             ],
-            context_limit=1,
             instructions="instructions",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             model="gpt-4o",
-            tools=[
-                {
-                    "access_key": "access_key",
-                    "project_id": 0,
-                    "name": "alpha_v0",
-                }
-            ],
         )
         assert_matches_type(object, run, path=["response"])
 
