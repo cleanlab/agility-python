@@ -19,4 +19,6 @@ class MessageCreateParams(TypedDict, total=False):
 class Metadata(TypedDict, total=False):
     citations: Optional[List[str]]
 
+    trustworthiness_explanation: Optional[str]
+
     trustworthiness_score: Optional[float]

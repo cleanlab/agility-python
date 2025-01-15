@@ -35,6 +35,7 @@ class TestMessages:
             content="content",
             metadata={
                 "citations": ["string"],
+                "trustworthiness_explanation": "trustworthiness_explanation",
                 "trustworthiness_score": 0,
             },
             role="user",
@@ -245,6 +246,7 @@ class TestAsyncMessages:
             content="content",
             metadata={
                 "citations": ["string"],
+                "trustworthiness_explanation": "trustworthiness_explanation",
                 "trustworthiness_score": 0,
             },
             role="user",

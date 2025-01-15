@@ -36,6 +36,7 @@ class TestRuns:
                     "content": "content",
                     "metadata": {
                         "citations": ["string"],
+                        "trustworthiness_explanation": "trustworthiness_explanation",
                         "trustworthiness_score": 0,
                     },
                     "role": "user",
@@ -205,6 +206,7 @@ class TestRuns:
                     "content": "content",
                     "metadata": {
                         "citations": ["string"],
+                        "trustworthiness_explanation": "trustworthiness_explanation",
                         "trustworthiness_score": 0,
                     },
                     "role": "user",
@@ -282,6 +284,7 @@ class TestAsyncRuns:
                     "content": "content",
                     "metadata": {
                         "citations": ["string"],
+                        "trustworthiness_explanation": "trustworthiness_explanation",
                         "trustworthiness_score": 0,
                     },
                     "role": "user",
@@ -451,6 +454,7 @@ class TestAsyncRuns:
                     "content": "content",
                     "metadata": {
                         "citations": ["string"],
+                        "trustworthiness_explanation": "trustworthiness_explanation",
                         "trustworthiness_score": 0,
                     },
                     "role": "user",

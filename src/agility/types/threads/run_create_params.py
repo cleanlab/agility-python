@@ -37,6 +37,8 @@ class RunCreateParams(TypedDict, total=False):
 class AdditionalMessageMetadata(TypedDict, total=False):
     citations: Optional[List[str]]
 
+    trustworthiness_explanation: Optional[str]
+
     trustworthiness_score: Optional[float]
 
 
