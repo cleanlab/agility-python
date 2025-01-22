@@ -10,7 +10,7 @@ __all__ = [
     "AdditionalMessage",
     "AdditionalMessageMetadata",
     "Tool",
-    "ToolAlphaV0Tool",
+    "ToolCodexV0Tool",
     "ToolNoOpTool",
 ]
 
@@ -52,16 +52,14 @@ class AdditionalMessage(TypedDict, total=False):
     thread_id: Required[str]
 
 
-class ToolAlphaV0Tool(TypedDict, total=False):
+class ToolCodexV0Tool(TypedDict, total=False):
     access_key: Required[str]
 
-    project_id: Required[int]
-
-    name: Literal["alpha_v0"]
+    type: Literal["codex_v0"]
 
 
 class ToolNoOpTool(TypedDict, total=False):
-    name: Literal["noop"]
+    type: Literal["noop"]
 
 
-Tool: TypeAlias = Union[ToolAlphaV0Tool, ToolNoOpTool]
+Tool: TypeAlias = Union[ToolCodexV0Tool, ToolNoOpTool]

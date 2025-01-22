@@ -6,22 +6,20 @@ from typing_extensions import Literal, TypeAlias
 
 from .._models import BaseModel
 
-__all__ = ["AssistantWithConfig", "Tool", "ToolAlphaV0Tool", "ToolNoOpTool"]
+__all__ = ["AssistantWithConfig", "Tool", "ToolCodexV0Tool", "ToolNoOpTool"]
 
 
-class ToolAlphaV0Tool(BaseModel):
+class ToolCodexV0Tool(BaseModel):
     access_key: str
 
-    project_id: int
-
-    name: Optional[Literal["alpha_v0"]] = None
+    type: Optional[Literal["codex_v0"]] = None
 
 
 class ToolNoOpTool(BaseModel):
-    name: Optional[Literal["noop"]] = None
+    type: Optional[Literal["noop"]] = None
 
 
-Tool: TypeAlias = Union[ToolAlphaV0Tool, ToolNoOpTool]
+Tool: TypeAlias = Union[ToolCodexV0Tool, ToolNoOpTool]
 
 
 class AssistantWithConfig(BaseModel):

@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import List, Union, Iterable, Optional
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
-__all__ = ["AssistantUpdateParams", "Tool", "ToolAlphaV0Tool", "ToolNoOpTool"]
+__all__ = ["AssistantUpdateParams", "Tool", "ToolCodexV0Tool", "ToolNoOpTool"]
 
 
 class AssistantUpdateParams(TypedDict, total=False):
@@ -35,16 +35,14 @@ class AssistantUpdateParams(TypedDict, total=False):
     """Optional URL suffix - unique identifier for the assistant's endpoint"""
 
 
-class ToolAlphaV0Tool(TypedDict, total=False):
+class ToolCodexV0Tool(TypedDict, total=False):
     access_key: Required[str]
 
-    project_id: Required[int]
-
-    name: Literal["alpha_v0"]
+    type: Literal["codex_v0"]
 
 
 class ToolNoOpTool(TypedDict, total=False):
-    name: Literal["noop"]
+    type: Literal["noop"]
 
 
-Tool: TypeAlias = Union[ToolAlphaV0Tool, ToolNoOpTool]
+Tool: TypeAlias = Union[ToolCodexV0Tool, ToolNoOpTool]

@@ -44,8 +44,7 @@ class TestAssistants:
             tools=[
                 {
                     "access_key": "access_key",
-                    "project_id": 0,
-                    "name": "alpha_v0",
+                    "type": "codex_v0",
                 }
             ],
             url_slug="url_slug",
@@ -144,8 +143,7 @@ class TestAssistants:
             tools=[
                 {
                     "access_key": "access_key",
-                    "project_id": 0,
-                    "name": "alpha_v0",
+                    "type": "codex_v0",
                 }
             ],
             url_slug="url_slug",
@@ -292,8 +290,7 @@ class TestAsyncAssistants:
             tools=[
                 {
                     "access_key": "access_key",
-                    "project_id": 0,
-                    "name": "alpha_v0",
+                    "type": "codex_v0",
                 }
             ],
             url_slug="url_slug",
@@ -392,8 +389,7 @@ class TestAsyncAssistants:
             tools=[
                 {
                     "access_key": "access_key",
-                    "project_id": 0,
-                    "name": "alpha_v0",
+                    "type": "codex_v0",
                 }
             ],
             url_slug="url_slug",

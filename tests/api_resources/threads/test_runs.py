@@ -50,8 +50,7 @@ class TestRuns:
             tools=[
                 {
                     "access_key": "access_key",
-                    "project_id": 0,
-                    "name": "alpha_v0",
+                    "type": "codex_v0",
                 }
             ],
         )
@@ -220,8 +219,7 @@ class TestRuns:
             tools=[
                 {
                     "access_key": "access_key",
-                    "project_id": 0,
-                    "name": "alpha_v0",
+                    "type": "codex_v0",
                 }
             ],
         )
@@ -298,8 +296,7 @@ class TestAsyncRuns:
             tools=[
                 {
                     "access_key": "access_key",
-                    "project_id": 0,
-                    "name": "alpha_v0",
+                    "type": "codex_v0",
                 }
             ],
         )
@@ -468,8 +465,7 @@ class TestAsyncRuns:
             tools=[
                 {
                     "access_key": "access_key",
-                    "project_id": 0,
-                    "name": "alpha_v0",
+                    "type": "codex_v0",
                 }
             ],
         )
