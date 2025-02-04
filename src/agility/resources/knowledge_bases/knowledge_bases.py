@@ -79,9 +79,7 @@ class KnowledgeBasesResource(SyncAPIResource):
         Create a new knowledge base.
 
         Args:
-          ingestion_pipeline_params: Knowledge base pipeline params.
-
-              Parameters defined on the knowledge-base level for a pipeline.
+          ingestion_pipeline_params: Knowledge base pipeline params input.
 
           extra_headers: Send extra headers
 
@@ -307,9 +305,7 @@ class AsyncKnowledgeBasesResource(AsyncAPIResource):
         Create a new knowledge base.
 
         Args:
-          ingestion_pipeline_params: Knowledge base pipeline params.
-
-              Parameters defined on the knowledge-base level for a pipeline.
+          ingestion_pipeline_params: Knowledge base pipeline params input.
 
           extra_headers: Send extra headers
 
