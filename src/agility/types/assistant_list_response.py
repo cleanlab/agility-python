@@ -34,7 +34,7 @@ class AssistantListResponse(BaseModel):
 
     knowledge_base_id: Optional[str] = None
 
-    knowledge_base_name: str
+    knowledge_base_name: Optional[str] = None
 
     name: str
     """The name of the assistant"""
