@@ -99,7 +99,7 @@ class Agility(SyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new synchronous agility client instance.
+        """Construct a new synchronous Agility client instance.
 
         This automatically infers the following arguments from their corresponding environment variables if they are not provided:
         - `bearer_token` from `BEARER_TOKEN`
@@ -344,7 +344,7 @@ class AsyncAgility(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async agility client instance.
+        """Construct a new async AsyncAgility client instance.
 
         This automatically infers the following arguments from their corresponding environment variables if they are not provided:
         - `bearer_token` from `BEARER_TOKEN`
