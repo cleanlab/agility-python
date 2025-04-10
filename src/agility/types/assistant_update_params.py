@@ -24,6 +24,12 @@ class AssistantUpdateParams(TypedDict, total=False):
 
     instructions: Optional[str]
 
+    logo_s3_key: Optional[str]
+    """S3 object key to the assistant's logo image"""
+
+    logo_text: Optional[str]
+    """Text to display alongside the assistant's logo"""
+
     model: Optional[Literal["gpt-4o"]]
 
     suggested_questions: List[str]

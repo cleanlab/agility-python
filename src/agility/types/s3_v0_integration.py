@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import Dict, Optional
 from typing_extensions import Literal
 
 from .._models import BaseModel
@@ -17,7 +17,7 @@ class ResourceAccessDefinitionResource(BaseModel):
 
 
 class ResourceAccessDefinition(BaseModel):
-    policy: object
+    policy: Dict[str, object]
 
     resource: ResourceAccessDefinitionResource
 

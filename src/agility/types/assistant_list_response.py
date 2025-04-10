@@ -46,6 +46,12 @@ class AssistantListResponse(BaseModel):
 
     instructions: Optional[str] = None
 
+    logo_s3_key: Optional[str] = None
+    """S3 object key to the assistant's logo image"""
+
+    logo_text: Optional[str] = None
+    """Text to display alongside the assistant's logo"""
+
     model: Optional[Literal["gpt-4o"]] = None
 
     suggested_questions: Optional[List[str]] = None

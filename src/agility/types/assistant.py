@@ -23,6 +23,12 @@ class Assistant(BaseModel):
 
     updated_at: datetime
 
+    logo_s3_key: Optional[str] = None
+    """S3 object key to the assistant's logo image"""
+
+    logo_text: Optional[str] = None
+    """Text to display alongside the assistant's logo"""
+
     suggested_questions: Optional[List[str]] = None
     """A list of suggested questions that can be asked to the assistant"""
 

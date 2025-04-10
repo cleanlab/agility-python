@@ -39,6 +39,8 @@ class TestAssistants:
             name="name",
             context_limit=1,
             instructions="instructions",
+            logo_s3_key="logo_s3_key",
+            logo_text="logo_text",
             model="gpt-4o",
             suggested_questions=["string"],
             tools=[
@@ -138,6 +140,8 @@ class TestAssistants:
             name="name",
             context_limit=1,
             instructions="instructions",
+            logo_s3_key="logo_s3_key",
+            logo_text="logo_text",
             model="gpt-4o",
             suggested_questions=["string"],
             tools=[
@@ -285,6 +289,8 @@ class TestAsyncAssistants:
             name="name",
             context_limit=1,
             instructions="instructions",
+            logo_s3_key="logo_s3_key",
+            logo_text="logo_text",
             model="gpt-4o",
             suggested_questions=["string"],
             tools=[
@@ -384,6 +390,8 @@ class TestAsyncAssistants:
             name="name",
             context_limit=1,
             instructions="instructions",
+            logo_s3_key="logo_s3_key",
+            logo_text="logo_text",
             model="gpt-4o",
             suggested_questions=["string"],
             tools=[

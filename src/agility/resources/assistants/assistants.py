@@ -70,6 +70,8 @@ class AssistantsResource(SyncAPIResource):
         name: str,
         context_limit: Optional[int] | NotGiven = NOT_GIVEN,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
+        logo_s3_key: Optional[str] | NotGiven = NOT_GIVEN,
+        logo_text: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
         suggested_questions: List[str] | NotGiven = NOT_GIVEN,
         tools: Optional[Iterable[assistant_create_params.Tool]] | NotGiven = NOT_GIVEN,
@@ -90,6 +92,10 @@ class AssistantsResource(SyncAPIResource):
           name: The name of the assistant
 
           context_limit: The maximum number of context chunks to include in a run.
+
+          logo_s3_key: S3 object key to the assistant's logo image
+
+          logo_text: Text to display alongside the assistant's logo
 
           suggested_questions: A list of suggested questions that can be asked to the assistant
 
@@ -112,6 +118,8 @@ class AssistantsResource(SyncAPIResource):
                     "name": name,
                     "context_limit": context_limit,
                     "instructions": instructions,
+                    "logo_s3_key": logo_s3_key,
+                    "logo_text": logo_text,
                     "model": model,
                     "suggested_questions": suggested_questions,
                     "tools": tools,
@@ -168,6 +176,8 @@ class AssistantsResource(SyncAPIResource):
         name: str,
         context_limit: Optional[int] | NotGiven = NOT_GIVEN,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
+        logo_s3_key: Optional[str] | NotGiven = NOT_GIVEN,
+        logo_text: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
         suggested_questions: List[str] | NotGiven = NOT_GIVEN,
         tools: Optional[Iterable[assistant_update_params.Tool]] | NotGiven = NOT_GIVEN,
@@ -188,6 +198,10 @@ class AssistantsResource(SyncAPIResource):
           name: The name of the assistant
 
           context_limit: The maximum number of context chunks to include in a run.
+
+          logo_s3_key: S3 object key to the assistant's logo image
+
+          logo_text: Text to display alongside the assistant's logo
 
           suggested_questions: A list of suggested questions that can be asked to the assistant
 
@@ -213,6 +227,8 @@ class AssistantsResource(SyncAPIResource):
                     "name": name,
                     "context_limit": context_limit,
                     "instructions": instructions,
+                    "logo_s3_key": logo_s3_key,
+                    "logo_text": logo_text,
                     "model": model,
                     "suggested_questions": suggested_questions,
                     "tools": tools,
@@ -336,6 +352,8 @@ class AsyncAssistantsResource(AsyncAPIResource):
         name: str,
         context_limit: Optional[int] | NotGiven = NOT_GIVEN,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
+        logo_s3_key: Optional[str] | NotGiven = NOT_GIVEN,
+        logo_text: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
         suggested_questions: List[str] | NotGiven = NOT_GIVEN,
         tools: Optional[Iterable[assistant_create_params.Tool]] | NotGiven = NOT_GIVEN,
@@ -356,6 +374,10 @@ class AsyncAssistantsResource(AsyncAPIResource):
           name: The name of the assistant
 
           context_limit: The maximum number of context chunks to include in a run.
+
+          logo_s3_key: S3 object key to the assistant's logo image
+
+          logo_text: Text to display alongside the assistant's logo
 
           suggested_questions: A list of suggested questions that can be asked to the assistant
 
@@ -378,6 +400,8 @@ class AsyncAssistantsResource(AsyncAPIResource):
                     "name": name,
                     "context_limit": context_limit,
                     "instructions": instructions,
+                    "logo_s3_key": logo_s3_key,
+                    "logo_text": logo_text,
                     "model": model,
                     "suggested_questions": suggested_questions,
                     "tools": tools,
@@ -434,6 +458,8 @@ class AsyncAssistantsResource(AsyncAPIResource):
         name: str,
         context_limit: Optional[int] | NotGiven = NOT_GIVEN,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
+        logo_s3_key: Optional[str] | NotGiven = NOT_GIVEN,
+        logo_text: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
         suggested_questions: List[str] | NotGiven = NOT_GIVEN,
         tools: Optional[Iterable[assistant_update_params.Tool]] | NotGiven = NOT_GIVEN,
@@ -454,6 +480,10 @@ class AsyncAssistantsResource(AsyncAPIResource):
           name: The name of the assistant
 
           context_limit: The maximum number of context chunks to include in a run.
+
+          logo_s3_key: S3 object key to the assistant's logo image
+
+          logo_text: Text to display alongside the assistant's logo
 
           suggested_questions: A list of suggested questions that can be asked to the assistant
 
@@ -479,6 +509,8 @@ class AsyncAssistantsResource(AsyncAPIResource):
                     "name": name,
                     "context_limit": context_limit,
                     "instructions": instructions,
+                    "logo_s3_key": logo_s3_key,
+                    "logo_text": logo_text,
                     "model": model,
                     "suggested_questions": suggested_questions,
                     "tools": tools,
