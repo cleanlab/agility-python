@@ -145,6 +145,36 @@ for assistant in first_page.items:
 # Remove `await` for non-async usage.
 ```
 
+## Nested params
+
+Nested parameters are dictionaries, typed using `TypedDict`, for example:
+
+```python
+from agility import Agility
+
+client = Agility()
+
+knowledge_base_with_config = client.knowledge_bases.create(
+    description="description",
+    ingestion_pipeline_params={
+        "curate": {"steps": {"foo": {"name": "remove_exact_duplicates.v0"}}},
+        "curate_document_store": {"document_tags": {"foo": "string"}},
+        "transform": {
+            "steps": {
+                "foo": {
+                    "chunk_overlap": 0,
+                    "chunk_size": 0,
+                    "name": "splitters.recursive_character.v0",
+                }
+            }
+        },
+        "vector_store": {"node_tags": {"foo": "string"}},
+    },
+    name="name",
+)
+print(knowledge_base_with_config.ingestion_pipeline_params)
+```
+
 ## Handling errors
 
 When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `agility.APIConnectionError` is raised.

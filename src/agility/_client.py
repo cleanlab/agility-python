@@ -175,13 +175,7 @@ class Agility(SyncAPIClient):
     @property
     @override
     def auth_headers(self) -> dict[str, str]:
-        if self._http_bearer:
-            return self._http_bearer
-        if self._authenticated_api_key:
-            return self._authenticated_api_key
-        if self._public_access_key:
-            return self._public_access_key
-        return {}
+        return {**self._http_bearer, **self._authenticated_api_key, **self._public_access_key}
 
     @property
     def _http_bearer(self) -> dict[str, str]:
@@ -420,13 +414,7 @@ class AsyncAgility(AsyncAPIClient):
     @property
     @override
     def auth_headers(self) -> dict[str, str]:
-        if self._http_bearer:
-            return self._http_bearer
-        if self._authenticated_api_key:
-            return self._authenticated_api_key
-        if self._public_access_key:
-            return self._public_access_key
-        return {}
+        return {**self._http_bearer, **self._authenticated_api_key, **self._public_access_key}
 
     @property
     def _http_bearer(self) -> dict[str, str]:

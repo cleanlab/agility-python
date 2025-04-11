@@ -1669,7 +1669,7 @@ class TestAsyncAgility:
         import threading
 
         from agility._utils import asyncify
-        from agility._base_client import get_platform 
+        from agility._base_client import get_platform
 
         async def test_main() -> None:
             result = await asyncify(get_platform)()
