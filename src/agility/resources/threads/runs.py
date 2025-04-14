@@ -31,7 +31,7 @@ class RunsResource(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> RunsResourceWithRawResponse:
         """
-        This property can be used as a prefix for any HTTP method call to return the
+        This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/stainless-sdks/agility-python#accessing-raw-response-data-eg-headers
@@ -54,6 +54,7 @@ class RunsResource(SyncAPIResource):
         assistant_id: str,
         additional_instructions: Optional[str] | NotGiven = NOT_GIVEN,
         additional_messages: Iterable[run_create_params.AdditionalMessage] | NotGiven = NOT_GIVEN,
+        codex_access_key: Optional[str] | NotGiven = NOT_GIVEN,
         context_limit: Optional[int] | NotGiven = NOT_GIVEN,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         knowledge_base_id: Optional[str] | NotGiven = NOT_GIVEN,
@@ -89,6 +90,7 @@ class RunsResource(SyncAPIResource):
                     "assistant_id": assistant_id,
                     "additional_instructions": additional_instructions,
                     "additional_messages": additional_messages,
+                    "codex_access_key": codex_access_key,
                     "context_limit": context_limit,
                     "instructions": instructions,
                     "knowledge_base_id": knowledge_base_id,
@@ -183,6 +185,7 @@ class RunsResource(SyncAPIResource):
         assistant_id: str,
         additional_instructions: Optional[str] | NotGiven = NOT_GIVEN,
         additional_messages: Iterable[run_stream_params.AdditionalMessage] | NotGiven = NOT_GIVEN,
+        codex_access_key: Optional[str] | NotGiven = NOT_GIVEN,
         context_limit: Optional[int] | NotGiven = NOT_GIVEN,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         knowledge_base_id: Optional[str] | NotGiven = NOT_GIVEN,
@@ -218,6 +221,7 @@ class RunsResource(SyncAPIResource):
                     "assistant_id": assistant_id,
                     "additional_instructions": additional_instructions,
                     "additional_messages": additional_messages,
+                    "codex_access_key": codex_access_key,
                     "context_limit": context_limit,
                     "instructions": instructions,
                     "knowledge_base_id": knowledge_base_id,
@@ -237,7 +241,7 @@ class AsyncRunsResource(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncRunsResourceWithRawResponse:
         """
-        This property can be used as a prefix for any HTTP method call to return the
+        This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/stainless-sdks/agility-python#accessing-raw-response-data-eg-headers
@@ -260,6 +264,7 @@ class AsyncRunsResource(AsyncAPIResource):
         assistant_id: str,
         additional_instructions: Optional[str] | NotGiven = NOT_GIVEN,
         additional_messages: Iterable[run_create_params.AdditionalMessage] | NotGiven = NOT_GIVEN,
+        codex_access_key: Optional[str] | NotGiven = NOT_GIVEN,
         context_limit: Optional[int] | NotGiven = NOT_GIVEN,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         knowledge_base_id: Optional[str] | NotGiven = NOT_GIVEN,
@@ -295,6 +300,7 @@ class AsyncRunsResource(AsyncAPIResource):
                     "assistant_id": assistant_id,
                     "additional_instructions": additional_instructions,
                     "additional_messages": additional_messages,
+                    "codex_access_key": codex_access_key,
                     "context_limit": context_limit,
                     "instructions": instructions,
                     "knowledge_base_id": knowledge_base_id,
@@ -389,6 +395,7 @@ class AsyncRunsResource(AsyncAPIResource):
         assistant_id: str,
         additional_instructions: Optional[str] | NotGiven = NOT_GIVEN,
         additional_messages: Iterable[run_stream_params.AdditionalMessage] | NotGiven = NOT_GIVEN,
+        codex_access_key: Optional[str] | NotGiven = NOT_GIVEN,
         context_limit: Optional[int] | NotGiven = NOT_GIVEN,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         knowledge_base_id: Optional[str] | NotGiven = NOT_GIVEN,
@@ -424,6 +431,7 @@ class AsyncRunsResource(AsyncAPIResource):
                     "assistant_id": assistant_id,
                     "additional_instructions": additional_instructions,
                     "additional_messages": additional_messages,
+                    "codex_access_key": codex_access_key,
                     "context_limit": context_limit,
                     "instructions": instructions,
                     "knowledge_base_id": knowledge_base_id,

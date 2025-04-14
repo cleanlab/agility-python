@@ -31,10 +31,7 @@ class KnowledgeBaseCreateParams(TypedDict, total=False):
     description: Required[str]
 
     ingestion_pipeline_params: Required[IngestionPipelineParams]
-    """Knowledge base pipeline params.
-
-    Parameters defined on the knowledge-base level for a pipeline.
-    """
+    """Knowledge base pipeline params input."""
 
     name: Required[str]
 
@@ -152,12 +149,6 @@ class IngestionPipelineParamsTransform(TypedDict, total=False):
 
 
 class IngestionPipelineParamsVectorStore(TypedDict, total=False):
-    weaviate_collection_name: Required[str]
-    """The name of the Weaviate collection to use for storing documents.
-
-    Must start with AgilityKB and be valid.
-    """
-
     node_tags: Dict[str, str]
 
 
@@ -180,4 +171,4 @@ class IngestionPipelineParams(TypedDict, total=False):
     """
 
     vector_store: Required[IngestionPipelineParamsVectorStore]
-    """Vector store params."""
+    """Vector store params input."""

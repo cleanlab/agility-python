@@ -6,22 +6,20 @@ from typing_extensions import Literal, TypeAlias
 
 from .._models import BaseModel
 
-__all__ = ["AssistantWithConfig", "Tool", "ToolAlphaV0Tool", "ToolNoOpTool"]
+__all__ = ["AssistantWithConfig", "Tool", "ToolCodexV0Tool", "ToolNoOpTool"]
 
 
-class ToolAlphaV0Tool(BaseModel):
+class ToolCodexV0Tool(BaseModel):
     access_key: str
 
-    project_id: int
-
-    name: Optional[Literal["alpha_v0"]] = None
+    type: Optional[Literal["codex_v0"]] = None
 
 
 class ToolNoOpTool(BaseModel):
-    name: Optional[Literal["noop"]] = None
+    type: Optional[Literal["noop"]] = None
 
 
-Tool: TypeAlias = Union[ToolAlphaV0Tool, ToolNoOpTool]
+Tool: TypeAlias = Union[ToolCodexV0Tool, ToolNoOpTool]
 
 
 class AssistantWithConfig(BaseModel):
@@ -41,10 +39,18 @@ class AssistantWithConfig(BaseModel):
 
     updated_at: datetime
 
+    codex_access_key: Optional[str] = None
+
     context_limit: Optional[int] = None
     """The maximum number of context chunks to include in a run."""
 
     instructions: Optional[str] = None
+
+    logo_s3_key: Optional[str] = None
+    """S3 object key to the assistant's logo image"""
+
+    logo_text: Optional[str] = None
+    """Text to display alongside the assistant's logo"""
 
     model: Optional[Literal["gpt-4o"]] = None
 

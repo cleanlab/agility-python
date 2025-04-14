@@ -6,22 +6,20 @@ from typing_extensions import Literal, TypeAlias
 
 from ..._models import BaseModel
 
-__all__ = ["Run", "Tool", "ToolAlphaV0Tool", "ToolNoOpTool", "Usage"]
+__all__ = ["Run", "Tool", "ToolCodexV0Tool", "ToolNoOpTool", "Usage"]
 
 
-class ToolAlphaV0Tool(BaseModel):
+class ToolCodexV0Tool(BaseModel):
     access_key: str
 
-    project_id: int
-
-    name: Optional[Literal["alpha_v0"]] = None
+    type: Optional[Literal["codex_v0"]] = None
 
 
 class ToolNoOpTool(BaseModel):
-    name: Optional[Literal["noop"]] = None
+    type: Optional[Literal["noop"]] = None
 
 
-Tool: TypeAlias = Union[ToolAlphaV0Tool, ToolNoOpTool]
+Tool: TypeAlias = Union[ToolCodexV0Tool, ToolNoOpTool]
 
 
 class Usage(BaseModel):
@@ -46,6 +44,8 @@ class Run(BaseModel):
     updated_at: datetime
 
     additional_instructions: Optional[str] = None
+
+    codex_access_key: Optional[str] = None
 
     context_limit: Optional[int] = None
     """The maximum number of context chunks to include."""

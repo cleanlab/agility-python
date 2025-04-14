@@ -99,7 +99,7 @@ class Agility(SyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new synchronous agility client instance.
+        """Construct a new synchronous Agility client instance.
 
         This automatically infers the following arguments from their corresponding environment variables if they are not provided:
         - `bearer_token` from `BEARER_TOKEN`
@@ -175,13 +175,7 @@ class Agility(SyncAPIClient):
     @property
     @override
     def auth_headers(self) -> dict[str, str]:
-        if self._http_bearer:
-            return self._http_bearer
-        if self._authenticated_api_key:
-            return self._authenticated_api_key
-        if self._public_access_key:
-            return self._public_access_key
-        return {}
+        return {**self._http_bearer, **self._authenticated_api_key, **self._public_access_key}
 
     @property
     def _http_bearer(self) -> dict[str, str]:
@@ -344,7 +338,7 @@ class AsyncAgility(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async agility client instance.
+        """Construct a new async AsyncAgility client instance.
 
         This automatically infers the following arguments from their corresponding environment variables if they are not provided:
         - `bearer_token` from `BEARER_TOKEN`
@@ -420,13 +414,7 @@ class AsyncAgility(AsyncAPIClient):
     @property
     @override
     def auth_headers(self) -> dict[str, str]:
-        if self._http_bearer:
-            return self._http_bearer
-        if self._authenticated_api_key:
-            return self._authenticated_api_key
-        if self._public_access_key:
-            return self._public_access_key
-        return {}
+        return {**self._http_bearer, **self._authenticated_api_key, **self._public_access_key}
 
     @property
     def _http_bearer(self) -> dict[str, str]:

@@ -46,7 +46,7 @@ class AssistantsResource(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AssistantsResourceWithRawResponse:
         """
-        This property can be used as a prefix for any HTTP method call to return the
+        This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/stainless-sdks/agility-python#accessing-raw-response-data-eg-headers
@@ -68,8 +68,11 @@ class AssistantsResource(SyncAPIResource):
         description: str,
         knowledge_base_id: Optional[str],
         name: str,
+        codex_access_key: Optional[str] | NotGiven = NOT_GIVEN,
         context_limit: Optional[int] | NotGiven = NOT_GIVEN,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
+        logo_s3_key: Optional[str] | NotGiven = NOT_GIVEN,
+        logo_text: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
         suggested_questions: List[str] | NotGiven = NOT_GIVEN,
         tools: Optional[Iterable[assistant_create_params.Tool]] | NotGiven = NOT_GIVEN,
@@ -91,6 +94,10 @@ class AssistantsResource(SyncAPIResource):
 
           context_limit: The maximum number of context chunks to include in a run.
 
+          logo_s3_key: S3 object key to the assistant's logo image
+
+          logo_text: Text to display alongside the assistant's logo
+
           suggested_questions: A list of suggested questions that can be asked to the assistant
 
           url_slug: Optional URL suffix - unique identifier for the assistant's endpoint
@@ -110,8 +117,11 @@ class AssistantsResource(SyncAPIResource):
                     "description": description,
                     "knowledge_base_id": knowledge_base_id,
                     "name": name,
+                    "codex_access_key": codex_access_key,
                     "context_limit": context_limit,
                     "instructions": instructions,
+                    "logo_s3_key": logo_s3_key,
+                    "logo_text": logo_text,
                     "model": model,
                     "suggested_questions": suggested_questions,
                     "tools": tools,
@@ -166,8 +176,11 @@ class AssistantsResource(SyncAPIResource):
         description: str,
         knowledge_base_id: Optional[str],
         name: str,
+        codex_access_key: Optional[str] | NotGiven = NOT_GIVEN,
         context_limit: Optional[int] | NotGiven = NOT_GIVEN,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
+        logo_s3_key: Optional[str] | NotGiven = NOT_GIVEN,
+        logo_text: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
         suggested_questions: List[str] | NotGiven = NOT_GIVEN,
         tools: Optional[Iterable[assistant_update_params.Tool]] | NotGiven = NOT_GIVEN,
@@ -188,6 +201,10 @@ class AssistantsResource(SyncAPIResource):
           name: The name of the assistant
 
           context_limit: The maximum number of context chunks to include in a run.
+
+          logo_s3_key: S3 object key to the assistant's logo image
+
+          logo_text: Text to display alongside the assistant's logo
 
           suggested_questions: A list of suggested questions that can be asked to the assistant
 
@@ -211,8 +228,11 @@ class AssistantsResource(SyncAPIResource):
                     "description": description,
                     "knowledge_base_id": knowledge_base_id,
                     "name": name,
+                    "codex_access_key": codex_access_key,
                     "context_limit": context_limit,
                     "instructions": instructions,
+                    "logo_s3_key": logo_s3_key,
+                    "logo_text": logo_text,
                     "model": model,
                     "suggested_questions": suggested_questions,
                     "tools": tools,
@@ -312,7 +332,7 @@ class AsyncAssistantsResource(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncAssistantsResourceWithRawResponse:
         """
-        This property can be used as a prefix for any HTTP method call to return the
+        This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/stainless-sdks/agility-python#accessing-raw-response-data-eg-headers
@@ -334,8 +354,11 @@ class AsyncAssistantsResource(AsyncAPIResource):
         description: str,
         knowledge_base_id: Optional[str],
         name: str,
+        codex_access_key: Optional[str] | NotGiven = NOT_GIVEN,
         context_limit: Optional[int] | NotGiven = NOT_GIVEN,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
+        logo_s3_key: Optional[str] | NotGiven = NOT_GIVEN,
+        logo_text: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
         suggested_questions: List[str] | NotGiven = NOT_GIVEN,
         tools: Optional[Iterable[assistant_create_params.Tool]] | NotGiven = NOT_GIVEN,
@@ -357,6 +380,10 @@ class AsyncAssistantsResource(AsyncAPIResource):
 
           context_limit: The maximum number of context chunks to include in a run.
 
+          logo_s3_key: S3 object key to the assistant's logo image
+
+          logo_text: Text to display alongside the assistant's logo
+
           suggested_questions: A list of suggested questions that can be asked to the assistant
 
           url_slug: Optional URL suffix - unique identifier for the assistant's endpoint
@@ -376,8 +403,11 @@ class AsyncAssistantsResource(AsyncAPIResource):
                     "description": description,
                     "knowledge_base_id": knowledge_base_id,
                     "name": name,
+                    "codex_access_key": codex_access_key,
                     "context_limit": context_limit,
                     "instructions": instructions,
+                    "logo_s3_key": logo_s3_key,
+                    "logo_text": logo_text,
                     "model": model,
                     "suggested_questions": suggested_questions,
                     "tools": tools,
@@ -432,8 +462,11 @@ class AsyncAssistantsResource(AsyncAPIResource):
         description: str,
         knowledge_base_id: Optional[str],
         name: str,
+        codex_access_key: Optional[str] | NotGiven = NOT_GIVEN,
         context_limit: Optional[int] | NotGiven = NOT_GIVEN,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
+        logo_s3_key: Optional[str] | NotGiven = NOT_GIVEN,
+        logo_text: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
         suggested_questions: List[str] | NotGiven = NOT_GIVEN,
         tools: Optional[Iterable[assistant_update_params.Tool]] | NotGiven = NOT_GIVEN,
@@ -454,6 +487,10 @@ class AsyncAssistantsResource(AsyncAPIResource):
           name: The name of the assistant
 
           context_limit: The maximum number of context chunks to include in a run.
+
+          logo_s3_key: S3 object key to the assistant's logo image
+
+          logo_text: Text to display alongside the assistant's logo
 
           suggested_questions: A list of suggested questions that can be asked to the assistant
 
@@ -477,8 +514,11 @@ class AsyncAssistantsResource(AsyncAPIResource):
                     "description": description,
                     "knowledge_base_id": knowledge_base_id,
                     "name": name,
+                    "codex_access_key": codex_access_key,
                     "context_limit": context_limit,
                     "instructions": instructions,
+                    "logo_s3_key": logo_s3_key,
+                    "logo_text": logo_text,
                     "model": model,
                     "suggested_questions": suggested_questions,
                     "tools": tools,
