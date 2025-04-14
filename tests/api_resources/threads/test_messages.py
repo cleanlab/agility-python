@@ -35,6 +35,12 @@ class TestMessages:
             content="content",
             metadata={
                 "citations": ["string"],
+                "is_bad_response": True,
+                "is_expert_answer": True,
+                "scores": {
+                    "response_helpfulness": {"foo": "bar"},
+                    "trustworthiness": {"foo": "bar"},
+                },
                 "trustworthiness_explanation": "trustworthiness_explanation",
                 "trustworthiness_score": 0,
             },
@@ -246,6 +252,12 @@ class TestAsyncMessages:
             content="content",
             metadata={
                 "citations": ["string"],
+                "is_bad_response": True,
+                "is_expert_answer": True,
+                "scores": {
+                    "response_helpfulness": {"foo": "bar"},
+                    "trustworthiness": {"foo": "bar"},
+                },
                 "trustworthiness_explanation": "trustworthiness_explanation",
                 "trustworthiness_score": 0,
             },

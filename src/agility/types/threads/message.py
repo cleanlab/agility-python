@@ -1,16 +1,28 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Dict, List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
 from ..._models import BaseModel
 
-__all__ = ["Message", "Metadata"]
+__all__ = ["Message", "Metadata", "MetadataScores"]
+
+
+class MetadataScores(BaseModel):
+    response_helpfulness: Optional[Dict[str, object]] = None
+
+    trustworthiness: Optional[Dict[str, object]] = None
 
 
 class Metadata(BaseModel):
     citations: Optional[List[str]] = None
+
+    is_bad_response: Optional[bool] = None
+
+    is_expert_answer: Optional[bool] = None
+
+    scores: Optional[MetadataScores] = None
 
     trustworthiness_explanation: Optional[str] = None
 

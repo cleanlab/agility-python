@@ -41,6 +41,8 @@ class AssistantListResponse(BaseModel):
 
     updated_at: datetime
 
+    codex_access_key: Optional[str] = None
+
     context_limit: Optional[int] = None
     """The maximum number of context chunks to include in a run."""
 

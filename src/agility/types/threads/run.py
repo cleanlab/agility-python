@@ -45,6 +45,8 @@ class Run(BaseModel):
 
     additional_instructions: Optional[str] = None
 
+    codex_access_key: Optional[str] = None
+
     context_limit: Optional[int] = None
     """The maximum number of context chunks to include."""
 

@@ -17,6 +17,8 @@ class AssistantCreateParams(TypedDict, total=False):
     name: Required[str]
     """The name of the assistant"""
 
+    codex_access_key: Optional[str]
+
     context_limit: Optional[int]
     """The maximum number of context chunks to include in a run."""
 

@@ -36,6 +36,12 @@ class TestRuns:
                     "content": "content",
                     "metadata": {
                         "citations": ["string"],
+                        "is_bad_response": True,
+                        "is_expert_answer": True,
+                        "scores": {
+                            "response_helpfulness": {"foo": "bar"},
+                            "trustworthiness": {"foo": "bar"},
+                        },
                         "trustworthiness_explanation": "trustworthiness_explanation",
                         "trustworthiness_score": 0,
                     },
@@ -43,6 +49,7 @@ class TestRuns:
                     "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 }
             ],
+            codex_access_key="codex_access_key",
             context_limit=1,
             instructions="instructions",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -205,6 +212,12 @@ class TestRuns:
                     "content": "content",
                     "metadata": {
                         "citations": ["string"],
+                        "is_bad_response": True,
+                        "is_expert_answer": True,
+                        "scores": {
+                            "response_helpfulness": {"foo": "bar"},
+                            "trustworthiness": {"foo": "bar"},
+                        },
                         "trustworthiness_explanation": "trustworthiness_explanation",
                         "trustworthiness_score": 0,
                     },
@@ -212,6 +225,7 @@ class TestRuns:
                     "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 }
             ],
+            codex_access_key="codex_access_key",
             context_limit=1,
             instructions="instructions",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -282,6 +296,12 @@ class TestAsyncRuns:
                     "content": "content",
                     "metadata": {
                         "citations": ["string"],
+                        "is_bad_response": True,
+                        "is_expert_answer": True,
+                        "scores": {
+                            "response_helpfulness": {"foo": "bar"},
+                            "trustworthiness": {"foo": "bar"},
+                        },
                         "trustworthiness_explanation": "trustworthiness_explanation",
                         "trustworthiness_score": 0,
                     },
@@ -289,6 +309,7 @@ class TestAsyncRuns:
                     "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 }
             ],
+            codex_access_key="codex_access_key",
             context_limit=1,
             instructions="instructions",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -451,6 +472,12 @@ class TestAsyncRuns:
                     "content": "content",
                     "metadata": {
                         "citations": ["string"],
+                        "is_bad_response": True,
+                        "is_expert_answer": True,
+                        "scores": {
+                            "response_helpfulness": {"foo": "bar"},
+                            "trustworthiness": {"foo": "bar"},
+                        },
                         "trustworthiness_explanation": "trustworthiness_explanation",
                         "trustworthiness_score": 0,
                     },
@@ -458,6 +485,7 @@ class TestAsyncRuns:
                     "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 }
             ],
+            codex_access_key="codex_access_key",
             context_limit=1,
             instructions="instructions",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
