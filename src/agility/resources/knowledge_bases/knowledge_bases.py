@@ -46,7 +46,7 @@ class KnowledgeBasesResource(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> KnowledgeBasesResourceWithRawResponse:
         """
-        This property can be used as a prefix for any HTTP method call to return the
+        This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/stainless-sdks/agility-python#accessing-raw-response-data-eg-headers
@@ -79,9 +79,7 @@ class KnowledgeBasesResource(SyncAPIResource):
         Create a new knowledge base.
 
         Args:
-          ingestion_pipeline_params: Knowledge base pipeline params.
-
-              Parameters defined on the knowledge-base level for a pipeline.
+          ingestion_pipeline_params: Knowledge base pipeline params input.
 
           extra_headers: Send extra headers
 
@@ -274,7 +272,7 @@ class AsyncKnowledgeBasesResource(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncKnowledgeBasesResourceWithRawResponse:
         """
-        This property can be used as a prefix for any HTTP method call to return the
+        This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/stainless-sdks/agility-python#accessing-raw-response-data-eg-headers
@@ -307,9 +305,7 @@ class AsyncKnowledgeBasesResource(AsyncAPIResource):
         Create a new knowledge base.
 
         Args:
-          ingestion_pipeline_params: Knowledge base pipeline params.
-
-              Parameters defined on the knowledge-base level for a pipeline.
+          ingestion_pipeline_params: Knowledge base pipeline params input.
 
           extra_headers: Send extra headers
 

@@ -29,7 +29,7 @@ class TestKnowledgeBases:
                 "curate": {},
                 "curate_document_store": {},
                 "transform": {},
-                "vector_store": {"weaviate_collection_name": "weaviate_collection_name"},
+                "vector_store": {},
             },
             name="name",
         )
@@ -43,7 +43,7 @@ class TestKnowledgeBases:
                 "curate": {},
                 "curate_document_store": {},
                 "transform": {},
-                "vector_store": {"weaviate_collection_name": "weaviate_collection_name"},
+                "vector_store": {},
             },
             name="name",
         )
@@ -61,7 +61,7 @@ class TestKnowledgeBases:
                 "curate": {},
                 "curate_document_store": {},
                 "transform": {},
-                "vector_store": {"weaviate_collection_name": "weaviate_collection_name"},
+                "vector_store": {},
             },
             name="name",
         ) as response:
@@ -264,7 +264,7 @@ class TestAsyncKnowledgeBases:
                 "curate": {},
                 "curate_document_store": {},
                 "transform": {},
-                "vector_store": {"weaviate_collection_name": "weaviate_collection_name"},
+                "vector_store": {},
             },
             name="name",
         )
@@ -278,7 +278,7 @@ class TestAsyncKnowledgeBases:
                 "curate": {},
                 "curate_document_store": {},
                 "transform": {},
-                "vector_store": {"weaviate_collection_name": "weaviate_collection_name"},
+                "vector_store": {},
             },
             name="name",
         )
@@ -296,7 +296,7 @@ class TestAsyncKnowledgeBases:
                 "curate": {},
                 "curate_document_store": {},
                 "transform": {},
-                "vector_store": {"weaviate_collection_name": "weaviate_collection_name"},
+                "vector_store": {},
             },
             name="name",
         ) as response:

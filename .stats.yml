@@ -1,2 +1,4 @@
 configured_endpoints: 42
-openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/cleanlab%2Fagility-60c8c820f2cbc6b5b0b129ccf707ec246921b9e93cfb18f4ed47a96cc97c47f8.yml
+openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/cleanlab%2Fagility-b890eea39144ced38d6196197401b71ac734bcd2343d046c04169bfab9d746f2.yml
+openapi_spec_hash: 50035b732d759a3bc9a00402b5ccf5c4
+config_hash: 6d2156cfe279456cf3c35ba5c66be1c1

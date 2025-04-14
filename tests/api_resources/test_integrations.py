@@ -29,7 +29,8 @@ class TestIntegrations:
                 "resource": {
                     "bucket_name": "bucket_name",
                     "prefix": "prefix",
-                }
+                },
+                "integration_type": "s3/v0",
             },
         )
         assert_matches_type(IntegrationCreateResponse, integration, path=["response"])
@@ -56,7 +57,8 @@ class TestIntegrations:
                 "resource": {
                     "bucket_name": "bucket_name",
                     "prefix": "prefix",
-                }
+                },
+                "integration_type": "s3/v0",
             },
         )
 
@@ -72,7 +74,8 @@ class TestIntegrations:
                 "resource": {
                     "bucket_name": "bucket_name",
                     "prefix": "prefix",
-                }
+                },
+                "integration_type": "s3/v0",
             },
         ) as response:
             assert not response.is_closed
@@ -203,7 +206,8 @@ class TestAsyncIntegrations:
                 "resource": {
                     "bucket_name": "bucket_name",
                     "prefix": "prefix",
-                }
+                },
+                "integration_type": "s3/v0",
             },
         )
         assert_matches_type(IntegrationCreateResponse, integration, path=["response"])
@@ -230,7 +234,8 @@ class TestAsyncIntegrations:
                 "resource": {
                     "bucket_name": "bucket_name",
                     "prefix": "prefix",
-                }
+                },
+                "integration_type": "s3/v0",
             },
         )
 
@@ -246,7 +251,8 @@ class TestAsyncIntegrations:
                 "resource": {
                     "bucket_name": "bucket_name",
                     "prefix": "prefix",
-                }
+                },
+                "integration_type": "s3/v0",
             },
         ) as response:
             assert not response.is_closed

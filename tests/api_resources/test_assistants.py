@@ -37,15 +37,17 @@ class TestAssistants:
             description="description",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             name="name",
+            codex_access_key="codex_access_key",
             context_limit=1,
             instructions="instructions",
+            logo_s3_key="logo_s3_key",
+            logo_text="logo_text",
             model="gpt-4o",
             suggested_questions=["string"],
             tools=[
                 {
                     "access_key": "access_key",
-                    "project_id": 0,
-                    "name": "alpha_v0",
+                    "type": "codex_v0",
                 }
             ],
             url_slug="url_slug",
@@ -137,15 +139,17 @@ class TestAssistants:
             description="description",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             name="name",
+            codex_access_key="codex_access_key",
             context_limit=1,
             instructions="instructions",
+            logo_s3_key="logo_s3_key",
+            logo_text="logo_text",
             model="gpt-4o",
             suggested_questions=["string"],
             tools=[
                 {
                     "access_key": "access_key",
-                    "project_id": 0,
-                    "name": "alpha_v0",
+                    "type": "codex_v0",
                 }
             ],
             url_slug="url_slug",
@@ -285,15 +289,17 @@ class TestAsyncAssistants:
             description="description",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             name="name",
+            codex_access_key="codex_access_key",
             context_limit=1,
             instructions="instructions",
+            logo_s3_key="logo_s3_key",
+            logo_text="logo_text",
             model="gpt-4o",
             suggested_questions=["string"],
             tools=[
                 {
                     "access_key": "access_key",
-                    "project_id": 0,
-                    "name": "alpha_v0",
+                    "type": "codex_v0",
                 }
             ],
             url_slug="url_slug",
@@ -385,15 +391,17 @@ class TestAsyncAssistants:
             description="description",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             name="name",
+            codex_access_key="codex_access_key",
             context_limit=1,
             instructions="instructions",
+            logo_s3_key="logo_s3_key",
+            logo_text="logo_text",
             model="gpt-4o",
             suggested_questions=["string"],
             tools=[
                 {
                     "access_key": "access_key",
-                    "project_id": 0,
-                    "name": "alpha_v0",
+                    "type": "codex_v0",
                 }
             ],
             url_slug="url_slug",

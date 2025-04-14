@@ -6,6 +6,7 @@ import gc
 import os
 import sys
 import json
+import time
 import asyncio
 import inspect
 import subprocess
@@ -22,6 +23,7 @@ from pydantic import ValidationError
 
 from agility import Agility, AsyncAgility, APIResponseValidationError
 from agility._types import Omit
+from agility._utils import maybe_transform
 from agility._models import BaseModel, FinalRequestOptions
 from agility._constants import RAW_RESPONSE_HEADER
 from agility._exceptions import APIStatusError, APITimeoutError, APIResponseValidationError
@@ -31,6 +33,7 @@ from agility._base_client import (
     BaseClient,
     make_request_options,
 )
+from agility.types.assistant_create_params import AssistantCreateParams
 
 from .utils import update_env
 
@@ -714,8 +717,13 @@ class TestAgility:
                 "/api/assistants/",
                 body=cast(
                     object,
-                    dict(
-                        description="description", knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", name="name"
+                    maybe_transform(
+                        dict(
+                            description="description",
+                            knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                            name="name",
+                        ),
+                        AssistantCreateParams,
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -734,8 +742,13 @@ class TestAgility:
                 "/api/assistants/",
                 body=cast(
                     object,
-                    dict(
-                        description="description", knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", name="name"
+                    maybe_transform(
+                        dict(
+                            description="description",
+                            knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                            name="name",
+                        ),
+                        AssistantCreateParams,
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -1512,8 +1525,13 @@ class TestAsyncAgility:
                 "/api/assistants/",
                 body=cast(
                     object,
-                    dict(
-                        description="description", knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", name="name"
+                    maybe_transform(
+                        dict(
+                            description="description",
+                            knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                            name="name",
+                        ),
+                        AssistantCreateParams,
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -1532,8 +1550,13 @@ class TestAsyncAgility:
                 "/api/assistants/",
                 body=cast(
                     object,
-                    dict(
-                        description="description", knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", name="name"
+                    maybe_transform(
+                        dict(
+                            description="description",
+                            knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                            name="name",
+                        ),
+                        AssistantCreateParams,
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -1646,7 +1669,7 @@ class TestAsyncAgility:
         import threading
 
         from agility._utils import asyncify
-        from agility._base_client import get_platform 
+        from agility._base_client import get_platform
 
         async def test_main() -> None:
             result = await asyncify(get_platform)()
@@ -1661,10 +1684,20 @@ class TestAsyncAgility:
             [sys.executable, "-c", test_code],
             text=True,
         ) as process:
-            try:
-                process.wait(2)
-                if process.returncode:
-                    raise AssertionError("calling get_platform using asyncify resulted in a non-zero exit code")
-            except subprocess.TimeoutExpired as e:
-                process.kill()
-                raise AssertionError("calling get_platform using asyncify resulted in a hung process") from e
+            timeout = 10  # seconds
+
+            start_time = time.monotonic()
+            while True:
+                return_code = process.poll()
+                if return_code is not None:
+                    if return_code != 0:
+                        raise AssertionError("calling get_platform using asyncify resulted in a non-zero exit code")
+
+                    # success
+                    break
+
+                if time.monotonic() - start_time > timeout:
+                    process.kill()
+                    raise AssertionError("calling get_platform using asyncify resulted in a hung process")
+
+                time.sleep(0.1)
