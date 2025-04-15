@@ -38,8 +38,31 @@ class TestMessages:
                 "is_bad_response": True,
                 "is_expert_answer": True,
                 "scores": {
-                    "response_helpfulness": {"foo": "bar"},
-                    "trustworthiness": {"foo": "bar"},
+                    "context_sufficiency": {
+                        "is_bad": True,
+                        "log": {"explanation": "explanation"},
+                        "score": 0,
+                    },
+                    "query_ease": {
+                        "is_bad": True,
+                        "log": {"explanation": "explanation"},
+                        "score": 0,
+                    },
+                    "response_groundedness": {
+                        "is_bad": True,
+                        "log": {"explanation": "explanation"},
+                        "score": 0,
+                    },
+                    "response_helpfulness": {
+                        "is_bad": True,
+                        "log": {"explanation": "explanation"},
+                        "score": 0,
+                    },
+                    "trustworthiness": {
+                        "is_bad": True,
+                        "log": {"explanation": "explanation"},
+                        "score": 0,
+                    },
                 },
                 "trustworthiness_explanation": "trustworthiness_explanation",
                 "trustworthiness_score": 0,
@@ -255,8 +278,31 @@ class TestAsyncMessages:
                 "is_bad_response": True,
                 "is_expert_answer": True,
                 "scores": {
-                    "response_helpfulness": {"foo": "bar"},
-                    "trustworthiness": {"foo": "bar"},
+                    "context_sufficiency": {
+                        "is_bad": True,
+                        "log": {"explanation": "explanation"},
+                        "score": 0,
+                    },
+                    "query_ease": {
+                        "is_bad": True,
+                        "log": {"explanation": "explanation"},
+                        "score": 0,
+                    },
+                    "response_groundedness": {
+                        "is_bad": True,
+                        "log": {"explanation": "explanation"},
+                        "score": 0,
+                    },
+                    "response_helpfulness": {
+                        "is_bad": True,
+                        "log": {"explanation": "explanation"},
+                        "score": 0,
+                    },
+                    "trustworthiness": {
+                        "is_bad": True,
+                        "log": {"explanation": "explanation"},
+                        "score": 0,
+                    },
                 },
                 "trustworthiness_explanation": "trustworthiness_explanation",
                 "trustworthiness_score": 0,

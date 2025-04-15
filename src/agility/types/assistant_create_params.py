@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import List, Union, Iterable, Optional
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
-__all__ = ["AssistantCreateParams", "Tool", "ToolCodexV0Tool", "ToolNoOpTool"]
+__all__ = ["AssistantCreateParams", "ResponseValidationConfig", "Tool", "ToolCodexV0Tool", "ToolNoOpTool"]
 
 
 class AssistantCreateParams(TypedDict, total=False):
@@ -32,6 +32,8 @@ class AssistantCreateParams(TypedDict, total=False):
 
     model: Optional[Literal["gpt-4o"]]
 
+    response_validation_config: Optional[Iterable[ResponseValidationConfig]]
+
     suggested_questions: List[str]
     """A list of suggested questions that can be asked to the assistant"""
 
@@ -39,6 +41,14 @@ class AssistantCreateParams(TypedDict, total=False):
 
     url_slug: Optional[str]
     """Optional URL suffix - unique identifier for the assistant's endpoint"""
+
+
+class ResponseValidationConfig(TypedDict, total=False):
+    is_bad_threshold: Required[float]
+
+    name: Required[
+        Literal["trustworthiness", "response_helpfulness", "context_sufficiency", "response_groundedness", "query_ease"]
+    ]
 
 
 class ToolCodexV0Tool(TypedDict, total=False):

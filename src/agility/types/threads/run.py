@@ -6,7 +6,15 @@ from typing_extensions import Literal, TypeAlias
 
 from ..._models import BaseModel
 
-__all__ = ["Run", "Tool", "ToolCodexV0Tool", "ToolNoOpTool", "Usage"]
+__all__ = ["Run", "ResponseValidationConfig", "Tool", "ToolCodexV0Tool", "ToolNoOpTool", "Usage"]
+
+
+class ResponseValidationConfig(BaseModel):
+    is_bad_threshold: float
+
+    name: Literal[
+        "trustworthiness", "response_helpfulness", "context_sufficiency", "response_groundedness", "query_ease"
+    ]
 
 
 class ToolCodexV0Tool(BaseModel):
@@ -59,6 +67,8 @@ class Run(BaseModel):
     last_error: Optional[str] = None
 
     model: Optional[Literal["gpt-4o"]] = None
+
+    response_validation_config: Optional[List[ResponseValidationConfig]] = None
 
     tools: Optional[List[Tool]] = None
 
