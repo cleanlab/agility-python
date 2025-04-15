@@ -51,7 +51,7 @@ class RunStreamParams(TypedDict, total=False):
 
 
 class AdditionalMessageMetadataScoresContextSufficiencyLog(TypedDict, total=False):
-    explanation: Required[str]
+    explanation: Optional[str]
 
 
 class AdditionalMessageMetadataScoresContextSufficiency(TypedDict, total=False):
@@ -63,7 +63,7 @@ class AdditionalMessageMetadataScoresContextSufficiency(TypedDict, total=False):
 
 
 class AdditionalMessageMetadataScoresQueryEaseLog(TypedDict, total=False):
-    explanation: Required[str]
+    explanation: Optional[str]
 
 
 class AdditionalMessageMetadataScoresQueryEase(TypedDict, total=False):
@@ -75,7 +75,7 @@ class AdditionalMessageMetadataScoresQueryEase(TypedDict, total=False):
 
 
 class AdditionalMessageMetadataScoresResponseGroundednessLog(TypedDict, total=False):
-    explanation: Required[str]
+    explanation: Optional[str]
 
 
 class AdditionalMessageMetadataScoresResponseGroundedness(TypedDict, total=False):
@@ -87,7 +87,7 @@ class AdditionalMessageMetadataScoresResponseGroundedness(TypedDict, total=False
 
 
 class AdditionalMessageMetadataScoresResponseHelpfulnessLog(TypedDict, total=False):
-    explanation: Required[str]
+    explanation: Optional[str]
 
 
 class AdditionalMessageMetadataScoresResponseHelpfulness(TypedDict, total=False):
@@ -99,7 +99,7 @@ class AdditionalMessageMetadataScoresResponseHelpfulness(TypedDict, total=False)
 
 
 class AdditionalMessageMetadataScoresTrustworthinessLog(TypedDict, total=False):
-    explanation: Required[str]
+    explanation: Optional[str]
 
 
 class AdditionalMessageMetadataScoresTrustworthiness(TypedDict, total=False):

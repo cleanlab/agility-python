@@ -24,7 +24,7 @@ __all__ = [
 
 
 class MetadataScoresContextSufficiencyLog(BaseModel):
-    explanation: str
+    explanation: Optional[str] = None
 
 
 class MetadataScoresContextSufficiency(BaseModel):
@@ -36,7 +36,7 @@ class MetadataScoresContextSufficiency(BaseModel):
 
 
 class MetadataScoresQueryEaseLog(BaseModel):
-    explanation: str
+    explanation: Optional[str] = None
 
 
 class MetadataScoresQueryEase(BaseModel):
@@ -48,7 +48,7 @@ class MetadataScoresQueryEase(BaseModel):
 
 
 class MetadataScoresResponseGroundednessLog(BaseModel):
-    explanation: str
+    explanation: Optional[str] = None
 
 
 class MetadataScoresResponseGroundedness(BaseModel):
@@ -60,7 +60,7 @@ class MetadataScoresResponseGroundedness(BaseModel):
 
 
 class MetadataScoresResponseHelpfulnessLog(BaseModel):
-    explanation: str
+    explanation: Optional[str] = None
 
 
 class MetadataScoresResponseHelpfulness(BaseModel):
@@ -72,7 +72,7 @@ class MetadataScoresResponseHelpfulness(BaseModel):
 
 
 class MetadataScoresTrustworthinessLog(BaseModel):
-    explanation: str
+    explanation: Optional[str] = None
 
 
 class MetadataScoresTrustworthiness(BaseModel):

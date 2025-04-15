@@ -31,7 +31,7 @@ class MessageCreateParams(TypedDict, total=False):
 
 
 class MetadataScoresContextSufficiencyLog(TypedDict, total=False):
-    explanation: Required[str]
+    explanation: Optional[str]
 
 
 class MetadataScoresContextSufficiency(TypedDict, total=False):
@@ -43,7 +43,7 @@ class MetadataScoresContextSufficiency(TypedDict, total=False):
 
 
 class MetadataScoresQueryEaseLog(TypedDict, total=False):
-    explanation: Required[str]
+    explanation: Optional[str]
 
 
 class MetadataScoresQueryEase(TypedDict, total=False):
@@ -55,7 +55,7 @@ class MetadataScoresQueryEase(TypedDict, total=False):
 
 
 class MetadataScoresResponseGroundednessLog(TypedDict, total=False):
-    explanation: Required[str]
+    explanation: Optional[str]
 
 
 class MetadataScoresResponseGroundedness(TypedDict, total=False):
@@ -67,7 +67,7 @@ class MetadataScoresResponseGroundedness(TypedDict, total=False):
 
 
 class MetadataScoresResponseHelpfulnessLog(TypedDict, total=False):
-    explanation: Required[str]
+    explanation: Optional[str]
 
 
 class MetadataScoresResponseHelpfulness(TypedDict, total=False):
@@ -79,7 +79,7 @@ class MetadataScoresResponseHelpfulness(TypedDict, total=False):
 
 
 class MetadataScoresTrustworthinessLog(TypedDict, total=False):
-    explanation: Required[str]
+    explanation: Optional[str]
 
 
 class MetadataScoresTrustworthiness(TypedDict, total=False):
