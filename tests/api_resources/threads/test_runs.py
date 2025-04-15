@@ -39,8 +39,31 @@ class TestRuns:
                         "is_bad_response": True,
                         "is_expert_answer": True,
                         "scores": {
-                            "response_helpfulness": {"foo": "bar"},
-                            "trustworthiness": {"foo": "bar"},
+                            "context_sufficiency": {
+                                "is_bad": True,
+                                "log": {"explanation": "explanation"},
+                                "score": 0,
+                            },
+                            "query_ease": {
+                                "is_bad": True,
+                                "log": {"explanation": "explanation"},
+                                "score": 0,
+                            },
+                            "response_groundedness": {
+                                "is_bad": True,
+                                "log": {"explanation": "explanation"},
+                                "score": 0,
+                            },
+                            "response_helpfulness": {
+                                "is_bad": True,
+                                "log": {"explanation": "explanation"},
+                                "score": 0,
+                            },
+                            "trustworthiness": {
+                                "is_bad": True,
+                                "log": {"explanation": "explanation"},
+                                "score": 0,
+                            },
                         },
                         "trustworthiness_explanation": "trustworthiness_explanation",
                         "trustworthiness_score": 0,
@@ -54,6 +77,12 @@ class TestRuns:
             instructions="instructions",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             model="gpt-4o",
+            response_validation_config=[
+                {
+                    "is_bad_threshold": 0,
+                    "name": "trustworthiness",
+                }
+            ],
             tools=[
                 {
                     "access_key": "access_key",
@@ -215,8 +244,31 @@ class TestRuns:
                         "is_bad_response": True,
                         "is_expert_answer": True,
                         "scores": {
-                            "response_helpfulness": {"foo": "bar"},
-                            "trustworthiness": {"foo": "bar"},
+                            "context_sufficiency": {
+                                "is_bad": True,
+                                "log": {"explanation": "explanation"},
+                                "score": 0,
+                            },
+                            "query_ease": {
+                                "is_bad": True,
+                                "log": {"explanation": "explanation"},
+                                "score": 0,
+                            },
+                            "response_groundedness": {
+                                "is_bad": True,
+                                "log": {"explanation": "explanation"},
+                                "score": 0,
+                            },
+                            "response_helpfulness": {
+                                "is_bad": True,
+                                "log": {"explanation": "explanation"},
+                                "score": 0,
+                            },
+                            "trustworthiness": {
+                                "is_bad": True,
+                                "log": {"explanation": "explanation"},
+                                "score": 0,
+                            },
                         },
                         "trustworthiness_explanation": "trustworthiness_explanation",
                         "trustworthiness_score": 0,
@@ -230,6 +282,12 @@ class TestRuns:
             instructions="instructions",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             model="gpt-4o",
+            response_validation_config=[
+                {
+                    "is_bad_threshold": 0,
+                    "name": "trustworthiness",
+                }
+            ],
             tools=[
                 {
                     "access_key": "access_key",
@@ -299,8 +357,31 @@ class TestAsyncRuns:
                         "is_bad_response": True,
                         "is_expert_answer": True,
                         "scores": {
-                            "response_helpfulness": {"foo": "bar"},
-                            "trustworthiness": {"foo": "bar"},
+                            "context_sufficiency": {
+                                "is_bad": True,
+                                "log": {"explanation": "explanation"},
+                                "score": 0,
+                            },
+                            "query_ease": {
+                                "is_bad": True,
+                                "log": {"explanation": "explanation"},
+                                "score": 0,
+                            },
+                            "response_groundedness": {
+                                "is_bad": True,
+                                "log": {"explanation": "explanation"},
+                                "score": 0,
+                            },
+                            "response_helpfulness": {
+                                "is_bad": True,
+                                "log": {"explanation": "explanation"},
+                                "score": 0,
+                            },
+                            "trustworthiness": {
+                                "is_bad": True,
+                                "log": {"explanation": "explanation"},
+                                "score": 0,
+                            },
                         },
                         "trustworthiness_explanation": "trustworthiness_explanation",
                         "trustworthiness_score": 0,
@@ -314,6 +395,12 @@ class TestAsyncRuns:
             instructions="instructions",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             model="gpt-4o",
+            response_validation_config=[
+                {
+                    "is_bad_threshold": 0,
+                    "name": "trustworthiness",
+                }
+            ],
             tools=[
                 {
                     "access_key": "access_key",
@@ -475,8 +562,31 @@ class TestAsyncRuns:
                         "is_bad_response": True,
                         "is_expert_answer": True,
                         "scores": {
-                            "response_helpfulness": {"foo": "bar"},
-                            "trustworthiness": {"foo": "bar"},
+                            "context_sufficiency": {
+                                "is_bad": True,
+                                "log": {"explanation": "explanation"},
+                                "score": 0,
+                            },
+                            "query_ease": {
+                                "is_bad": True,
+                                "log": {"explanation": "explanation"},
+                                "score": 0,
+                            },
+                            "response_groundedness": {
+                                "is_bad": True,
+                                "log": {"explanation": "explanation"},
+                                "score": 0,
+                            },
+                            "response_helpfulness": {
+                                "is_bad": True,
+                                "log": {"explanation": "explanation"},
+                                "score": 0,
+                            },
+                            "trustworthiness": {
+                                "is_bad": True,
+                                "log": {"explanation": "explanation"},
+                                "score": 0,
+                            },
                         },
                         "trustworthiness_explanation": "trustworthiness_explanation",
                         "trustworthiness_score": 0,
@@ -490,6 +600,12 @@ class TestAsyncRuns:
             instructions="instructions",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             model="gpt-4o",
+            response_validation_config=[
+                {
+                    "is_bad_threshold": 0,
+                    "name": "trustworthiness",
+                }
+            ],
             tools=[
                 {
                     "access_key": "access_key",

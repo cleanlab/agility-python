@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Union, Iterable, Optional
+from typing import List, Union, Iterable, Optional
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
 __all__ = [
@@ -10,6 +10,17 @@ __all__ = [
     "AdditionalMessage",
     "AdditionalMessageMetadata",
     "AdditionalMessageMetadataScores",
+    "AdditionalMessageMetadataScoresContextSufficiency",
+    "AdditionalMessageMetadataScoresContextSufficiencyLog",
+    "AdditionalMessageMetadataScoresQueryEase",
+    "AdditionalMessageMetadataScoresQueryEaseLog",
+    "AdditionalMessageMetadataScoresResponseGroundedness",
+    "AdditionalMessageMetadataScoresResponseGroundednessLog",
+    "AdditionalMessageMetadataScoresResponseHelpfulness",
+    "AdditionalMessageMetadataScoresResponseHelpfulnessLog",
+    "AdditionalMessageMetadataScoresTrustworthiness",
+    "AdditionalMessageMetadataScoresTrustworthinessLog",
+    "ResponseValidationConfig",
     "Tool",
     "ToolCodexV0Tool",
     "ToolNoOpTool",
@@ -34,13 +45,81 @@ class RunStreamParams(TypedDict, total=False):
 
     model: Optional[Literal["gpt-4o"]]
 
+    response_validation_config: Optional[Iterable[ResponseValidationConfig]]
+
     tools: Optional[Iterable[Tool]]
 
 
-class AdditionalMessageMetadataScores(TypedDict, total=False):
-    response_helpfulness: Optional[Dict[str, object]]
+class AdditionalMessageMetadataScoresContextSufficiencyLog(TypedDict, total=False):
+    explanation: Required[str]
 
-    trustworthiness: Optional[Dict[str, object]]
+
+class AdditionalMessageMetadataScoresContextSufficiency(TypedDict, total=False):
+    is_bad: Optional[bool]
+
+    log: Optional[AdditionalMessageMetadataScoresContextSufficiencyLog]
+
+    score: Optional[float]
+
+
+class AdditionalMessageMetadataScoresQueryEaseLog(TypedDict, total=False):
+    explanation: Required[str]
+
+
+class AdditionalMessageMetadataScoresQueryEase(TypedDict, total=False):
+    is_bad: Optional[bool]
+
+    log: Optional[AdditionalMessageMetadataScoresQueryEaseLog]
+
+    score: Optional[float]
+
+
+class AdditionalMessageMetadataScoresResponseGroundednessLog(TypedDict, total=False):
+    explanation: Required[str]
+
+
+class AdditionalMessageMetadataScoresResponseGroundedness(TypedDict, total=False):
+    is_bad: Optional[bool]
+
+    log: Optional[AdditionalMessageMetadataScoresResponseGroundednessLog]
+
+    score: Optional[float]
+
+
+class AdditionalMessageMetadataScoresResponseHelpfulnessLog(TypedDict, total=False):
+    explanation: Required[str]
+
+
+class AdditionalMessageMetadataScoresResponseHelpfulness(TypedDict, total=False):
+    is_bad: Optional[bool]
+
+    log: Optional[AdditionalMessageMetadataScoresResponseHelpfulnessLog]
+
+    score: Optional[float]
+
+
+class AdditionalMessageMetadataScoresTrustworthinessLog(TypedDict, total=False):
+    explanation: Required[str]
+
+
+class AdditionalMessageMetadataScoresTrustworthiness(TypedDict, total=False):
+    is_bad: Optional[bool]
+
+    log: Optional[AdditionalMessageMetadataScoresTrustworthinessLog]
+
+    score: Optional[float]
+
+
+class AdditionalMessageMetadataScores(TypedDict, total=False):
+    context_sufficiency: Optional[AdditionalMessageMetadataScoresContextSufficiency]
+
+    query_ease: Optional[AdditionalMessageMetadataScoresQueryEase]
+
+    response_groundedness: Optional[AdditionalMessageMetadataScoresResponseGroundedness]
+
+    response_helpfulness: Optional[AdditionalMessageMetadataScoresResponseHelpfulness]
+
+    trustworthiness: Optional[AdditionalMessageMetadataScoresTrustworthiness]
 
 
 class AdditionalMessageMetadata(TypedDict, total=False):
@@ -65,6 +144,14 @@ class AdditionalMessage(TypedDict, total=False):
     role: Required[Literal["user", "assistant"]]
 
     thread_id: Required[str]
+
+
+class ResponseValidationConfig(TypedDict, total=False):
+    is_bad_threshold: Required[float]
+
+    name: Required[
+        Literal["trustworthiness", "response_helpfulness", "context_sufficiency", "response_groundedness", "query_ease"]
+    ]
 
 
 class ToolCodexV0Tool(TypedDict, total=False):

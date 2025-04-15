@@ -43,6 +43,12 @@ class TestAssistants:
             logo_s3_key="logo_s3_key",
             logo_text="logo_text",
             model="gpt-4o",
+            response_validation_config=[
+                {
+                    "is_bad_threshold": 0,
+                    "name": "trustworthiness",
+                }
+            ],
             suggested_questions=["string"],
             tools=[
                 {
@@ -145,6 +151,12 @@ class TestAssistants:
             logo_s3_key="logo_s3_key",
             logo_text="logo_text",
             model="gpt-4o",
+            response_validation_config=[
+                {
+                    "is_bad_threshold": 0,
+                    "name": "trustworthiness",
+                }
+            ],
             suggested_questions=["string"],
             tools=[
                 {
@@ -295,6 +307,12 @@ class TestAsyncAssistants:
             logo_s3_key="logo_s3_key",
             logo_text="logo_text",
             model="gpt-4o",
+            response_validation_config=[
+                {
+                    "is_bad_threshold": 0,
+                    "name": "trustworthiness",
+                }
+            ],
             suggested_questions=["string"],
             tools=[
                 {
@@ -397,6 +415,12 @@ class TestAsyncAssistants:
             logo_s3_key="logo_s3_key",
             logo_text="logo_text",
             model="gpt-4o",
+            response_validation_config=[
+                {
+                    "is_bad_threshold": 0,
+                    "name": "trustworthiness",
+                }
+            ],
             suggested_questions=["string"],
             tools=[
                 {

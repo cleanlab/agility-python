@@ -1,18 +1,98 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict, List, Optional
+from typing import List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
 from ..._models import BaseModel
 
-__all__ = ["Message", "Metadata", "MetadataScores"]
+__all__ = [
+    "Message",
+    "Metadata",
+    "MetadataScores",
+    "MetadataScoresContextSufficiency",
+    "MetadataScoresContextSufficiencyLog",
+    "MetadataScoresQueryEase",
+    "MetadataScoresQueryEaseLog",
+    "MetadataScoresResponseGroundedness",
+    "MetadataScoresResponseGroundednessLog",
+    "MetadataScoresResponseHelpfulness",
+    "MetadataScoresResponseHelpfulnessLog",
+    "MetadataScoresTrustworthiness",
+    "MetadataScoresTrustworthinessLog",
+]
+
+
+class MetadataScoresContextSufficiencyLog(BaseModel):
+    explanation: str
+
+
+class MetadataScoresContextSufficiency(BaseModel):
+    is_bad: Optional[bool] = None
+
+    log: Optional[MetadataScoresContextSufficiencyLog] = None
+
+    score: Optional[float] = None
+
+
+class MetadataScoresQueryEaseLog(BaseModel):
+    explanation: str
+
+
+class MetadataScoresQueryEase(BaseModel):
+    is_bad: Optional[bool] = None
+
+    log: Optional[MetadataScoresQueryEaseLog] = None
+
+    score: Optional[float] = None
+
+
+class MetadataScoresResponseGroundednessLog(BaseModel):
+    explanation: str
+
+
+class MetadataScoresResponseGroundedness(BaseModel):
+    is_bad: Optional[bool] = None
+
+    log: Optional[MetadataScoresResponseGroundednessLog] = None
+
+    score: Optional[float] = None
+
+
+class MetadataScoresResponseHelpfulnessLog(BaseModel):
+    explanation: str
+
+
+class MetadataScoresResponseHelpfulness(BaseModel):
+    is_bad: Optional[bool] = None
+
+    log: Optional[MetadataScoresResponseHelpfulnessLog] = None
+
+    score: Optional[float] = None
+
+
+class MetadataScoresTrustworthinessLog(BaseModel):
+    explanation: str
+
+
+class MetadataScoresTrustworthiness(BaseModel):
+    is_bad: Optional[bool] = None
+
+    log: Optional[MetadataScoresTrustworthinessLog] = None
+
+    score: Optional[float] = None
 
 
 class MetadataScores(BaseModel):
-    response_helpfulness: Optional[Dict[str, object]] = None
+    context_sufficiency: Optional[MetadataScoresContextSufficiency] = None
 
-    trustworthiness: Optional[Dict[str, object]] = None
+    query_ease: Optional[MetadataScoresQueryEase] = None
+
+    response_groundedness: Optional[MetadataScoresResponseGroundedness] = None
+
+    response_helpfulness: Optional[MetadataScoresResponseHelpfulness] = None
+
+    trustworthiness: Optional[MetadataScoresTrustworthiness] = None
 
 
 class Metadata(BaseModel):

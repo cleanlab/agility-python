@@ -6,7 +6,15 @@ from typing_extensions import Literal, TypeAlias
 
 from .._models import BaseModel
 
-__all__ = ["AssistantWithConfig", "Tool", "ToolCodexV0Tool", "ToolNoOpTool"]
+__all__ = ["AssistantWithConfig", "ResponseValidationConfig", "Tool", "ToolCodexV0Tool", "ToolNoOpTool"]
+
+
+class ResponseValidationConfig(BaseModel):
+    is_bad_threshold: float
+
+    name: Literal[
+        "trustworthiness", "response_helpfulness", "context_sufficiency", "response_groundedness", "query_ease"
+    ]
 
 
 class ToolCodexV0Tool(BaseModel):
@@ -53,6 +61,8 @@ class AssistantWithConfig(BaseModel):
     """Text to display alongside the assistant's logo"""
 
     model: Optional[Literal["gpt-4o"]] = None
+
+    response_validation_config: Optional[List[ResponseValidationConfig]] = None
 
     suggested_questions: Optional[List[str]] = None
     """A list of suggested questions that can be asked to the assistant"""
