@@ -5,7 +5,14 @@ from __future__ import annotations
 from typing import List, Union, Iterable, Optional
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
-__all__ = ["AssistantUpdateParams", "ResponseValidationConfig", "Tool", "ToolCodexV0Tool", "ToolNoOpTool"]
+__all__ = [
+    "AssistantUpdateParams",
+    "HardCodedQuery",
+    "ResponseValidationConfig",
+    "Tool",
+    "ToolCodexV0Tool",
+    "ToolNoOpTool",
+]
 
 
 class AssistantUpdateParams(TypedDict, total=False):
@@ -23,6 +30,8 @@ class AssistantUpdateParams(TypedDict, total=False):
 
     context_limit: Optional[int]
     """The maximum number of context chunks to include in a run."""
+
+    hard_coded_queries: Optional[Iterable[HardCodedQuery]]
 
     instructions: Optional[str]
 
@@ -43,6 +52,16 @@ class AssistantUpdateParams(TypedDict, total=False):
 
     url_slug: Optional[str]
     """Optional URL suffix - unique identifier for the assistant's endpoint"""
+
+
+class HardCodedQuery(TypedDict, total=False):
+    query: Required[str]
+
+    response: Required[str]
+
+    context: Optional[List[str]]
+
+    prompt: Optional[str]
 
 
 class ResponseValidationConfig(TypedDict, total=False):

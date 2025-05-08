@@ -74,6 +74,14 @@ class TestRuns:
             ],
             codex_access_key="codex_access_key",
             context_limit=1,
+            hard_coded_queries=[
+                {
+                    "query": "query",
+                    "response": "response",
+                    "context": ["string"],
+                    "prompt": "prompt",
+                }
+            ],
             instructions="instructions",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             model="gpt-4o",
@@ -279,6 +287,14 @@ class TestRuns:
             ],
             codex_access_key="codex_access_key",
             context_limit=1,
+            hard_coded_queries=[
+                {
+                    "query": "query",
+                    "response": "response",
+                    "context": ["string"],
+                    "prompt": "prompt",
+                }
+            ],
             instructions="instructions",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             model="gpt-4o",
@@ -392,6 +408,14 @@ class TestAsyncRuns:
             ],
             codex_access_key="codex_access_key",
             context_limit=1,
+            hard_coded_queries=[
+                {
+                    "query": "query",
+                    "response": "response",
+                    "context": ["string"],
+                    "prompt": "prompt",
+                }
+            ],
             instructions="instructions",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             model="gpt-4o",
@@ -597,6 +621,14 @@ class TestAsyncRuns:
             ],
             codex_access_key="codex_access_key",
             context_limit=1,
+            hard_coded_queries=[
+                {
+                    "query": "query",
+                    "response": "response",
+                    "context": ["string"],
+                    "prompt": "prompt",
+                }
+            ],
             instructions="instructions",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             model="gpt-4o",

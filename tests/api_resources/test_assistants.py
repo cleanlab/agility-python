@@ -39,6 +39,14 @@ class TestAssistants:
             name="name",
             codex_access_key="codex_access_key",
             context_limit=1,
+            hard_coded_queries=[
+                {
+                    "query": "query",
+                    "response": "response",
+                    "context": ["string"],
+                    "prompt": "prompt",
+                }
+            ],
             instructions="instructions",
             logo_s3_key="logo_s3_key",
             logo_text="logo_text",
@@ -147,6 +155,14 @@ class TestAssistants:
             name="name",
             codex_access_key="codex_access_key",
             context_limit=1,
+            hard_coded_queries=[
+                {
+                    "query": "query",
+                    "response": "response",
+                    "context": ["string"],
+                    "prompt": "prompt",
+                }
+            ],
             instructions="instructions",
             logo_s3_key="logo_s3_key",
             logo_text="logo_text",
@@ -303,6 +319,14 @@ class TestAsyncAssistants:
             name="name",
             codex_access_key="codex_access_key",
             context_limit=1,
+            hard_coded_queries=[
+                {
+                    "query": "query",
+                    "response": "response",
+                    "context": ["string"],
+                    "prompt": "prompt",
+                }
+            ],
             instructions="instructions",
             logo_s3_key="logo_s3_key",
             logo_text="logo_text",
@@ -411,6 +435,14 @@ class TestAsyncAssistants:
             name="name",
             codex_access_key="codex_access_key",
             context_limit=1,
+            hard_coded_queries=[
+                {
+                    "query": "query",
+                    "response": "response",
+                    "context": ["string"],
+                    "prompt": "prompt",
+                }
+            ],
             instructions="instructions",
             logo_s3_key="logo_s3_key",
             logo_text="logo_text",

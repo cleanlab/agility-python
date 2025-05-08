@@ -6,7 +6,24 @@ from typing_extensions import Literal, TypeAlias
 
 from .._models import BaseModel
 
-__all__ = ["AssistantListResponse", "ResponseValidationConfig", "Tool", "ToolCodexV0Tool", "ToolNoOpTool"]
+__all__ = [
+    "AssistantListResponse",
+    "HardCodedQuery",
+    "ResponseValidationConfig",
+    "Tool",
+    "ToolCodexV0Tool",
+    "ToolNoOpTool",
+]
+
+
+class HardCodedQuery(BaseModel):
+    query: str
+
+    response: str
+
+    context: Optional[List[str]] = None
+
+    prompt: Optional[str] = None
 
 
 class ResponseValidationConfig(BaseModel):
@@ -53,6 +70,8 @@ class AssistantListResponse(BaseModel):
 
     context_limit: Optional[int] = None
     """The maximum number of context chunks to include in a run."""
+
+    hard_coded_queries: Optional[List[HardCodedQuery]] = None
 
     instructions: Optional[str] = None
 

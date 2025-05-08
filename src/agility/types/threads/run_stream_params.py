@@ -20,6 +20,7 @@ __all__ = [
     "AdditionalMessageMetadataScoresResponseHelpfulnessLog",
     "AdditionalMessageMetadataScoresTrustworthiness",
     "AdditionalMessageMetadataScoresTrustworthinessLog",
+    "HardCodedQuery",
     "ResponseValidationConfig",
     "Tool",
     "ToolCodexV0Tool",
@@ -38,6 +39,8 @@ class RunStreamParams(TypedDict, total=False):
 
     context_limit: Optional[int]
     """The maximum number of context chunks to include."""
+
+    hard_coded_queries: Optional[Iterable[HardCodedQuery]]
 
     instructions: Optional[str]
 
@@ -144,6 +147,16 @@ class AdditionalMessage(TypedDict, total=False):
     role: Required[Literal["user", "assistant"]]
 
     thread_id: Required[str]
+
+
+class HardCodedQuery(TypedDict, total=False):
+    query: Required[str]
+
+    response: Required[str]
+
+    context: Optional[List[str]]
+
+    prompt: Optional[str]
 
 
 class ResponseValidationConfig(TypedDict, total=False):
