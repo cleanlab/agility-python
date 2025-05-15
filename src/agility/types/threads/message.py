@@ -102,6 +102,8 @@ class Metadata(BaseModel):
 
     is_expert_answer: Optional[bool] = None
 
+    original_llm_response: Optional[str] = None
+
     scores: Optional[MetadataScores] = None
 
     trustworthiness_explanation: Optional[str] = None

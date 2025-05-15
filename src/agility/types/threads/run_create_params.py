@@ -132,6 +132,8 @@ class AdditionalMessageMetadata(TypedDict, total=False):
 
     is_expert_answer: Optional[bool]
 
+    original_llm_response: Optional[str]
+
     scores: Optional[AdditionalMessageMetadataScores]
 
     trustworthiness_explanation: Optional[str]

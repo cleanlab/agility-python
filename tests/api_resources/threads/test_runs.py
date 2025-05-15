@@ -38,6 +38,7 @@ class TestRuns:
                         "citations": ["string"],
                         "is_bad_response": True,
                         "is_expert_answer": True,
+                        "original_llm_response": "original_llm_response",
                         "scores": {
                             "context_sufficiency": {
                                 "is_bad": True,
@@ -251,6 +252,7 @@ class TestRuns:
                         "citations": ["string"],
                         "is_bad_response": True,
                         "is_expert_answer": True,
+                        "original_llm_response": "original_llm_response",
                         "scores": {
                             "context_sufficiency": {
                                 "is_bad": True,
@@ -372,6 +374,7 @@ class TestAsyncRuns:
                         "citations": ["string"],
                         "is_bad_response": True,
                         "is_expert_answer": True,
+                        "original_llm_response": "original_llm_response",
                         "scores": {
                             "context_sufficiency": {
                                 "is_bad": True,
@@ -585,6 +588,7 @@ class TestAsyncRuns:
                         "citations": ["string"],
                         "is_bad_response": True,
                         "is_expert_answer": True,
+                        "original_llm_response": "original_llm_response",
                         "scores": {
                             "context_sufficiency": {
                                 "is_bad": True,
