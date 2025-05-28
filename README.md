@@ -27,9 +27,11 @@ pip install git+ssh://git@github.com/stainless-sdks/agility-python.git
 The full API of this library can be found in [api.md](api.md).
 
 ```python
+import os
 from agility import Agility
 
 client = Agility(
+    bearer_token=os.environ.get("BEARER_TOKEN"),  # This is the default and can be omitted
     # or 'production' | 'dev' | 'local'; defaults to "production".
     environment="staging",
 )
@@ -52,10 +54,12 @@ so that your Bearer Token is not stored in source control.
 Simply import `AsyncAgility` instead of `Agility` and use `await` with each API call:
 
 ```python
+import os
 import asyncio
 from agility import AsyncAgility
 
 client = AsyncAgility(
+    bearer_token=os.environ.get("BEARER_TOKEN"),  # This is the default and can be omitted
     # or 'production' | 'dev' | 'local'; defaults to "production".
     environment="staging",
 )
