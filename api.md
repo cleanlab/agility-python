@@ -48,7 +48,7 @@ Methods:
 Types:
 
 ```python
-from agility.types.knowledge_bases import Source, SourceStatusResponse, SourceSyncResponse
+from agility.types.knowledge_bases import Source, SourceStatusResponse
 ```
 
 Methods:
@@ -59,7 +59,7 @@ Methods:
 - <code title="get /api/knowledge_bases/{knowledge_base_id}/sources/">client.knowledge_bases.sources.<a href="./src/agility/resources/knowledge_bases/sources/sources.py">list</a>(knowledge_base_id, \*\*<a href="src/agility/types/knowledge_bases/source_list_params.py">params</a>) -> <a href="./src/agility/types/knowledge_bases/source.py">SyncMyOffsetPage[Source]</a></code>
 - <code title="delete /api/knowledge_bases/{knowledge_base_id}/sources/{source_id}">client.knowledge_bases.sources.<a href="./src/agility/resources/knowledge_bases/sources/sources.py">delete</a>(source_id, \*, knowledge_base_id) -> None</code>
 - <code title="get /api/knowledge_bases/{knowledge_base_id}/sources/{source_id}/status">client.knowledge_bases.sources.<a href="./src/agility/resources/knowledge_bases/sources/sources.py">status</a>(source_id, \*, knowledge_base_id) -> <a href="./src/agility/types/knowledge_bases/source_status_response.py">SourceStatusResponse</a></code>
-- <code title="post /api/knowledge_bases/{knowledge_base_id}/sources/{source_id}/sync">client.knowledge_bases.sources.<a href="./src/agility/resources/knowledge_bases/sources/sources.py">sync</a>(source_id, \*, knowledge_base_id) -> <a href="./src/agility/types/knowledge_bases/source_sync_response.py">object</a></code>
+- <code title="post /api/knowledge_bases/{knowledge_base_id}/sources/{source_id}/sync">client.knowledge_bases.sources.<a href="./src/agility/resources/knowledge_bases/sources/sources.py">sync</a>(source_id, \*, knowledge_base_id) -> object</code>
 
 ### Documents
 
@@ -134,7 +134,7 @@ Methods:
 Types:
 
 ```python
-from agility.types.threads import Run, RunStreamResponse
+from agility.types.threads import Run
 ```
 
 Methods:
@@ -142,7 +142,7 @@ Methods:
 - <code title="post /api/threads/{thread_id}/runs/">client.threads.runs.<a href="./src/agility/resources/threads/runs.py">create</a>(thread_id, \*\*<a href="src/agility/types/threads/run_create_params.py">params</a>) -> <a href="./src/agility/types/threads/run.py">Run</a></code>
 - <code title="get /api/threads/{thread_id}/runs/{run_id}">client.threads.runs.<a href="./src/agility/resources/threads/runs.py">retrieve</a>(run_id, \*, thread_id) -> <a href="./src/agility/types/threads/run.py">Run</a></code>
 - <code title="delete /api/threads/{thread_id}/runs/{run_id}">client.threads.runs.<a href="./src/agility/resources/threads/runs.py">delete</a>(run_id, \*, thread_id) -> None</code>
-- <code title="post /api/threads/{thread_id}/runs/stream">client.threads.runs.<a href="./src/agility/resources/threads/runs.py">stream</a>(thread_id, \*\*<a href="src/agility/types/threads/run_stream_params.py">params</a>) -> <a href="./src/agility/types/threads/run_stream_response.py">object</a></code>
+- <code title="post /api/threads/{thread_id}/runs/stream">client.threads.runs.<a href="./src/agility/resources/threads/runs.py">stream</a>(thread_id, \*\*<a href="src/agility/types/threads/run_stream_params.py">params</a>) -> object</code>
 
 # Integrations
 
