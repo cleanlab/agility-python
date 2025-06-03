@@ -161,18 +161,10 @@ client = Agility()
 knowledge_base_with_config = client.knowledge_bases.create(
     description="description",
     ingestion_pipeline_params={
-        "curate": {"steps": {"foo": {"name": "remove_exact_duplicates.v0"}}},
-        "curate_document_store": {"document_tags": {"foo": "string"}},
-        "transform": {
-            "steps": {
-                "foo": {
-                    "chunk_overlap": 0,
-                    "chunk_size": 0,
-                    "name": "splitters.recursive_character.v0",
-                }
-            }
-        },
-        "vector_store": {"node_tags": {"foo": "string"}},
+        "curate": {},
+        "curate_document_store": {},
+        "transform": {},
+        "vector_store": {},
     },
     name="name",
 )
