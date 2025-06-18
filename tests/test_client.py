@@ -23,17 +23,16 @@ from pydantic import ValidationError
 
 from agility import Agility, AsyncAgility, APIResponseValidationError
 from agility._types import Omit
-from agility._utils import maybe_transform
 from agility._models import BaseModel, FinalRequestOptions
-from agility._constants import RAW_RESPONSE_HEADER
 from agility._exceptions import APIStatusError, APITimeoutError, APIResponseValidationError
 from agility._base_client import (
     DEFAULT_TIMEOUT,
     HTTPX_DEFAULT_TIMEOUT,
     BaseClient,
+    DefaultHttpxClient,
+    DefaultAsyncHttpxClient,
     make_request_options,
 )
-from agility.types.assistant_create_params import AssistantCreateParams
 
 from .utils import update_env
 
@@ -709,52 +708,25 @@ class TestAgility:
 
     @mock.patch("agility._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter, client: Agility) -> None:
         respx_mock.post("/api/assistants/").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            self.client.post(
-                "/api/assistants/",
-                body=cast(
-                    object,
-                    maybe_transform(
-                        dict(
-                            description="description",
-                            knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                            name="name",
-                        ),
-                        AssistantCreateParams,
-                    ),
-                ),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
+            client.assistants.with_streaming_response.create(
+                description="description", knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", name="name"
+            ).__enter__()
 
         assert _get_open_connections(self.client) == 0
 
     @mock.patch("agility._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, client: Agility) -> None:
         respx_mock.post("/api/assistants/").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            self.client.post(
-                "/api/assistants/",
-                body=cast(
-                    object,
-                    maybe_transform(
-                        dict(
-                            description="description",
-                            knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                            name="name",
-                        ),
-                        AssistantCreateParams,
-                    ),
-                ),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
-
+            client.assistants.with_streaming_response.create(
+                description="description", knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", name="name"
+            ).__enter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -845,6 +817,28 @@ class TestAgility:
         )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
+
+    def test_proxy_environment_variables(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        # Test that the proxy environment variables are set correctly
+        monkeypatch.setenv("HTTPS_PROXY", "https://example.org")
+
+        client = DefaultHttpxClient()
+
+        mounts = tuple(client._mounts.items())
+        assert len(mounts) == 1
+        assert mounts[0][0].pattern == "https://"
+
+    @pytest.mark.filterwarnings("ignore:.*deprecated.*:DeprecationWarning")
+    def test_default_client_creation(self) -> None:
+        # Ensure that the client can be initialized without any exceptions
+        DefaultHttpxClient(
+            verify=True,
+            cert=None,
+            trust_env=True,
+            http1=True,
+            http2=False,
+            limits=httpx.Limits(max_connections=100, max_keepalive_connections=20),
+        )
 
     @pytest.mark.respx(base_url=base_url)
     def test_follow_redirects(self, respx_mock: MockRouter) -> None:
@@ -1544,52 +1538,27 @@ class TestAsyncAgility:
 
     @mock.patch("agility._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    async def test_retrying_timeout_errors_doesnt_leak(
+        self, respx_mock: MockRouter, async_client: AsyncAgility
+    ) -> None:
         respx_mock.post("/api/assistants/").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            await self.client.post(
-                "/api/assistants/",
-                body=cast(
-                    object,
-                    maybe_transform(
-                        dict(
-                            description="description",
-                            knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                            name="name",
-                        ),
-                        AssistantCreateParams,
-                    ),
-                ),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
+            await async_client.assistants.with_streaming_response.create(
+                description="description", knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", name="name"
+            ).__aenter__()
 
         assert _get_open_connections(self.client) == 0
 
     @mock.patch("agility._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, async_client: AsyncAgility) -> None:
         respx_mock.post("/api/assistants/").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            await self.client.post(
-                "/api/assistants/",
-                body=cast(
-                    object,
-                    maybe_transform(
-                        dict(
-                            description="description",
-                            knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                            name="name",
-                        ),
-                        AssistantCreateParams,
-                    ),
-                ),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
-
+            await async_client.assistants.with_streaming_response.create(
+                description="description", knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", name="name"
+            ).__aenter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -1728,6 +1697,28 @@ class TestAsyncAgility:
                     raise AssertionError("calling get_platform using asyncify resulted in a hung process")
 
                 time.sleep(0.1)
+
+    async def test_proxy_environment_variables(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        # Test that the proxy environment variables are set correctly
+        monkeypatch.setenv("HTTPS_PROXY", "https://example.org")
+
+        client = DefaultAsyncHttpxClient()
+
+        mounts = tuple(client._mounts.items())
+        assert len(mounts) == 1
+        assert mounts[0][0].pattern == "https://"
+
+    @pytest.mark.filterwarnings("ignore:.*deprecated.*:DeprecationWarning")
+    async def test_default_client_creation(self) -> None:
+        # Ensure that the client can be initialized without any exceptions
+        DefaultAsyncHttpxClient(
+            verify=True,
+            cert=None,
+            trust_env=True,
+            http1=True,
+            http2=False,
+            limits=httpx.Limits(max_connections=100, max_keepalive_connections=20),
+        )
 
     @pytest.mark.respx(base_url=base_url)
     async def test_follow_redirects(self, respx_mock: MockRouter) -> None:
