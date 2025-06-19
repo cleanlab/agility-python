@@ -31,6 +31,7 @@ from ..._base_client import AsyncPaginator, make_request_options
 from ...types.assistant import Assistant
 from ...types.assistant_with_config import AssistantWithConfig
 from ...types.assistant_list_response import AssistantListResponse
+from ...types.assistant_retrieve_run_metadata_response import AssistantRetrieveRunMetadataResponse
 
 __all__ = ["AssistantsResource", "AsyncAssistantsResource"]
 
@@ -330,6 +331,42 @@ class AssistantsResource(SyncAPIResource):
             cast_to=NoneType,
         )
 
+    def retrieve_run_metadata(
+        self,
+        run_id: str,
+        *,
+        assistant_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AssistantRetrieveRunMetadataResponse:
+        """
+        Get historical run metadata for an assistant.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not assistant_id:
+            raise ValueError(f"Expected a non-empty value for `assistant_id` but received {assistant_id!r}")
+        if not run_id:
+            raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
+        return self._get(
+            f"/api/assistants/{assistant_id}/historical_run_metadata/{run_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AssistantRetrieveRunMetadataResponse,
+        )
+
 
 class AsyncAssistantsResource(AsyncAPIResource):
     @cached_property
@@ -626,6 +663,42 @@ class AsyncAssistantsResource(AsyncAPIResource):
             cast_to=NoneType,
         )
 
+    async def retrieve_run_metadata(
+        self,
+        run_id: str,
+        *,
+        assistant_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AssistantRetrieveRunMetadataResponse:
+        """
+        Get historical run metadata for an assistant.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not assistant_id:
+            raise ValueError(f"Expected a non-empty value for `assistant_id` but received {assistant_id!r}")
+        if not run_id:
+            raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
+        return await self._get(
+            f"/api/assistants/{assistant_id}/historical_run_metadata/{run_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AssistantRetrieveRunMetadataResponse,
+        )
+
 
 class AssistantsResourceWithRawResponse:
     def __init__(self, assistants: AssistantsResource) -> None:
@@ -645,6 +718,9 @@ class AssistantsResourceWithRawResponse:
         )
         self.delete = to_raw_response_wrapper(
             assistants.delete,
+        )
+        self.retrieve_run_metadata = to_raw_response_wrapper(
+            assistants.retrieve_run_metadata,
         )
 
     @cached_property
@@ -671,6 +747,9 @@ class AsyncAssistantsResourceWithRawResponse:
         self.delete = async_to_raw_response_wrapper(
             assistants.delete,
         )
+        self.retrieve_run_metadata = async_to_raw_response_wrapper(
+            assistants.retrieve_run_metadata,
+        )
 
     @cached_property
     def access_keys(self) -> AsyncAccessKeysResourceWithRawResponse:
@@ -696,6 +775,9 @@ class AssistantsResourceWithStreamingResponse:
         self.delete = to_streamed_response_wrapper(
             assistants.delete,
         )
+        self.retrieve_run_metadata = to_streamed_response_wrapper(
+            assistants.retrieve_run_metadata,
+        )
 
     @cached_property
     def access_keys(self) -> AccessKeysResourceWithStreamingResponse:
@@ -720,6 +802,9 @@ class AsyncAssistantsResourceWithStreamingResponse:
         )
         self.delete = async_to_streamed_response_wrapper(
             assistants.delete,
+        )
+        self.retrieve_run_metadata = async_to_streamed_response_wrapper(
+            assistants.retrieve_run_metadata,
         )
 
     @cached_property

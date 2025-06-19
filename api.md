@@ -3,7 +3,12 @@
 Types:
 
 ```python
-from agility.types import Assistant, AssistantWithConfig, AssistantListResponse
+from agility.types import (
+    Assistant,
+    AssistantWithConfig,
+    AssistantListResponse,
+    AssistantRetrieveRunMetadataResponse,
+)
 ```
 
 Methods:
@@ -13,6 +18,7 @@ Methods:
 - <code title="put /api/assistants/{assistant_id}">client.assistants.<a href="./src/agility/resources/assistants/assistants.py">update</a>(assistant_id, \*\*<a href="src/agility/types/assistant_update_params.py">params</a>) -> <a href="./src/agility/types/assistant_with_config.py">AssistantWithConfig</a></code>
 - <code title="get /api/assistants/">client.assistants.<a href="./src/agility/resources/assistants/assistants.py">list</a>(\*\*<a href="src/agility/types/assistant_list_params.py">params</a>) -> <a href="./src/agility/types/assistant_list_response.py">SyncMyOffsetPage[AssistantListResponse]</a></code>
 - <code title="delete /api/assistants/{assistant_id}">client.assistants.<a href="./src/agility/resources/assistants/assistants.py">delete</a>(assistant_id) -> None</code>
+- <code title="get /api/assistants/{assistant_id}/historical_run_metadata/{run_id}">client.assistants.<a href="./src/agility/resources/assistants/assistants.py">retrieve_run_metadata</a>(run_id, \*, assistant_id) -> <a href="./src/agility/types/assistant_retrieve_run_metadata_response.py">AssistantRetrieveRunMetadataResponse</a></code>
 
 ## AccessKeys
 
