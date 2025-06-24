@@ -1,12 +1,12 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Union, Optional
+from typing import List, Optional
 from datetime import datetime
-from typing_extensions import Literal, TypeAlias
+from typing_extensions import Literal
 
 from ..._models import BaseModel
 
-__all__ = ["Run", "HardCodedQuery", "ResponseValidationConfig", "Tool", "ToolCodexV0Tool", "ToolNoOpTool", "Usage"]
+__all__ = ["Run", "HardCodedQuery", "ResponseValidationConfig", "Usage"]
 
 
 class HardCodedQuery(BaseModel):
@@ -25,19 +25,6 @@ class ResponseValidationConfig(BaseModel):
     name: Literal[
         "trustworthiness", "response_helpfulness", "context_sufficiency", "response_groundedness", "query_ease"
     ]
-
-
-class ToolCodexV0Tool(BaseModel):
-    access_key: str
-
-    type: Optional[Literal["codex_v0"]] = None
-
-
-class ToolNoOpTool(BaseModel):
-    type: Optional[Literal["noop"]] = None
-
-
-Tool: TypeAlias = Union[ToolCodexV0Tool, ToolNoOpTool]
 
 
 class Usage(BaseModel):
@@ -81,7 +68,5 @@ class Run(BaseModel):
     model: Optional[Literal["gpt-4o"]] = None
 
     response_validation_config: Optional[List[ResponseValidationConfig]] = None
-
-    tools: Optional[List[Tool]] = None
 
     usage: Optional[Usage] = None

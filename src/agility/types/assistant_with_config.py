@@ -1,19 +1,12 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Union, Optional
+from typing import List, Optional
 from datetime import datetime
-from typing_extensions import Literal, TypeAlias
+from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = [
-    "AssistantWithConfig",
-    "HardCodedQuery",
-    "ResponseValidationConfig",
-    "Tool",
-    "ToolCodexV0Tool",
-    "ToolNoOpTool",
-]
+__all__ = ["AssistantWithConfig", "HardCodedQuery", "ResponseValidationConfig"]
 
 
 class HardCodedQuery(BaseModel):
@@ -32,19 +25,6 @@ class ResponseValidationConfig(BaseModel):
     name: Literal[
         "trustworthiness", "response_helpfulness", "context_sufficiency", "response_groundedness", "query_ease"
     ]
-
-
-class ToolCodexV0Tool(BaseModel):
-    access_key: str
-
-    type: Optional[Literal["codex_v0"]] = None
-
-
-class ToolNoOpTool(BaseModel):
-    type: Optional[Literal["noop"]] = None
-
-
-Tool: TypeAlias = Union[ToolCodexV0Tool, ToolNoOpTool]
 
 
 class AssistantWithConfig(BaseModel):
@@ -85,8 +65,6 @@ class AssistantWithConfig(BaseModel):
 
     suggested_questions: Optional[List[str]] = None
     """A list of suggested questions that can be asked to the assistant"""
-
-    tools: Optional[List[Tool]] = None
 
     url_slug: Optional[str] = None
     """Optional URL suffix - unique identifier for the assistant's endpoint"""

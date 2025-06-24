@@ -92,12 +92,6 @@ class TestRuns:
                     "name": "trustworthiness",
                 }
             ],
-            tools=[
-                {
-                    "access_key": "access_key",
-                    "type": "codex_v0",
-                }
-            ],
         )
         assert_matches_type(Run, run, path=["response"])
 
@@ -306,12 +300,6 @@ class TestRuns:
                     "name": "trustworthiness",
                 }
             ],
-            tools=[
-                {
-                    "access_key": "access_key",
-                    "type": "codex_v0",
-                }
-            ],
         )
         assert_matches_type(object, run, path=["response"])
 
@@ -428,12 +416,6 @@ class TestAsyncRuns:
                 {
                     "is_bad_threshold": 0,
                     "name": "trustworthiness",
-                }
-            ],
-            tools=[
-                {
-                    "access_key": "access_key",
-                    "type": "codex_v0",
                 }
             ],
         )
@@ -642,12 +624,6 @@ class TestAsyncRuns:
                 {
                     "is_bad_threshold": 0,
                     "name": "trustworthiness",
-                }
-            ],
-            tools=[
-                {
-                    "access_key": "access_key",
-                    "type": "codex_v0",
                 }
             ],
         )

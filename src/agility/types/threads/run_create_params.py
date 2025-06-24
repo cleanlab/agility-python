@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from typing import List, Union, Iterable, Optional
-from typing_extensions import Literal, Required, TypeAlias, TypedDict
+from typing import List, Iterable, Optional
+from typing_extensions import Literal, Required, TypedDict
 
 __all__ = [
     "RunCreateParams",
@@ -22,9 +22,6 @@ __all__ = [
     "AdditionalMessageMetadataScoresTrustworthinessLog",
     "HardCodedQuery",
     "ResponseValidationConfig",
-    "Tool",
-    "ToolCodexV0Tool",
-    "ToolNoOpTool",
 ]
 
 
@@ -49,8 +46,6 @@ class RunCreateParams(TypedDict, total=False):
     model: Optional[Literal["gpt-4o"]]
 
     response_validation_config: Optional[Iterable[ResponseValidationConfig]]
-
-    tools: Optional[Iterable[Tool]]
 
 
 class AdditionalMessageMetadataScoresContextSufficiencyLog(TypedDict, total=False):
@@ -167,16 +162,3 @@ class ResponseValidationConfig(TypedDict, total=False):
     name: Required[
         Literal["trustworthiness", "response_helpfulness", "context_sufficiency", "response_groundedness", "query_ease"]
     ]
-
-
-class ToolCodexV0Tool(TypedDict, total=False):
-    access_key: Required[str]
-
-    type: Literal["codex_v0"]
-
-
-class ToolNoOpTool(TypedDict, total=False):
-    type: Literal["noop"]
-
-
-Tool: TypeAlias = Union[ToolCodexV0Tool, ToolNoOpTool]

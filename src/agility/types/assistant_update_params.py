@@ -2,17 +2,10 @@
 
 from __future__ import annotations
 
-from typing import List, Union, Iterable, Optional
-from typing_extensions import Literal, Required, TypeAlias, TypedDict
+from typing import List, Iterable, Optional
+from typing_extensions import Literal, Required, TypedDict
 
-__all__ = [
-    "AssistantUpdateParams",
-    "HardCodedQuery",
-    "ResponseValidationConfig",
-    "Tool",
-    "ToolCodexV0Tool",
-    "ToolNoOpTool",
-]
+__all__ = ["AssistantUpdateParams", "HardCodedQuery", "ResponseValidationConfig"]
 
 
 class AssistantUpdateParams(TypedDict, total=False):
@@ -48,8 +41,6 @@ class AssistantUpdateParams(TypedDict, total=False):
     suggested_questions: List[str]
     """A list of suggested questions that can be asked to the assistant"""
 
-    tools: Optional[Iterable[Tool]]
-
     url_slug: Optional[str]
     """Optional URL suffix - unique identifier for the assistant's endpoint"""
 
@@ -70,16 +61,3 @@ class ResponseValidationConfig(TypedDict, total=False):
     name: Required[
         Literal["trustworthiness", "response_helpfulness", "context_sufficiency", "response_groundedness", "query_ease"]
     ]
-
-
-class ToolCodexV0Tool(TypedDict, total=False):
-    access_key: Required[str]
-
-    type: Literal["codex_v0"]
-
-
-class ToolNoOpTool(TypedDict, total=False):
-    type: Literal["noop"]
-
-
-Tool: TypeAlias = Union[ToolCodexV0Tool, ToolNoOpTool]

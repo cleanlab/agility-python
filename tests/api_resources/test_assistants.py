@@ -59,12 +59,6 @@ class TestAssistants:
                 }
             ],
             suggested_questions=["string"],
-            tools=[
-                {
-                    "access_key": "access_key",
-                    "type": "codex_v0",
-                }
-            ],
             url_slug="url_slug",
         )
         assert_matches_type(Assistant, assistant, path=["response"])
@@ -175,12 +169,6 @@ class TestAssistants:
                 }
             ],
             suggested_questions=["string"],
-            tools=[
-                {
-                    "access_key": "access_key",
-                    "type": "codex_v0",
-                }
-            ],
             url_slug="url_slug",
         )
         assert_matches_type(AssistantWithConfig, assistant, path=["response"])
@@ -389,12 +377,6 @@ class TestAsyncAssistants:
                 }
             ],
             suggested_questions=["string"],
-            tools=[
-                {
-                    "access_key": "access_key",
-                    "type": "codex_v0",
-                }
-            ],
             url_slug="url_slug",
         )
         assert_matches_type(Assistant, assistant, path=["response"])
@@ -505,12 +487,6 @@ class TestAsyncAssistants:
                 }
             ],
             suggested_questions=["string"],
-            tools=[
-                {
-                    "access_key": "access_key",
-                    "type": "codex_v0",
-                }
-            ],
             url_slug="url_slug",
         )
         assert_matches_type(AssistantWithConfig, assistant, path=["response"])
