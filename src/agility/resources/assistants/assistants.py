@@ -73,8 +73,6 @@ class AssistantsResource(SyncAPIResource):
         logo_s3_key: Optional[str] | NotGiven = NOT_GIVEN,
         logo_text: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
-        response_validation_config: Optional[Iterable[assistant_create_params.ResponseValidationConfig]]
-        | NotGiven = NOT_GIVEN,
         suggested_questions: List[str] | NotGiven = NOT_GIVEN,
         url_slug: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -124,7 +122,6 @@ class AssistantsResource(SyncAPIResource):
                     "logo_s3_key": logo_s3_key,
                     "logo_text": logo_text,
                     "model": model,
-                    "response_validation_config": response_validation_config,
                     "suggested_questions": suggested_questions,
                     "url_slug": url_slug,
                 },
@@ -184,8 +181,6 @@ class AssistantsResource(SyncAPIResource):
         logo_s3_key: Optional[str] | NotGiven = NOT_GIVEN,
         logo_text: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
-        response_validation_config: Optional[Iterable[assistant_update_params.ResponseValidationConfig]]
-        | NotGiven = NOT_GIVEN,
         suggested_questions: List[str] | NotGiven = NOT_GIVEN,
         url_slug: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -238,7 +233,6 @@ class AssistantsResource(SyncAPIResource):
                     "logo_s3_key": logo_s3_key,
                     "logo_text": logo_text,
                     "model": model,
-                    "response_validation_config": response_validation_config,
                     "suggested_questions": suggested_questions,
                     "url_slug": url_slug,
                 },
@@ -401,8 +395,6 @@ class AsyncAssistantsResource(AsyncAPIResource):
         logo_s3_key: Optional[str] | NotGiven = NOT_GIVEN,
         logo_text: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
-        response_validation_config: Optional[Iterable[assistant_create_params.ResponseValidationConfig]]
-        | NotGiven = NOT_GIVEN,
         suggested_questions: List[str] | NotGiven = NOT_GIVEN,
         url_slug: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -452,7 +444,6 @@ class AsyncAssistantsResource(AsyncAPIResource):
                     "logo_s3_key": logo_s3_key,
                     "logo_text": logo_text,
                     "model": model,
-                    "response_validation_config": response_validation_config,
                     "suggested_questions": suggested_questions,
                     "url_slug": url_slug,
                 },
@@ -512,8 +503,6 @@ class AsyncAssistantsResource(AsyncAPIResource):
         logo_s3_key: Optional[str] | NotGiven = NOT_GIVEN,
         logo_text: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
-        response_validation_config: Optional[Iterable[assistant_update_params.ResponseValidationConfig]]
-        | NotGiven = NOT_GIVEN,
         suggested_questions: List[str] | NotGiven = NOT_GIVEN,
         url_slug: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -566,7 +555,6 @@ class AsyncAssistantsResource(AsyncAPIResource):
                     "logo_s3_key": logo_s3_key,
                     "logo_text": logo_text,
                     "model": model,
-                    "response_validation_config": response_validation_config,
                     "suggested_questions": suggested_questions,
                     "url_slug": url_slug,
                 },

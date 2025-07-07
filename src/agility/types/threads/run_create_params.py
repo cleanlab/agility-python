@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Iterable, Optional
+from typing import Dict, List, Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 
 __all__ = [
@@ -10,18 +10,8 @@ __all__ = [
     "AdditionalMessage",
     "AdditionalMessageMetadata",
     "AdditionalMessageMetadataScores",
-    "AdditionalMessageMetadataScoresContextSufficiency",
-    "AdditionalMessageMetadataScoresContextSufficiencyLog",
-    "AdditionalMessageMetadataScoresQueryEase",
-    "AdditionalMessageMetadataScoresQueryEaseLog",
-    "AdditionalMessageMetadataScoresResponseGroundedness",
-    "AdditionalMessageMetadataScoresResponseGroundednessLog",
-    "AdditionalMessageMetadataScoresResponseHelpfulness",
-    "AdditionalMessageMetadataScoresResponseHelpfulnessLog",
-    "AdditionalMessageMetadataScoresTrustworthiness",
-    "AdditionalMessageMetadataScoresTrustworthinessLog",
+    "AdditionalMessageMetadataScoresLog",
     "HardCodedQuery",
-    "ResponseValidationConfig",
 ]
 
 
@@ -45,83 +35,31 @@ class RunCreateParams(TypedDict, total=False):
 
     model: Optional[Literal["gpt-4o"]]
 
-    response_validation_config: Optional[Iterable[ResponseValidationConfig]]
 
-
-class AdditionalMessageMetadataScoresContextSufficiencyLog(TypedDict, total=False):
+class AdditionalMessageMetadataScoresLog(TypedDict, total=False):
     explanation: Optional[str]
-
-
-class AdditionalMessageMetadataScoresContextSufficiency(TypedDict, total=False):
-    is_bad: Optional[bool]
-
-    log: Optional[AdditionalMessageMetadataScoresContextSufficiencyLog]
-
-    score: Optional[float]
-
-
-class AdditionalMessageMetadataScoresQueryEaseLog(TypedDict, total=False):
-    explanation: Optional[str]
-
-
-class AdditionalMessageMetadataScoresQueryEase(TypedDict, total=False):
-    is_bad: Optional[bool]
-
-    log: Optional[AdditionalMessageMetadataScoresQueryEaseLog]
-
-    score: Optional[float]
-
-
-class AdditionalMessageMetadataScoresResponseGroundednessLog(TypedDict, total=False):
-    explanation: Optional[str]
-
-
-class AdditionalMessageMetadataScoresResponseGroundedness(TypedDict, total=False):
-    is_bad: Optional[bool]
-
-    log: Optional[AdditionalMessageMetadataScoresResponseGroundednessLog]
-
-    score: Optional[float]
-
-
-class AdditionalMessageMetadataScoresResponseHelpfulnessLog(TypedDict, total=False):
-    explanation: Optional[str]
-
-
-class AdditionalMessageMetadataScoresResponseHelpfulness(TypedDict, total=False):
-    is_bad: Optional[bool]
-
-    log: Optional[AdditionalMessageMetadataScoresResponseHelpfulnessLog]
-
-    score: Optional[float]
-
-
-class AdditionalMessageMetadataScoresTrustworthinessLog(TypedDict, total=False):
-    explanation: Optional[str]
-
-
-class AdditionalMessageMetadataScoresTrustworthiness(TypedDict, total=False):
-    is_bad: Optional[bool]
-
-    log: Optional[AdditionalMessageMetadataScoresTrustworthinessLog]
-
-    score: Optional[float]
 
 
 class AdditionalMessageMetadataScores(TypedDict, total=False):
-    context_sufficiency: Optional[AdditionalMessageMetadataScoresContextSufficiency]
+    is_bad: Optional[bool]
 
-    query_ease: Optional[AdditionalMessageMetadataScoresQueryEase]
+    log: Optional[AdditionalMessageMetadataScoresLog]
 
-    response_groundedness: Optional[AdditionalMessageMetadataScoresResponseGroundedness]
+    score: Optional[float]
 
-    response_helpfulness: Optional[AdditionalMessageMetadataScoresResponseHelpfulness]
+    triggered: Optional[bool]
 
-    trustworthiness: Optional[AdditionalMessageMetadataScoresTrustworthiness]
+    triggered_escalation: Optional[bool]
+
+    triggered_guardrail: Optional[bool]
 
 
 class AdditionalMessageMetadata(TypedDict, total=False):
     citations: Optional[List[str]]
+
+    escalated_to_sme: Optional[bool]
+
+    guardrailed: Optional[bool]
 
     is_bad_response: Optional[bool]
 
@@ -129,7 +67,7 @@ class AdditionalMessageMetadata(TypedDict, total=False):
 
     original_llm_response: Optional[str]
 
-    scores: Optional[AdditionalMessageMetadataScores]
+    scores: Optional[Dict[str, AdditionalMessageMetadataScores]]
 
     trustworthiness_explanation: Optional[str]
 
@@ -154,11 +92,3 @@ class HardCodedQuery(TypedDict, total=False):
     context: Optional[List[str]]
 
     prompt: Optional[str]
-
-
-class ResponseValidationConfig(TypedDict, total=False):
-    is_bad_threshold: Required[float]
-
-    name: Required[
-        Literal["trustworthiness", "response_helpfulness", "context_sufficiency", "response_groundedness", "query_ease"]
-    ]

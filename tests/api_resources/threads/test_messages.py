@@ -35,35 +35,20 @@ class TestMessages:
             content="content",
             metadata={
                 "citations": ["string"],
+                "escalated_to_sme": True,
+                "guardrailed": True,
                 "is_bad_response": True,
                 "is_expert_answer": True,
                 "original_llm_response": "original_llm_response",
                 "scores": {
-                    "context_sufficiency": {
+                    "foo": {
                         "is_bad": True,
                         "log": {"explanation": "explanation"},
                         "score": 0,
-                    },
-                    "query_ease": {
-                        "is_bad": True,
-                        "log": {"explanation": "explanation"},
-                        "score": 0,
-                    },
-                    "response_groundedness": {
-                        "is_bad": True,
-                        "log": {"explanation": "explanation"},
-                        "score": 0,
-                    },
-                    "response_helpfulness": {
-                        "is_bad": True,
-                        "log": {"explanation": "explanation"},
-                        "score": 0,
-                    },
-                    "trustworthiness": {
-                        "is_bad": True,
-                        "log": {"explanation": "explanation"},
-                        "score": 0,
-                    },
+                        "triggered": True,
+                        "triggered_escalation": True,
+                        "triggered_guardrail": True,
+                    }
                 },
                 "trustworthiness_explanation": "trustworthiness_explanation",
                 "trustworthiness_score": 0,
@@ -278,35 +263,20 @@ class TestAsyncMessages:
             content="content",
             metadata={
                 "citations": ["string"],
+                "escalated_to_sme": True,
+                "guardrailed": True,
                 "is_bad_response": True,
                 "is_expert_answer": True,
                 "original_llm_response": "original_llm_response",
                 "scores": {
-                    "context_sufficiency": {
+                    "foo": {
                         "is_bad": True,
                         "log": {"explanation": "explanation"},
                         "score": 0,
-                    },
-                    "query_ease": {
-                        "is_bad": True,
-                        "log": {"explanation": "explanation"},
-                        "score": 0,
-                    },
-                    "response_groundedness": {
-                        "is_bad": True,
-                        "log": {"explanation": "explanation"},
-                        "score": 0,
-                    },
-                    "response_helpfulness": {
-                        "is_bad": True,
-                        "log": {"explanation": "explanation"},
-                        "score": 0,
-                    },
-                    "trustworthiness": {
-                        "is_bad": True,
-                        "log": {"explanation": "explanation"},
-                        "score": 0,
-                    },
+                        "triggered": True,
+                        "triggered_escalation": True,
+                        "triggered_guardrail": True,
+                    }
                 },
                 "trustworthiness_explanation": "trustworthiness_explanation",
                 "trustworthiness_score": 0,

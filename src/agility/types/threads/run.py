@@ -6,7 +6,7 @@ from typing_extensions import Literal
 
 from ..._models import BaseModel
 
-__all__ = ["Run", "HardCodedQuery", "ResponseValidationConfig", "Usage"]
+__all__ = ["Run", "HardCodedQuery", "Usage"]
 
 
 class HardCodedQuery(BaseModel):
@@ -17,14 +17,6 @@ class HardCodedQuery(BaseModel):
     context: Optional[List[str]] = None
 
     prompt: Optional[str] = None
-
-
-class ResponseValidationConfig(BaseModel):
-    is_bad_threshold: float
-
-    name: Literal[
-        "trustworthiness", "response_helpfulness", "context_sufficiency", "response_groundedness", "query_ease"
-    ]
 
 
 class Usage(BaseModel):
@@ -66,7 +58,5 @@ class Run(BaseModel):
     last_error: Optional[str] = None
 
     model: Optional[Literal["gpt-4o"]] = None
-
-    response_validation_config: Optional[List[ResponseValidationConfig]] = None
 
     usage: Optional[Usage] = None

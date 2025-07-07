@@ -57,8 +57,6 @@ class RunsResource(SyncAPIResource):
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         knowledge_base_id: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
-        response_validation_config: Optional[Iterable[run_create_params.ResponseValidationConfig]]
-        | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -95,7 +93,6 @@ class RunsResource(SyncAPIResource):
                     "instructions": instructions,
                     "knowledge_base_id": knowledge_base_id,
                     "model": model,
-                    "response_validation_config": response_validation_config,
                 },
                 run_create_params.RunCreateParams,
             ),
@@ -191,8 +188,6 @@ class RunsResource(SyncAPIResource):
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         knowledge_base_id: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
-        response_validation_config: Optional[Iterable[run_stream_params.ResponseValidationConfig]]
-        | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -229,7 +224,6 @@ class RunsResource(SyncAPIResource):
                     "instructions": instructions,
                     "knowledge_base_id": knowledge_base_id,
                     "model": model,
-                    "response_validation_config": response_validation_config,
                 },
                 run_stream_params.RunStreamParams,
             ),
@@ -273,8 +267,6 @@ class AsyncRunsResource(AsyncAPIResource):
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         knowledge_base_id: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
-        response_validation_config: Optional[Iterable[run_create_params.ResponseValidationConfig]]
-        | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -311,7 +303,6 @@ class AsyncRunsResource(AsyncAPIResource):
                     "instructions": instructions,
                     "knowledge_base_id": knowledge_base_id,
                     "model": model,
-                    "response_validation_config": response_validation_config,
                 },
                 run_create_params.RunCreateParams,
             ),
@@ -407,8 +398,6 @@ class AsyncRunsResource(AsyncAPIResource):
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         knowledge_base_id: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
-        response_validation_config: Optional[Iterable[run_stream_params.ResponseValidationConfig]]
-        | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -445,7 +434,6 @@ class AsyncRunsResource(AsyncAPIResource):
                     "instructions": instructions,
                     "knowledge_base_id": knowledge_base_id,
                     "model": model,
-                    "response_validation_config": response_validation_config,
                 },
                 run_stream_params.RunStreamParams,
             ),

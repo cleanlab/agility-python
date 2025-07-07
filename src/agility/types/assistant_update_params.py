@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import List, Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["AssistantUpdateParams", "HardCodedQuery", "ResponseValidationConfig"]
+__all__ = ["AssistantUpdateParams", "HardCodedQuery"]
 
 
 class AssistantUpdateParams(TypedDict, total=False):
@@ -36,8 +36,6 @@ class AssistantUpdateParams(TypedDict, total=False):
 
     model: Optional[Literal["gpt-4o"]]
 
-    response_validation_config: Optional[Iterable[ResponseValidationConfig]]
-
     suggested_questions: List[str]
     """A list of suggested questions that can be asked to the assistant"""
 
@@ -53,11 +51,3 @@ class HardCodedQuery(TypedDict, total=False):
     context: Optional[List[str]]
 
     prompt: Optional[str]
-
-
-class ResponseValidationConfig(TypedDict, total=False):
-    is_bad_threshold: Required[float]
-
-    name: Required[
-        Literal["trustworthiness", "response_helpfulness", "context_sufficiency", "response_groundedness", "query_ease"]
-    ]

@@ -2,24 +2,10 @@
 
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import Dict, List, Optional
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = [
-    "MessageCreateParams",
-    "Metadata",
-    "MetadataScores",
-    "MetadataScoresContextSufficiency",
-    "MetadataScoresContextSufficiencyLog",
-    "MetadataScoresQueryEase",
-    "MetadataScoresQueryEaseLog",
-    "MetadataScoresResponseGroundedness",
-    "MetadataScoresResponseGroundednessLog",
-    "MetadataScoresResponseHelpfulness",
-    "MetadataScoresResponseHelpfulnessLog",
-    "MetadataScoresTrustworthiness",
-    "MetadataScoresTrustworthinessLog",
-]
+__all__ = ["MessageCreateParams", "Metadata", "MetadataScores", "MetadataScoresLog"]
 
 
 class MessageCreateParams(TypedDict, total=False):
@@ -30,80 +16,30 @@ class MessageCreateParams(TypedDict, total=False):
     role: Required[Literal["user", "assistant"]]
 
 
-class MetadataScoresContextSufficiencyLog(TypedDict, total=False):
+class MetadataScoresLog(TypedDict, total=False):
     explanation: Optional[str]
-
-
-class MetadataScoresContextSufficiency(TypedDict, total=False):
-    is_bad: Optional[bool]
-
-    log: Optional[MetadataScoresContextSufficiencyLog]
-
-    score: Optional[float]
-
-
-class MetadataScoresQueryEaseLog(TypedDict, total=False):
-    explanation: Optional[str]
-
-
-class MetadataScoresQueryEase(TypedDict, total=False):
-    is_bad: Optional[bool]
-
-    log: Optional[MetadataScoresQueryEaseLog]
-
-    score: Optional[float]
-
-
-class MetadataScoresResponseGroundednessLog(TypedDict, total=False):
-    explanation: Optional[str]
-
-
-class MetadataScoresResponseGroundedness(TypedDict, total=False):
-    is_bad: Optional[bool]
-
-    log: Optional[MetadataScoresResponseGroundednessLog]
-
-    score: Optional[float]
-
-
-class MetadataScoresResponseHelpfulnessLog(TypedDict, total=False):
-    explanation: Optional[str]
-
-
-class MetadataScoresResponseHelpfulness(TypedDict, total=False):
-    is_bad: Optional[bool]
-
-    log: Optional[MetadataScoresResponseHelpfulnessLog]
-
-    score: Optional[float]
-
-
-class MetadataScoresTrustworthinessLog(TypedDict, total=False):
-    explanation: Optional[str]
-
-
-class MetadataScoresTrustworthiness(TypedDict, total=False):
-    is_bad: Optional[bool]
-
-    log: Optional[MetadataScoresTrustworthinessLog]
-
-    score: Optional[float]
 
 
 class MetadataScores(TypedDict, total=False):
-    context_sufficiency: Optional[MetadataScoresContextSufficiency]
+    is_bad: Optional[bool]
 
-    query_ease: Optional[MetadataScoresQueryEase]
+    log: Optional[MetadataScoresLog]
 
-    response_groundedness: Optional[MetadataScoresResponseGroundedness]
+    score: Optional[float]
 
-    response_helpfulness: Optional[MetadataScoresResponseHelpfulness]
+    triggered: Optional[bool]
 
-    trustworthiness: Optional[MetadataScoresTrustworthiness]
+    triggered_escalation: Optional[bool]
+
+    triggered_guardrail: Optional[bool]
 
 
 class Metadata(TypedDict, total=False):
     citations: Optional[List[str]]
+
+    escalated_to_sme: Optional[bool]
+
+    guardrailed: Optional[bool]
 
     is_bad_response: Optional[bool]
 
@@ -111,7 +47,7 @@ class Metadata(TypedDict, total=False):
 
     original_llm_response: Optional[str]
 
-    scores: Optional[MetadataScores]
+    scores: Optional[Dict[str, MetadataScores]]
 
     trustworthiness_explanation: Optional[str]
 
