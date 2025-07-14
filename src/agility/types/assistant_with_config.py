@@ -38,6 +38,8 @@ class AssistantWithConfig(BaseModel):
 
     codex_access_key: Optional[str] = None
 
+    codex_as_cache: Optional[bool] = None
+
     context_limit: Optional[int] = None
     """The maximum number of context chunks to include in a run."""
 

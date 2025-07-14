@@ -24,6 +24,8 @@ class RunCreateParams(TypedDict, total=False):
 
     codex_access_key: Optional[str]
 
+    codex_as_cache: Optional[bool]
+
     context_limit: Optional[int]
     """The maximum number of context chunks to include."""
 

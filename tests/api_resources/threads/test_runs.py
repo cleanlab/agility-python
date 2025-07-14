@@ -59,6 +59,7 @@ class TestRuns:
                 }
             ],
             codex_access_key="codex_access_key",
+            codex_as_cache=True,
             context_limit=1,
             hard_coded_queries=[
                 {
@@ -246,6 +247,7 @@ class TestRuns:
                 }
             ],
             codex_access_key="codex_access_key",
+            codex_as_cache=True,
             context_limit=1,
             hard_coded_queries=[
                 {
@@ -343,6 +345,7 @@ class TestAsyncRuns:
                 }
             ],
             codex_access_key="codex_access_key",
+            codex_as_cache=True,
             context_limit=1,
             hard_coded_queries=[
                 {
@@ -530,6 +533,7 @@ class TestAsyncRuns:
                 }
             ],
             codex_access_key="codex_access_key",
+            codex_as_cache=True,
             context_limit=1,
             hard_coded_queries=[
                 {

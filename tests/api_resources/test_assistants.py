@@ -39,6 +39,7 @@ class TestAssistants:
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             name="name",
             codex_access_key="codex_access_key",
+            codex_as_cache=True,
             context_limit=1,
             hard_coded_queries=[
                 {
@@ -143,6 +144,7 @@ class TestAssistants:
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             name="name",
             codex_access_key="codex_access_key",
+            codex_as_cache=True,
             context_limit=1,
             hard_coded_queries=[
                 {
@@ -345,6 +347,7 @@ class TestAsyncAssistants:
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             name="name",
             codex_access_key="codex_access_key",
+            codex_as_cache=True,
             context_limit=1,
             hard_coded_queries=[
                 {
@@ -449,6 +452,7 @@ class TestAsyncAssistants:
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             name="name",
             codex_access_key="codex_access_key",
+            codex_as_cache=True,
             context_limit=1,
             hard_coded_queries=[
                 {

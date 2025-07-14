@@ -19,6 +19,8 @@ class AssistantCreateParams(TypedDict, total=False):
 
     codex_access_key: Optional[str]
 
+    codex_as_cache: bool
+
     context_limit: Optional[int]
     """The maximum number of context chunks to include in a run."""
 
