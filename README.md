@@ -94,7 +94,6 @@ pip install 'agility[aiohttp] @ git+ssh://git@github.com/stainless-sdks/agility-
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
-import os
 import asyncio
 from agility import DefaultAioHttpClient
 from agility import AsyncAgility
@@ -102,7 +101,7 @@ from agility import AsyncAgility
 
 async def main() -> None:
     async with AsyncAgility(
-        bearer_token=os.environ.get("BEARER_TOKEN"),  # This is the default and can be omitted
+        bearer_token="My Bearer Token",
         http_client=DefaultAioHttpClient(),
     ) as client:
         assistant = await client.assistants.create(
