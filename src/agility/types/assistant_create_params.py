@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Iterable, Optional
+from typing import Dict, List, Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["AssistantCreateParams", "HardCodedQuery"]
@@ -49,5 +49,7 @@ class HardCodedQuery(TypedDict, total=False):
     response: Required[str]
 
     context: Optional[List[str]]
+
+    messages: Optional[Iterable[Dict[str, object]]]
 
     prompt: Optional[str]

@@ -66,6 +66,7 @@ class TestRuns:
                     "query": "query",
                     "response": "response",
                     "context": ["string"],
+                    "messages": [{"foo": "bar"}],
                     "prompt": "prompt",
                 }
             ],
@@ -254,6 +255,7 @@ class TestRuns:
                     "query": "query",
                     "response": "response",
                     "context": ["string"],
+                    "messages": [{"foo": "bar"}],
                     "prompt": "prompt",
                 }
             ],
@@ -352,6 +354,7 @@ class TestAsyncRuns:
                     "query": "query",
                     "response": "response",
                     "context": ["string"],
+                    "messages": [{"foo": "bar"}],
                     "prompt": "prompt",
                 }
             ],
@@ -540,6 +543,7 @@ class TestAsyncRuns:
                     "query": "query",
                     "response": "response",
                     "context": ["string"],
+                    "messages": [{"foo": "bar"}],
                     "prompt": "prompt",
                 }
             ],

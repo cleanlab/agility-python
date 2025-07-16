@@ -46,6 +46,7 @@ class TestAssistants:
                     "query": "query",
                     "response": "response",
                     "context": ["string"],
+                    "messages": [{"foo": "bar"}],
                     "prompt": "prompt",
                 }
             ],
@@ -151,6 +152,7 @@ class TestAssistants:
                     "query": "query",
                     "response": "response",
                     "context": ["string"],
+                    "messages": [{"foo": "bar"}],
                     "prompt": "prompt",
                 }
             ],
@@ -354,6 +356,7 @@ class TestAsyncAssistants:
                     "query": "query",
                     "response": "response",
                     "context": ["string"],
+                    "messages": [{"foo": "bar"}],
                     "prompt": "prompt",
                 }
             ],
@@ -459,6 +462,7 @@ class TestAsyncAssistants:
                     "query": "query",
                     "response": "response",
                     "context": ["string"],
+                    "messages": [{"foo": "bar"}],
                     "prompt": "prompt",
                 }
             ],

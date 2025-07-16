@@ -93,4 +93,6 @@ class HardCodedQuery(TypedDict, total=False):
 
     context: Optional[List[str]]
 
+    messages: Optional[Iterable[Dict[str, object]]]
+
     prompt: Optional[str]
