@@ -1,11 +1,11 @@
 [project]
-name = "agility"
+name = "agility-sdk"
 version = "0.0.1"
 description = "The official Python library for the agility API"
 dynamic = ["readme"]
 license = "Apache-2.0"
 authors = [
-{ name = "Agility", email = "dev-feedback@agility.com" },
+{ name = "Cleanlab Inc", email = "team@cleanlab.ai" },
 ]
 dependencies = [
     "httpx>=0.23.0, <1",

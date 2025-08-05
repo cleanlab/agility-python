@@ -35,7 +35,7 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: cleanlab-agility
+          name: agility-sdk
           path: dist/*
           if-no-files-found: error
 
@@ -49,7 +49,7 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          name: cleanlab-agility
+          name: agility-sdk
           path: dist
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
