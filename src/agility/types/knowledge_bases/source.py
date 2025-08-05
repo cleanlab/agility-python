@@ -80,6 +80,8 @@ class SourceParamsNotionV0Params(BaseModel):
 
     limit: Optional[int] = None
 
+    max_age_days: Optional[int] = None
+
     name: Optional[Literal["notion_v0"]] = None
 
 

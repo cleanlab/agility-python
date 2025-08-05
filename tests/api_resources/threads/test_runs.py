@@ -36,34 +36,20 @@ class TestRuns:
                     "content": "content",
                     "metadata": {
                         "citations": ["string"],
+                        "escalated_to_sme": True,
+                        "guardrailed": True,
                         "is_bad_response": True,
                         "is_expert_answer": True,
+                        "original_llm_response": "original_llm_response",
                         "scores": {
-                            "context_sufficiency": {
+                            "foo": {
                                 "is_bad": True,
                                 "log": {"explanation": "explanation"},
                                 "score": 0,
-                            },
-                            "query_ease": {
-                                "is_bad": True,
-                                "log": {"explanation": "explanation"},
-                                "score": 0,
-                            },
-                            "response_groundedness": {
-                                "is_bad": True,
-                                "log": {"explanation": "explanation"},
-                                "score": 0,
-                            },
-                            "response_helpfulness": {
-                                "is_bad": True,
-                                "log": {"explanation": "explanation"},
-                                "score": 0,
-                            },
-                            "trustworthiness": {
-                                "is_bad": True,
-                                "log": {"explanation": "explanation"},
-                                "score": 0,
-                            },
+                                "triggered": True,
+                                "triggered_escalation": True,
+                                "triggered_guardrail": True,
+                            }
                         },
                         "trustworthiness_explanation": "trustworthiness_explanation",
                         "trustworthiness_score": 0,
@@ -73,22 +59,20 @@ class TestRuns:
                 }
             ],
             codex_access_key="codex_access_key",
+            codex_as_cache=True,
             context_limit=1,
+            hard_coded_queries=[
+                {
+                    "query": "query",
+                    "response": "response",
+                    "context": ["string"],
+                    "messages": [{"foo": "bar"}],
+                    "prompt": "prompt",
+                }
+            ],
             instructions="instructions",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             model="gpt-4o",
-            response_validation_config=[
-                {
-                    "is_bad_threshold": 0,
-                    "name": "trustworthiness",
-                }
-            ],
-            tools=[
-                {
-                    "access_key": "access_key",
-                    "type": "codex_v0",
-                }
-            ],
         )
         assert_matches_type(Run, run, path=["response"])
 
@@ -241,34 +225,20 @@ class TestRuns:
                     "content": "content",
                     "metadata": {
                         "citations": ["string"],
+                        "escalated_to_sme": True,
+                        "guardrailed": True,
                         "is_bad_response": True,
                         "is_expert_answer": True,
+                        "original_llm_response": "original_llm_response",
                         "scores": {
-                            "context_sufficiency": {
+                            "foo": {
                                 "is_bad": True,
                                 "log": {"explanation": "explanation"},
                                 "score": 0,
-                            },
-                            "query_ease": {
-                                "is_bad": True,
-                                "log": {"explanation": "explanation"},
-                                "score": 0,
-                            },
-                            "response_groundedness": {
-                                "is_bad": True,
-                                "log": {"explanation": "explanation"},
-                                "score": 0,
-                            },
-                            "response_helpfulness": {
-                                "is_bad": True,
-                                "log": {"explanation": "explanation"},
-                                "score": 0,
-                            },
-                            "trustworthiness": {
-                                "is_bad": True,
-                                "log": {"explanation": "explanation"},
-                                "score": 0,
-                            },
+                                "triggered": True,
+                                "triggered_escalation": True,
+                                "triggered_guardrail": True,
+                            }
                         },
                         "trustworthiness_explanation": "trustworthiness_explanation",
                         "trustworthiness_score": 0,
@@ -278,22 +248,20 @@ class TestRuns:
                 }
             ],
             codex_access_key="codex_access_key",
+            codex_as_cache=True,
             context_limit=1,
+            hard_coded_queries=[
+                {
+                    "query": "query",
+                    "response": "response",
+                    "context": ["string"],
+                    "messages": [{"foo": "bar"}],
+                    "prompt": "prompt",
+                }
+            ],
             instructions="instructions",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             model="gpt-4o",
-            response_validation_config=[
-                {
-                    "is_bad_threshold": 0,
-                    "name": "trustworthiness",
-                }
-            ],
-            tools=[
-                {
-                    "access_key": "access_key",
-                    "type": "codex_v0",
-                }
-            ],
         )
         assert_matches_type(object, run, path=["response"])
 
@@ -333,7 +301,9 @@ class TestRuns:
 
 
 class TestAsyncRuns:
-    parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
+    parametrize = pytest.mark.parametrize(
+        "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
+    )
 
     @parametrize
     async def test_method_create(self, async_client: AsyncAgility) -> None:
@@ -354,34 +324,20 @@ class TestAsyncRuns:
                     "content": "content",
                     "metadata": {
                         "citations": ["string"],
+                        "escalated_to_sme": True,
+                        "guardrailed": True,
                         "is_bad_response": True,
                         "is_expert_answer": True,
+                        "original_llm_response": "original_llm_response",
                         "scores": {
-                            "context_sufficiency": {
+                            "foo": {
                                 "is_bad": True,
                                 "log": {"explanation": "explanation"},
                                 "score": 0,
-                            },
-                            "query_ease": {
-                                "is_bad": True,
-                                "log": {"explanation": "explanation"},
-                                "score": 0,
-                            },
-                            "response_groundedness": {
-                                "is_bad": True,
-                                "log": {"explanation": "explanation"},
-                                "score": 0,
-                            },
-                            "response_helpfulness": {
-                                "is_bad": True,
-                                "log": {"explanation": "explanation"},
-                                "score": 0,
-                            },
-                            "trustworthiness": {
-                                "is_bad": True,
-                                "log": {"explanation": "explanation"},
-                                "score": 0,
-                            },
+                                "triggered": True,
+                                "triggered_escalation": True,
+                                "triggered_guardrail": True,
+                            }
                         },
                         "trustworthiness_explanation": "trustworthiness_explanation",
                         "trustworthiness_score": 0,
@@ -391,22 +347,20 @@ class TestAsyncRuns:
                 }
             ],
             codex_access_key="codex_access_key",
+            codex_as_cache=True,
             context_limit=1,
+            hard_coded_queries=[
+                {
+                    "query": "query",
+                    "response": "response",
+                    "context": ["string"],
+                    "messages": [{"foo": "bar"}],
+                    "prompt": "prompt",
+                }
+            ],
             instructions="instructions",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             model="gpt-4o",
-            response_validation_config=[
-                {
-                    "is_bad_threshold": 0,
-                    "name": "trustworthiness",
-                }
-            ],
-            tools=[
-                {
-                    "access_key": "access_key",
-                    "type": "codex_v0",
-                }
-            ],
         )
         assert_matches_type(Run, run, path=["response"])
 
@@ -559,34 +513,20 @@ class TestAsyncRuns:
                     "content": "content",
                     "metadata": {
                         "citations": ["string"],
+                        "escalated_to_sme": True,
+                        "guardrailed": True,
                         "is_bad_response": True,
                         "is_expert_answer": True,
+                        "original_llm_response": "original_llm_response",
                         "scores": {
-                            "context_sufficiency": {
+                            "foo": {
                                 "is_bad": True,
                                 "log": {"explanation": "explanation"},
                                 "score": 0,
-                            },
-                            "query_ease": {
-                                "is_bad": True,
-                                "log": {"explanation": "explanation"},
-                                "score": 0,
-                            },
-                            "response_groundedness": {
-                                "is_bad": True,
-                                "log": {"explanation": "explanation"},
-                                "score": 0,
-                            },
-                            "response_helpfulness": {
-                                "is_bad": True,
-                                "log": {"explanation": "explanation"},
-                                "score": 0,
-                            },
-                            "trustworthiness": {
-                                "is_bad": True,
-                                "log": {"explanation": "explanation"},
-                                "score": 0,
-                            },
+                                "triggered": True,
+                                "triggered_escalation": True,
+                                "triggered_guardrail": True,
+                            }
                         },
                         "trustworthiness_explanation": "trustworthiness_explanation",
                         "trustworthiness_score": 0,
@@ -596,22 +536,20 @@ class TestAsyncRuns:
                 }
             ],
             codex_access_key="codex_access_key",
+            codex_as_cache=True,
             context_limit=1,
+            hard_coded_queries=[
+                {
+                    "query": "query",
+                    "response": "response",
+                    "context": ["string"],
+                    "messages": [{"foo": "bar"}],
+                    "prompt": "prompt",
+                }
+            ],
             instructions="instructions",
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             model="gpt-4o",
-            response_validation_config=[
-                {
-                    "is_bad_threshold": 0,
-                    "name": "trustworthiness",
-                }
-            ],
-            tools=[
-                {
-                    "access_key": "access_key",
-                    "type": "codex_v0",
-                }
-            ],
         )
         assert_matches_type(object, run, path=["response"])
 
