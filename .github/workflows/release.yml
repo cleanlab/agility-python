@@ -8,9 +8,6 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  tests:
-    uses: ./.github/workflows/ci.yml
-
   build:
     name: Build package and upload artifacts
     needs: tests
