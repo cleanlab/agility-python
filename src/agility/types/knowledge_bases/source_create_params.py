@@ -87,6 +87,8 @@ class SourceParamsNotionV0Params(TypedDict, total=False):
 
     limit: Optional[int]
 
+    max_age_days: int
+
     name: Literal["notion_v0"]
 
 

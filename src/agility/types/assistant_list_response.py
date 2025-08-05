@@ -1,33 +1,24 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Union, Optional
+from typing import Dict, List, Optional
 from datetime import datetime
-from typing_extensions import Literal, TypeAlias
+from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["AssistantListResponse", "ResponseValidationConfig", "Tool", "ToolCodexV0Tool", "ToolNoOpTool"]
+__all__ = ["AssistantListResponse", "HardCodedQuery"]
 
 
-class ResponseValidationConfig(BaseModel):
-    is_bad_threshold: float
+class HardCodedQuery(BaseModel):
+    query: str
 
-    name: Literal[
-        "trustworthiness", "response_helpfulness", "context_sufficiency", "response_groundedness", "query_ease"
-    ]
+    response: str
 
+    context: Optional[List[str]] = None
 
-class ToolCodexV0Tool(BaseModel):
-    access_key: str
+    messages: Optional[List[Dict[str, object]]] = None
 
-    type: Optional[Literal["codex_v0"]] = None
-
-
-class ToolNoOpTool(BaseModel):
-    type: Optional[Literal["noop"]] = None
-
-
-Tool: TypeAlias = Union[ToolCodexV0Tool, ToolNoOpTool]
+    prompt: Optional[str] = None
 
 
 class AssistantListResponse(BaseModel):
@@ -51,8 +42,12 @@ class AssistantListResponse(BaseModel):
 
     codex_access_key: Optional[str] = None
 
+    codex_as_cache: Optional[bool] = None
+
     context_limit: Optional[int] = None
     """The maximum number of context chunks to include in a run."""
+
+    hard_coded_queries: Optional[List[HardCodedQuery]] = None
 
     instructions: Optional[str] = None
 
@@ -64,12 +59,8 @@ class AssistantListResponse(BaseModel):
 
     model: Optional[Literal["gpt-4o"]] = None
 
-    response_validation_config: Optional[List[ResponseValidationConfig]] = None
-
     suggested_questions: Optional[List[str]] = None
     """A list of suggested questions that can be asked to the assistant"""
-
-    tools: Optional[List[Tool]] = None
 
     url_slug: Optional[str] = None
     """Optional URL suffix - unique identifier for the assistant's endpoint"""

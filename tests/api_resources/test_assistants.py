@@ -13,6 +13,7 @@ from agility.types import (
     Assistant,
     AssistantWithConfig,
     AssistantListResponse,
+    AssistantRetrieveRunMetadataResponse,
 )
 from agility.pagination import SyncMyOffsetPage, AsyncMyOffsetPage
 
@@ -38,24 +39,22 @@ class TestAssistants:
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             name="name",
             codex_access_key="codex_access_key",
+            codex_as_cache=True,
             context_limit=1,
+            hard_coded_queries=[
+                {
+                    "query": "query",
+                    "response": "response",
+                    "context": ["string"],
+                    "messages": [{"foo": "bar"}],
+                    "prompt": "prompt",
+                }
+            ],
             instructions="instructions",
             logo_s3_key="logo_s3_key",
             logo_text="logo_text",
             model="gpt-4o",
-            response_validation_config=[
-                {
-                    "is_bad_threshold": 0,
-                    "name": "trustworthiness",
-                }
-            ],
             suggested_questions=["string"],
-            tools=[
-                {
-                    "access_key": "access_key",
-                    "type": "codex_v0",
-                }
-            ],
             url_slug="url_slug",
         )
         assert_matches_type(Assistant, assistant, path=["response"])
@@ -146,24 +145,22 @@ class TestAssistants:
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             name="name",
             codex_access_key="codex_access_key",
+            codex_as_cache=True,
             context_limit=1,
+            hard_coded_queries=[
+                {
+                    "query": "query",
+                    "response": "response",
+                    "context": ["string"],
+                    "messages": [{"foo": "bar"}],
+                    "prompt": "prompt",
+                }
+            ],
             instructions="instructions",
             logo_s3_key="logo_s3_key",
             logo_text="logo_text",
             model="gpt-4o",
-            response_validation_config=[
-                {
-                    "is_bad_threshold": 0,
-                    "name": "trustworthiness",
-                }
-            ],
             suggested_questions=["string"],
-            tools=[
-                {
-                    "access_key": "access_key",
-                    "type": "codex_v0",
-                }
-            ],
             url_slug="url_slug",
         )
         assert_matches_type(AssistantWithConfig, assistant, path=["response"])
@@ -282,9 +279,59 @@ class TestAssistants:
                 "",
             )
 
+    @parametrize
+    def test_method_retrieve_run_metadata(self, client: Agility) -> None:
+        assistant = client.assistants.retrieve_run_metadata(
+            run_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            assistant_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(AssistantRetrieveRunMetadataResponse, assistant, path=["response"])
+
+    @parametrize
+    def test_raw_response_retrieve_run_metadata(self, client: Agility) -> None:
+        response = client.assistants.with_raw_response.retrieve_run_metadata(
+            run_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            assistant_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assistant = response.parse()
+        assert_matches_type(AssistantRetrieveRunMetadataResponse, assistant, path=["response"])
+
+    @parametrize
+    def test_streaming_response_retrieve_run_metadata(self, client: Agility) -> None:
+        with client.assistants.with_streaming_response.retrieve_run_metadata(
+            run_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            assistant_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            assistant = response.parse()
+            assert_matches_type(AssistantRetrieveRunMetadataResponse, assistant, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_retrieve_run_metadata(self, client: Agility) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `assistant_id` but received ''"):
+            client.assistants.with_raw_response.retrieve_run_metadata(
+                run_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                assistant_id="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `run_id` but received ''"):
+            client.assistants.with_raw_response.retrieve_run_metadata(
+                run_id="",
+                assistant_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            )
+
 
 class TestAsyncAssistants:
-    parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
+    parametrize = pytest.mark.parametrize(
+        "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
+    )
 
     @parametrize
     async def test_method_create(self, async_client: AsyncAgility) -> None:
@@ -302,24 +349,22 @@ class TestAsyncAssistants:
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             name="name",
             codex_access_key="codex_access_key",
+            codex_as_cache=True,
             context_limit=1,
+            hard_coded_queries=[
+                {
+                    "query": "query",
+                    "response": "response",
+                    "context": ["string"],
+                    "messages": [{"foo": "bar"}],
+                    "prompt": "prompt",
+                }
+            ],
             instructions="instructions",
             logo_s3_key="logo_s3_key",
             logo_text="logo_text",
             model="gpt-4o",
-            response_validation_config=[
-                {
-                    "is_bad_threshold": 0,
-                    "name": "trustworthiness",
-                }
-            ],
             suggested_questions=["string"],
-            tools=[
-                {
-                    "access_key": "access_key",
-                    "type": "codex_v0",
-                }
-            ],
             url_slug="url_slug",
         )
         assert_matches_type(Assistant, assistant, path=["response"])
@@ -410,24 +455,22 @@ class TestAsyncAssistants:
             knowledge_base_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             name="name",
             codex_access_key="codex_access_key",
+            codex_as_cache=True,
             context_limit=1,
+            hard_coded_queries=[
+                {
+                    "query": "query",
+                    "response": "response",
+                    "context": ["string"],
+                    "messages": [{"foo": "bar"}],
+                    "prompt": "prompt",
+                }
+            ],
             instructions="instructions",
             logo_s3_key="logo_s3_key",
             logo_text="logo_text",
             model="gpt-4o",
-            response_validation_config=[
-                {
-                    "is_bad_threshold": 0,
-                    "name": "trustworthiness",
-                }
-            ],
             suggested_questions=["string"],
-            tools=[
-                {
-                    "access_key": "access_key",
-                    "type": "codex_v0",
-                }
-            ],
             url_slug="url_slug",
         )
         assert_matches_type(AssistantWithConfig, assistant, path=["response"])
@@ -544,4 +587,52 @@ class TestAsyncAssistants:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `assistant_id` but received ''"):
             await async_client.assistants.with_raw_response.delete(
                 "",
+            )
+
+    @parametrize
+    async def test_method_retrieve_run_metadata(self, async_client: AsyncAgility) -> None:
+        assistant = await async_client.assistants.retrieve_run_metadata(
+            run_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            assistant_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(AssistantRetrieveRunMetadataResponse, assistant, path=["response"])
+
+    @parametrize
+    async def test_raw_response_retrieve_run_metadata(self, async_client: AsyncAgility) -> None:
+        response = await async_client.assistants.with_raw_response.retrieve_run_metadata(
+            run_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            assistant_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assistant = await response.parse()
+        assert_matches_type(AssistantRetrieveRunMetadataResponse, assistant, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_retrieve_run_metadata(self, async_client: AsyncAgility) -> None:
+        async with async_client.assistants.with_streaming_response.retrieve_run_metadata(
+            run_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            assistant_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            assistant = await response.parse()
+            assert_matches_type(AssistantRetrieveRunMetadataResponse, assistant, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_retrieve_run_metadata(self, async_client: AsyncAgility) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `assistant_id` but received ''"):
+            await async_client.assistants.with_raw_response.retrieve_run_metadata(
+                run_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                assistant_id="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `run_id` but received ''"):
+            await async_client.assistants.with_raw_response.retrieve_run_metadata(
+                run_id="",
+                assistant_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )

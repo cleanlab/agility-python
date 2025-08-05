@@ -8,10 +8,7 @@ from typing_extensions import Literal
 import httpx
 
 from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
-from ..._utils import (
-    maybe_transform,
-    async_maybe_transform,
-)
+from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -55,13 +52,12 @@ class RunsResource(SyncAPIResource):
         additional_instructions: Optional[str] | NotGiven = NOT_GIVEN,
         additional_messages: Iterable[run_create_params.AdditionalMessage] | NotGiven = NOT_GIVEN,
         codex_access_key: Optional[str] | NotGiven = NOT_GIVEN,
+        codex_as_cache: Optional[bool] | NotGiven = NOT_GIVEN,
         context_limit: Optional[int] | NotGiven = NOT_GIVEN,
+        hard_coded_queries: Optional[Iterable[run_create_params.HardCodedQuery]] | NotGiven = NOT_GIVEN,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         knowledge_base_id: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
-        response_validation_config: Optional[Iterable[run_create_params.ResponseValidationConfig]]
-        | NotGiven = NOT_GIVEN,
-        tools: Optional[Iterable[run_create_params.Tool]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -93,12 +89,12 @@ class RunsResource(SyncAPIResource):
                     "additional_instructions": additional_instructions,
                     "additional_messages": additional_messages,
                     "codex_access_key": codex_access_key,
+                    "codex_as_cache": codex_as_cache,
                     "context_limit": context_limit,
+                    "hard_coded_queries": hard_coded_queries,
                     "instructions": instructions,
                     "knowledge_base_id": knowledge_base_id,
                     "model": model,
-                    "response_validation_config": response_validation_config,
-                    "tools": tools,
                 },
                 run_create_params.RunCreateParams,
             ),
@@ -189,13 +185,12 @@ class RunsResource(SyncAPIResource):
         additional_instructions: Optional[str] | NotGiven = NOT_GIVEN,
         additional_messages: Iterable[run_stream_params.AdditionalMessage] | NotGiven = NOT_GIVEN,
         codex_access_key: Optional[str] | NotGiven = NOT_GIVEN,
+        codex_as_cache: Optional[bool] | NotGiven = NOT_GIVEN,
         context_limit: Optional[int] | NotGiven = NOT_GIVEN,
+        hard_coded_queries: Optional[Iterable[run_stream_params.HardCodedQuery]] | NotGiven = NOT_GIVEN,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         knowledge_base_id: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
-        response_validation_config: Optional[Iterable[run_stream_params.ResponseValidationConfig]]
-        | NotGiven = NOT_GIVEN,
-        tools: Optional[Iterable[run_stream_params.Tool]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -227,12 +222,12 @@ class RunsResource(SyncAPIResource):
                     "additional_instructions": additional_instructions,
                     "additional_messages": additional_messages,
                     "codex_access_key": codex_access_key,
+                    "codex_as_cache": codex_as_cache,
                     "context_limit": context_limit,
+                    "hard_coded_queries": hard_coded_queries,
                     "instructions": instructions,
                     "knowledge_base_id": knowledge_base_id,
                     "model": model,
-                    "response_validation_config": response_validation_config,
-                    "tools": tools,
                 },
                 run_stream_params.RunStreamParams,
             ),
@@ -271,13 +266,12 @@ class AsyncRunsResource(AsyncAPIResource):
         additional_instructions: Optional[str] | NotGiven = NOT_GIVEN,
         additional_messages: Iterable[run_create_params.AdditionalMessage] | NotGiven = NOT_GIVEN,
         codex_access_key: Optional[str] | NotGiven = NOT_GIVEN,
+        codex_as_cache: Optional[bool] | NotGiven = NOT_GIVEN,
         context_limit: Optional[int] | NotGiven = NOT_GIVEN,
+        hard_coded_queries: Optional[Iterable[run_create_params.HardCodedQuery]] | NotGiven = NOT_GIVEN,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         knowledge_base_id: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
-        response_validation_config: Optional[Iterable[run_create_params.ResponseValidationConfig]]
-        | NotGiven = NOT_GIVEN,
-        tools: Optional[Iterable[run_create_params.Tool]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -309,12 +303,12 @@ class AsyncRunsResource(AsyncAPIResource):
                     "additional_instructions": additional_instructions,
                     "additional_messages": additional_messages,
                     "codex_access_key": codex_access_key,
+                    "codex_as_cache": codex_as_cache,
                     "context_limit": context_limit,
+                    "hard_coded_queries": hard_coded_queries,
                     "instructions": instructions,
                     "knowledge_base_id": knowledge_base_id,
                     "model": model,
-                    "response_validation_config": response_validation_config,
-                    "tools": tools,
                 },
                 run_create_params.RunCreateParams,
             ),
@@ -405,13 +399,12 @@ class AsyncRunsResource(AsyncAPIResource):
         additional_instructions: Optional[str] | NotGiven = NOT_GIVEN,
         additional_messages: Iterable[run_stream_params.AdditionalMessage] | NotGiven = NOT_GIVEN,
         codex_access_key: Optional[str] | NotGiven = NOT_GIVEN,
+        codex_as_cache: Optional[bool] | NotGiven = NOT_GIVEN,
         context_limit: Optional[int] | NotGiven = NOT_GIVEN,
+        hard_coded_queries: Optional[Iterable[run_stream_params.HardCodedQuery]] | NotGiven = NOT_GIVEN,
         instructions: Optional[str] | NotGiven = NOT_GIVEN,
         knowledge_base_id: Optional[str] | NotGiven = NOT_GIVEN,
         model: Optional[Literal["gpt-4o"]] | NotGiven = NOT_GIVEN,
-        response_validation_config: Optional[Iterable[run_stream_params.ResponseValidationConfig]]
-        | NotGiven = NOT_GIVEN,
-        tools: Optional[Iterable[run_stream_params.Tool]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -443,12 +436,12 @@ class AsyncRunsResource(AsyncAPIResource):
                     "additional_instructions": additional_instructions,
                     "additional_messages": additional_messages,
                     "codex_access_key": codex_access_key,
+                    "codex_as_cache": codex_as_cache,
                     "context_limit": context_limit,
+                    "hard_coded_queries": hard_coded_queries,
                     "instructions": instructions,
                     "knowledge_base_id": knowledge_base_id,
                     "model": model,
-                    "response_validation_config": response_validation_config,
-                    "tools": tools,
                 },
                 run_stream_params.RunStreamParams,
             ),

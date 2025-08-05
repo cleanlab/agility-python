@@ -24,3 +24,6 @@ from .knowledge_base_create_params import KnowledgeBaseCreateParams as Knowledge
 from .knowledge_base_list_response import KnowledgeBaseListResponse as KnowledgeBaseListResponse
 from .knowledge_base_update_params import KnowledgeBaseUpdateParams as KnowledgeBaseUpdateParams
 from .integration_retrieve_response import IntegrationRetrieveResponse as IntegrationRetrieveResponse
+from .assistant_retrieve_run_metadata_response import (
+    AssistantRetrieveRunMetadataResponse as AssistantRetrieveRunMetadataResponse,
+)

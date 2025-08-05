@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
-from typing import List, Union, Iterable, Optional
-from typing_extensions import Literal, Required, TypeAlias, TypedDict
+from typing import Dict, List, Iterable, Optional
+from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["AssistantUpdateParams", "ResponseValidationConfig", "Tool", "ToolCodexV0Tool", "ToolNoOpTool"]
+__all__ = ["AssistantUpdateParams", "HardCodedQuery"]
 
 
 class AssistantUpdateParams(TypedDict, total=False):
@@ -21,8 +21,12 @@ class AssistantUpdateParams(TypedDict, total=False):
 
     codex_access_key: Optional[str]
 
+    codex_as_cache: bool
+
     context_limit: Optional[int]
     """The maximum number of context chunks to include in a run."""
+
+    hard_coded_queries: Optional[Iterable[HardCodedQuery]]
 
     instructions: Optional[str]
 
@@ -34,33 +38,20 @@ class AssistantUpdateParams(TypedDict, total=False):
 
     model: Optional[Literal["gpt-4o"]]
 
-    response_validation_config: Optional[Iterable[ResponseValidationConfig]]
-
     suggested_questions: List[str]
     """A list of suggested questions that can be asked to the assistant"""
-
-    tools: Optional[Iterable[Tool]]
 
     url_slug: Optional[str]
     """Optional URL suffix - unique identifier for the assistant's endpoint"""
 
 
-class ResponseValidationConfig(TypedDict, total=False):
-    is_bad_threshold: Required[float]
+class HardCodedQuery(TypedDict, total=False):
+    query: Required[str]
 
-    name: Required[
-        Literal["trustworthiness", "response_helpfulness", "context_sufficiency", "response_groundedness", "query_ease"]
-    ]
+    response: Required[str]
 
+    context: Optional[List[str]]
 
-class ToolCodexV0Tool(TypedDict, total=False):
-    access_key: Required[str]
+    messages: Optional[Iterable[Dict[str, object]]]
 
-    type: Literal["codex_v0"]
-
-
-class ToolNoOpTool(TypedDict, total=False):
-    type: Literal["noop"]
-
-
-Tool: TypeAlias = Union[ToolCodexV0Tool, ToolNoOpTool]
+    prompt: Optional[str]
